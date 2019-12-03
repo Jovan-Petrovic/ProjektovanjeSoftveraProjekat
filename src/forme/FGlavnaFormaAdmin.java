@@ -49,7 +49,7 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuFilm);
 
-        jMenuProjekcija.setText("Edit");
+        jMenuProjekcija.setText("Projekcija");
 
         jMenuItemPretragaProjekcija.setText("Pretraga projekcija");
         jMenuProjekcija.add(jMenuItemPretragaProjekcija);

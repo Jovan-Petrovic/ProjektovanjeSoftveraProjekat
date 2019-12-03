@@ -23,7 +23,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuProjekcija">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Edit"/>
+            <Property name="text" type="java.lang.String" value="Projekcija"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemPretragaProjekcija">
