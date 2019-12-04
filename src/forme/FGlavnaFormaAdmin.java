@@ -5,6 +5,10 @@
  */
 package forme;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
+
 /**
  *
  * @author Bron Zilar
@@ -17,6 +21,7 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
     public FGlavnaFormaAdmin() {
         initComponents();
         setLocationRelativeTo(null);
+        setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -45,6 +50,11 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
         jMenuFilm.add(jMenuItemPretragaFilmova);
 
         jMenuItemNoviFilm.setText("Novi film");
+        jMenuItemNoviFilm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNoviFilmActionPerformed(evt);
+            }
+        });
         jMenuFilm.add(jMenuItemNoviFilm);
 
         jMenuBar1.add(jMenuFilm);
@@ -77,6 +87,15 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItemNoviFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNoviFilmActionPerformed
+        try {
+            JDialog forma = new FFilm(this, true);
+            forma.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(FGlavnaFormaAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItemNoviFilmActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

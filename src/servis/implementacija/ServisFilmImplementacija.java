@@ -24,8 +24,8 @@ public class ServisFilmImplementacija implements ServisFilm {
     }
 
     @Override
-    public Film sacuvaj(Film film) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Film sacuvaj(Film film) throws Exception {
+        return skladisteFilm.sacuvaj(film);
     }
 
     @Override

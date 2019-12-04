@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ServisFilm {
     
-    Film sacuvaj(Film film);
+    Film sacuvaj(Film film) throws Exception;
     
-    List<Film> vratiSve();
+    List<Film> vratiSve() throws Exception;
 }
