@@ -6,11 +6,14 @@
 package kontroler;
 
 import domen.Film;
+import domen.Glumac;
 import domen.Reditelj;
 import java.util.List;
 import servis.ServisFilm;
+import servis.ServisGlumac;
 import servis.ServisReditelj;
 import servis.implementacija.ServisFilmImplementacija;
+import servis.implementacija.ServisGlumacImplementacija;
 import servis.implementacija.ServisRediteljImplementacija;
 
 /**
@@ -22,10 +25,12 @@ public class Kontroler {
     private static Kontroler instanca;
     private final ServisFilm servisFilm;
     private final ServisReditelj servisReditelj;
+    private final ServisGlumac servisGlumac;
     
     public Kontroler() {
         servisFilm = new ServisFilmImplementacija();
         servisReditelj = new ServisRediteljImplementacija();
+        servisGlumac = new ServisGlumacImplementacija();
     }
 
     public static Kontroler getInstanca() {
@@ -41,5 +46,9 @@ public class Kontroler {
     
     public List<Reditelj> vratiSveReditelje() throws Exception {
         return servisReditelj.vratiSve();
+    }
+
+    public List<Glumac> vratiSveGlumce() throws Exception {
+        return servisGlumac.vratiSve();
     }
 }

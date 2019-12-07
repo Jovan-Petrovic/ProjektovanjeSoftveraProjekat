@@ -6,16 +6,17 @@
 package forme;
 
 import domen.Film;
+import domen.Glumac;
 import domen.Reditelj;
 import domen.Zanr;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import kontroler.Kontroler;
+import model.GlumacTableModel;
 import model.RediteljTableModel;
 
 /**
@@ -149,6 +150,11 @@ public class FFilm extends javax.swing.JDialog {
         });
 
         jbtnDodajGlumca.setText("Dodaj glumca");
+        jbtnDodajGlumca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnDodajGlumcaActionPerformed(evt);
+            }
+        });
 
         jbtnObrisiGlumca.setText("Obrisi glumca");
 
@@ -330,8 +336,13 @@ public class FFilm extends javax.swing.JDialog {
         //rtm.obrisiReditelja(red);
     }//GEN-LAST:event_jbtnObrisiRediteljaActionPerformed
 
-    
-    
+    private void jbtnDodajGlumcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDodajGlumcaActionPerformed
+        Glumac glumac = (Glumac) jcomboGlumci.getSelectedItem();
+        TableModel tm = jtblGlumci.getModel();
+        GlumacTableModel gtm = (GlumacTableModel) tm;
+        gtm.dodajGlumca(glumac);
+    }//GEN-LAST:event_jbtnDodajGlumcaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -372,12 +383,16 @@ public class FFilm extends javax.swing.JDialog {
         
         List<Reditelj> reditelji = new ArrayList<>();
         jtblReditelji.setModel(new RediteljTableModel(reditelji));
-        
+
 //        List<Reditelj> reditelji = Kontroler.getInstanca().vratiSveReditelje();
 //        TableModel tm = new RediteljTableModel(reditelji);
 //        jtblReditelji.setModel(tm);
-    }
 
+        popuniGlumce();
+        List<Glumac> glumci = new ArrayList<>();
+        jtblGlumci.setModel(new GlumacTableModel(glumci));
+    }
+    
     private void popuniZanrove() {
         jcomboZanr.removeAllItems();
         
@@ -390,13 +405,22 @@ public class FFilm extends javax.swing.JDialog {
         jcomboZanr.addItem(Zanr.NAUCNA_FANTASTIKA);
         jcomboZanr.addItem(Zanr.TRILER);
     }
-
+    
     private void popuniReditelje() throws Exception {
         jcomboReditelji.removeAllItems();
         
         List<Reditelj> reditelji = Kontroler.getInstanca().vratiSveReditelje();
         for (Reditelj reditelj : reditelji) {
             jcomboReditelji.addItem(reditelj);
+        }
+    }
+    
+    private void popuniGlumce() throws Exception {
+        jcomboGlumci.removeAllItems();;
+        
+        List<Glumac> glumci = Kontroler.getInstanca().vratiSveGlumce();
+        for (Glumac glumac : glumci) {
+            jcomboGlumci.addItem(glumac);
         }
     }
 }
