@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -23,18 +30,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Component id="jbtnIzadji" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jbtnSacuvaj" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanel1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,12 +49,12 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbtnIzadji" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbtnSacuvaj" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -68,26 +74,55 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jlabNaziv" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jlabTrajanje" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jlabZanr" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jlabGodina" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jlabJezik" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jlabOcenaIMDb" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jlabID" alignment="0" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jcomboZanr" max="32767" attributes="0"/>
-                      <Component id="jtxtGodina" max="32767" attributes="0"/>
-                      <Component id="jtxtJezik" max="32767" attributes="0"/>
-                      <Component id="jtxtOcenaIMDb" max="32767" attributes="0"/>
-                      <Component id="jtxtID" min="-2" pref="261" max="-2" attributes="0"/>
-                      <Component id="jtxtNaziv" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jtxtTrajanje" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jlabReditelji" max="32767" attributes="0"/>
+                              <Component id="jlabNaziv" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlabTrajanje" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlabZanr" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlabGodina" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlabJezik" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlabOcenaIMDb" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jlabID" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jtxtNaziv" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jcomboZanr" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtxtTrajanje" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jtxtOcenaIMDb" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jtxtJezik" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jtxtGodina" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jtxtID" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jcomboReditelji" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jbtnObrisiReditelja" max="32767" attributes="0"/>
+                                      <Component id="jbtnDodajReditelja" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jScrollPane2" pref="468" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jlabGlumci" min="-2" pref="77" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jcomboGlumci" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="51" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jbtnDodajGlumca" pref="103" max="32767" attributes="0"/>
+                              <Component id="jbtnObrisiGlumca" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -129,7 +164,29 @@
                       <Component id="jlabOcenaIMDb" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jtxtOcenaIMDb" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jlabReditelji" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcomboReditelji" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbtnDodajReditelja" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="130" max="-2" attributes="0"/>
+                      <Component id="jbtnObrisiReditelja" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jlabGlumci" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jcomboGlumci" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbtnDodajGlumca" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jScrollPane2" min="-2" pref="140" max="-2" attributes="0"/>
+                      <Component id="jbtnObrisiGlumca" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -199,6 +256,114 @@
         <Component class="javax.swing.JTextField" name="jtxtJezik">
         </Component>
         <Component class="javax.swing.JTextField" name="jtxtOcenaIMDb">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlabReditelji">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Reditelji:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jcomboReditelji">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Object&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jlabGlumci">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Glumci:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="jcomboGlumci">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Object&gt;"/>
+          </AuxValues>
+        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="jtblReditelji">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="4" rowCount="4">
+                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                  </Table>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="jtblGlumci">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="4" rowCount="4">
+                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                  </Table>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="jbtnDodajReditelja">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Dodaj reditelja"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnDodajRediteljaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbtnObrisiReditelja">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Obrisi reditelja"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnObrisiRediteljaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbtnDodajGlumca">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Dodaj glumca"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbtnObrisiGlumca">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Obrisi glumca"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

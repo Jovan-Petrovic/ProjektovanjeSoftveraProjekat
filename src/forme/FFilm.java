@@ -6,11 +6,17 @@
 package forme;
 
 import domen.Film;
+import domen.Reditelj;
 import domen.Zanr;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 import kontroler.Kontroler;
+import model.RediteljTableModel;
 
 /**
  *
@@ -21,7 +27,7 @@ public class FFilm extends javax.swing.JDialog {
     /**
      * Creates new form FFilm
      */
-    public FFilm(java.awt.Frame parent, boolean modal) {
+    public FFilm(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
         
@@ -39,6 +45,7 @@ public class FFilm extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jlabID = new javax.swing.JLabel();
         jlabNaziv = new javax.swing.JLabel();
@@ -54,8 +61,22 @@ public class FFilm extends javax.swing.JDialog {
         jtxtGodina = new javax.swing.JTextField();
         jtxtJezik = new javax.swing.JTextField();
         jtxtOcenaIMDb = new javax.swing.JTextField();
+        jlabReditelji = new javax.swing.JLabel();
+        jcomboReditelji = new javax.swing.JComboBox<>();
+        jlabGlumci = new javax.swing.JLabel();
+        jcomboGlumci = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtblReditelji = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtblGlumci = new javax.swing.JTable();
+        jbtnDodajReditelja = new javax.swing.JButton();
+        jbtnObrisiReditelja = new javax.swing.JButton();
+        jbtnDodajGlumca = new javax.swing.JButton();
+        jbtnObrisiGlumca = new javax.swing.JButton();
         jbtnIzadji = new javax.swing.JButton();
         jbtnSacuvaj = new javax.swing.JButton();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,30 +100,103 @@ public class FFilm extends javax.swing.JDialog {
 
         jcomboZanr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jlabReditelji.setText("Reditelji:");
+
+        jcomboReditelji.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jlabGlumci.setText("Glumci:");
+
+        jcomboGlumci.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jtblReditelji.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtblReditelji);
+
+        jtblGlumci.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jtblGlumci);
+
+        jbtnDodajReditelja.setText("Dodaj reditelja");
+        jbtnDodajReditelja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnDodajRediteljaActionPerformed(evt);
+            }
+        });
+
+        jbtnObrisiReditelja.setText("Obrisi reditelja");
+        jbtnObrisiReditelja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnObrisiRediteljaActionPerformed(evt);
+            }
+        });
+
+        jbtnDodajGlumca.setText("Dodaj glumca");
+
+        jbtnObrisiGlumca.setText("Obrisi glumca");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlabNaziv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlabTrajanje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlabZanr, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlabGodina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlabJezik, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlabOcenaIMDb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlabID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcomboZanr, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtxtGodina)
-                    .addComponent(jtxtJezik)
-                    .addComponent(jtxtOcenaIMDb)
-                    .addComponent(jtxtID, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxtNaziv)
-                    .addComponent(jtxtTrajanje))
-                .addGap(75, 75, 75))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jlabReditelji, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlabNaziv, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlabTrajanje, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlabZanr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlabGodina, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlabJezik, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlabOcenaIMDb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlabID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtxtNaziv)
+                            .addComponent(jcomboZanr, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtxtTrajanje, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtxtOcenaIMDb)
+                            .addComponent(jtxtJezik, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtxtGodina, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtxtID)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jcomboReditelji, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(51, 51, 51)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jbtnObrisiReditelja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbtnDodajReditelja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jlabGlumci, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jcomboGlumci, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbtnDodajGlumca, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                            .addComponent(jbtnObrisiGlumca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +229,25 @@ public class FFilm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlabOcenaIMDb)
                     .addComponent(jtxtOcenaIMDb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlabReditelji)
+                    .addComponent(jcomboReditelji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnDodajReditelja))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnObrisiReditelja))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlabGlumci)
+                    .addComponent(jcomboGlumci, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnDodajGlumca))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnObrisiGlumca))
+                .addContainerGap())
         );
 
         jbtnIzadji.setText("Izadji");
@@ -156,27 +268,26 @@ public class FFilm extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(19, 19, 19)
                         .addComponent(jbtnIzadji)
-                        .addGap(203, 203, 203)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbtnSacuvaj))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnIzadji)
                     .addComponent(jbtnSacuvaj))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
@@ -203,19 +314,50 @@ public class FFilm extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jbtnSacuvajActionPerformed
 
+    private void jbtnDodajRediteljaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDodajRediteljaActionPerformed
+        Reditelj reditelj = (Reditelj) jcomboReditelji.getSelectedItem();
+        TableModel tm = jtblReditelji.getModel();
+        RediteljTableModel rtm = (RediteljTableModel) tm;
+        rtm.dodajReditelja(reditelj);
+        
+    }//GEN-LAST:event_jbtnDodajRediteljaActionPerformed
+
+    private void jbtnObrisiRediteljaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnObrisiRediteljaActionPerformed
+        int selectovanRed = jtblReditelji.getSelectedRow();
+        TableModel tm = jtblReditelji.getModel();
+        RediteljTableModel rtm = (RediteljTableModel) tm;
+        Long red = (Long) rtm.getValueAt(selectovanRed, 0);
+        //rtm.obrisiReditelja(red);
+    }//GEN-LAST:event_jbtnObrisiRediteljaActionPerformed
+
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton jbtnDodajGlumca;
+    private javax.swing.JButton jbtnDodajReditelja;
     private javax.swing.JButton jbtnIzadji;
+    private javax.swing.JButton jbtnObrisiGlumca;
+    private javax.swing.JButton jbtnObrisiReditelja;
     private javax.swing.JButton jbtnSacuvaj;
+    private javax.swing.JComboBox<Object> jcomboGlumci;
+    private javax.swing.JComboBox<Object> jcomboReditelji;
     private javax.swing.JComboBox<Object> jcomboZanr;
+    private javax.swing.JLabel jlabGlumci;
     private javax.swing.JLabel jlabGodina;
     private javax.swing.JLabel jlabID;
     private javax.swing.JLabel jlabJezik;
     private javax.swing.JLabel jlabNaziv;
     private javax.swing.JLabel jlabOcenaIMDb;
+    private javax.swing.JLabel jlabReditelji;
     private javax.swing.JLabel jlabTrajanje;
     private javax.swing.JLabel jlabZanr;
+    private javax.swing.JTable jtblGlumci;
+    private javax.swing.JTable jtblReditelji;
     private javax.swing.JTextField jtxtGodina;
     private javax.swing.JTextField jtxtID;
     private javax.swing.JTextField jtxtJezik;
@@ -224,8 +366,16 @@ public class FFilm extends javax.swing.JDialog {
     private javax.swing.JTextField jtxtTrajanje;
     // End of variables declaration//GEN-END:variables
 
-    private void pripremiFormu() {
+    private void pripremiFormu() throws Exception {
         popuniZanrove();
+        popuniReditelje();
+        
+        List<Reditelj> reditelji = new ArrayList<>();
+        jtblReditelji.setModel(new RediteljTableModel(reditelji));
+        
+//        List<Reditelj> reditelji = Kontroler.getInstanca().vratiSveReditelje();
+//        TableModel tm = new RediteljTableModel(reditelji);
+//        jtblReditelji.setModel(tm);
     }
 
     private void popuniZanrove() {
@@ -239,5 +389,14 @@ public class FFilm extends javax.swing.JDialog {
         jcomboZanr.addItem(Zanr.MISTERIJA);
         jcomboZanr.addItem(Zanr.NAUCNA_FANTASTIKA);
         jcomboZanr.addItem(Zanr.TRILER);
+    }
+
+    private void popuniReditelje() throws Exception {
+        jcomboReditelji.removeAllItems();
+        
+        List<Reditelj> reditelji = Kontroler.getInstanca().vratiSveReditelje();
+        for (Reditelj reditelj : reditelji) {
+            jcomboReditelji.addItem(reditelj);
+        }
     }
 }

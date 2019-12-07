@@ -6,8 +6,12 @@
 package kontroler;
 
 import domen.Film;
+import domen.Reditelj;
+import java.util.List;
 import servis.ServisFilm;
+import servis.ServisReditelj;
 import servis.implementacija.ServisFilmImplementacija;
+import servis.implementacija.ServisRediteljImplementacija;
 
 /**
  *
@@ -17,9 +21,11 @@ public class Kontroler {
     
     private static Kontroler instanca;
     private final ServisFilm servisFilm;
+    private final ServisReditelj servisReditelj;
     
     public Kontroler() {
         servisFilm = new ServisFilmImplementacija();
+        servisReditelj = new ServisRediteljImplementacija();
     }
 
     public static Kontroler getInstanca() {
@@ -31,5 +37,9 @@ public class Kontroler {
     
     public Film sacuvajFilm(Film film) throws Exception {
         return servisFilm.sacuvaj(film);
+    }
+    
+    public List<Reditelj> vratiSveReditelje() throws Exception {
+        return servisReditelj.vratiSve();
     }
 }
