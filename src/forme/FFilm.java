@@ -9,11 +9,13 @@ import domen.Film;
 import domen.Glumac;
 import domen.Reditelj;
 import domen.Zanr;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import kontroler.Kontroler;
 import model.GlumacTableModel;
@@ -305,16 +307,7 @@ public class FFilm extends javax.swing.JDialog {
 
     private void jbtnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSacuvajActionPerformed
         try {
-            String naziv = jtxtNaziv.getText().trim();
-            int trajanje = Integer.parseInt(jtxtTrajanje.getText().trim());
-            Zanr zanr = (Zanr) jcomboZanr.getSelectedItem();
-            int godina = Integer.parseInt(jtxtGodina.getText().trim());
-            String jezik = jtxtJezik.getText().trim();
-            double ocenaIMDb = Double.parseDouble(jtxtOcenaIMDb.getText().trim());
-            
-            Film film = new Film(null, naziv, trajanje, zanr, godina, jezik, ocenaIMDb);
-            film = Kontroler.getInstanca().sacuvajFilm(film);
-            JOptionPane.showMessageDialog(this, "Film je sacuvan sa id-em: " + film.getId());
+            sacuvajFilm();
         } catch (Exception ex) {
             Logger.getLogger(FFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -332,8 +325,8 @@ public class FFilm extends javax.swing.JDialog {
         int selectovanRed = jtblReditelji.getSelectedRow();
         TableModel tm = jtblReditelji.getModel();
         RediteljTableModel rtm = (RediteljTableModel) tm;
-        Long red = (Long) rtm.getValueAt(selectovanRed, 0);
-        //rtm.obrisiReditelja(red);
+        Long id = (Long) rtm.getValueAt(selectovanRed, 0);
+        //rtm.obrisiReditelja(id);
     }//GEN-LAST:event_jbtnObrisiRediteljaActionPerformed
 
     private void jbtnDodajGlumcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDodajGlumcaActionPerformed
@@ -379,8 +372,8 @@ public class FFilm extends javax.swing.JDialog {
 
     private void pripremiFormu() throws Exception {
         popuniZanrove();
-        popuniReditelje();
         
+        popuniReditelje();
         List<Reditelj> reditelji = new ArrayList<>();
         jtblReditelji.setModel(new RediteljTableModel(reditelji));
 
@@ -415,12 +408,26 @@ public class FFilm extends javax.swing.JDialog {
         }
     }
     
+    private void sacuvajFilm() throws HeadlessException, Exception, NumberFormatException {
+        String naziv = jtxtNaziv.getText().trim();
+        int trajanje = Integer.parseInt(jtxtTrajanje.getText().trim());
+        Zanr zanr = (Zanr) jcomboZanr.getSelectedItem();
+        int godina = Integer.parseInt(jtxtGodina.getText().trim());
+        String jezik = jtxtJezik.getText().trim();
+        double ocenaIMDb = Double.parseDouble(jtxtOcenaIMDb.getText().trim());
+        
+        Film film = new Film(null, naziv, trajanje, zanr, godina, jezik, ocenaIMDb);
+        film = Kontroler.getInstanca().sacuvajFilm(film);
+        JOptionPane.showMessageDialog(this, "Film je sacuvan sa id-em: " + film.getId());
+    }
+    
     private void popuniGlumce() throws Exception {
-        jcomboGlumci.removeAllItems();;
+        jcomboGlumci.removeAllItems();
         
         List<Glumac> glumci = Kontroler.getInstanca().vratiSveGlumce();
         for (Glumac glumac : glumci) {
             jcomboGlumci.addItem(glumac);
         }
     }
+
 }

@@ -6,6 +6,7 @@
 package model;
 
 import domen.Reditelj;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
@@ -74,9 +75,9 @@ public class RediteljTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    public void obrisiReditelja(Long red) {
+    public void obrisiReditelja(Long id) {
         for (Reditelj reditelj : reditelji) {
-            if(reditelj.getId().equals(red)) {
+            if(reditelj.getId().equals(id)) {
                 reditelji.remove(reditelj);
             }
         }
