@@ -9,6 +9,8 @@ import domen.Film;
 import domen.Zanr;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.table.TableModel;
+import kontroler.Kontroler;
 import model.FilmTableModel;
 
 /**
@@ -20,7 +22,7 @@ public class FPretragaFilma extends javax.swing.JDialog {
     /**
      * Creates new form FPretragaFilma
      */
-    public FPretragaFilma(java.awt.Frame parent, boolean modal) {
+    public FPretragaFilma(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
         
@@ -40,13 +42,14 @@ public class FPretragaFilma extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblFilmovi = new javax.swing.JTable();
-        jlblFiltriraj = new javax.swing.JLabel();
-        jcomboFiltriraj = new javax.swing.JComboBox<>();
-        jlblPretrazi = new javax.swing.JLabel();
-        jtxtPretrazi = new javax.swing.JTextField();
-        jbtnPretrazi = new javax.swing.JButton();
+        jlblPretraziPoZanru = new javax.swing.JLabel();
+        jcomboPretraziPoZanru = new javax.swing.JComboBox<>();
+        jlblPretraziPoImenu = new javax.swing.JLabel();
+        jtxtPretraziPoImenu = new javax.swing.JTextField();
+        jbtnPretraziPoImenu = new javax.swing.JButton();
         jbtnDetalji = new javax.swing.JButton();
         jbtnIzadji = new javax.swing.JButton();
+        jbtnPretraziPoZanru = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -63,20 +66,37 @@ public class FPretragaFilma extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jtblFilmovi);
 
-        jlblFiltriraj.setText("Filtriraj po zanru:");
+        jlblPretraziPoZanru.setText("Pretrazi po zanru:");
 
-        jcomboFiltriraj.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcomboPretraziPoZanru.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jlblPretrazi.setText("Pretrazi po imenu:");
+        jlblPretraziPoImenu.setText("Pretrazi po imenu:");
 
-        jbtnPretrazi.setText("Pretrazi");
+        jbtnPretraziPoImenu.setText("Pretrazi po imenu");
+        jbtnPretraziPoImenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnPretraziPoImenuActionPerformed(evt);
+            }
+        });
 
         jbtnDetalji.setText("Detalji");
+        jbtnDetalji.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnDetaljiActionPerformed(evt);
+            }
+        });
 
         jbtnIzadji.setText("Izadji");
         jbtnIzadji.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnIzadjiActionPerformed(evt);
+            }
+        });
+
+        jbtnPretraziPoZanru.setText("Pretrazi po zanru");
+        jbtnPretraziPoZanru.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnPretraziPoZanruActionPerformed(evt);
             }
         });
 
@@ -89,15 +109,17 @@ public class FPretragaFilma extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jlblPretrazi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblFiltriraj, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlblPretraziPoImenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlblPretraziPoZanru, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcomboFiltriraj, 0, 284, Short.MAX_VALUE)
-                            .addComponent(jtxtPretrazi))
+                            .addComponent(jcomboPretraziPoZanru, 0, 284, Short.MAX_VALUE)
+                            .addComponent(jtxtPretraziPoImenu))
                         .addGap(44, 44, 44)
-                        .addComponent(jbtnPretrazi)
-                        .addGap(196, 196, 196))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbtnPretraziPoImenu, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                            .addComponent(jbtnPretraziPoZanru, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(134, 134, 134))
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jbtnIzadji)
@@ -110,13 +132,14 @@ public class FPretragaFilma extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblFiltriraj, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcomboFiltriraj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(jlblPretraziPoZanru, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcomboPretraziPoZanru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnPretraziPoZanru))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblPretrazi)
-                    .addComponent(jtxtPretrazi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnPretrazi))
+                    .addComponent(jlblPretraziPoImenu)
+                    .addComponent(jtxtPretraziPoImenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnPretraziPoImenu))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
@@ -133,36 +156,59 @@ public class FPretragaFilma extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jbtnIzadjiActionPerformed
 
+    private void jbtnPretraziPoZanruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPretraziPoZanruActionPerformed
+        Zanr zanr = (Zanr) jcomboPretraziPoZanru.getSelectedItem();
+        TableModel tm = jtblFilmovi.getModel();
+        FilmTableModel ftm = (FilmTableModel) tm;
+        ftm.pretraziFilmovePoZanru(zanr);
+    }//GEN-LAST:event_jbtnPretraziPoZanruActionPerformed
+
+    private void jbtnPretraziPoImenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPretraziPoImenuActionPerformed
+        String naziv = jtxtPretraziPoImenu.getText().trim();
+        TableModel tm = jtblFilmovi.getModel();
+        FilmTableModel ftm = (FilmTableModel) tm;
+        ftm.pretraziFilmovePoImenu(naziv);
+    }//GEN-LAST:event_jbtnPretraziPoImenuActionPerformed
+
+    private void jbtnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDetaljiActionPerformed
+        int selektovanRed = jtblFilmovi.getSelectedRow();
+        TableModel tm = jtblFilmovi.getModel();
+        FilmTableModel ftm = (FilmTableModel) tm;
+        Long id = (Long) ftm.getValueAt(selektovanRed, 0);
+        Film film = ftm.nadjiFilm(id);
+    }//GEN-LAST:event_jbtnDetaljiActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnDetalji;
     private javax.swing.JButton jbtnIzadji;
-    private javax.swing.JButton jbtnPretrazi;
-    private javax.swing.JComboBox<Object> jcomboFiltriraj;
-    private javax.swing.JLabel jlblFiltriraj;
-    private javax.swing.JLabel jlblPretrazi;
+    private javax.swing.JButton jbtnPretraziPoImenu;
+    private javax.swing.JButton jbtnPretraziPoZanru;
+    private javax.swing.JComboBox<Object> jcomboPretraziPoZanru;
+    private javax.swing.JLabel jlblPretraziPoImenu;
+    private javax.swing.JLabel jlblPretraziPoZanru;
     private javax.swing.JTable jtblFilmovi;
-    private javax.swing.JTextField jtxtPretrazi;
+    private javax.swing.JTextField jtxtPretraziPoImenu;
     // End of variables declaration//GEN-END:variables
 
-    private void pripremiFormu() {
+    private void pripremiFormu() throws Exception {
         popuniZanrove();
         
-        List<Film> filmovi = new ArrayList<>();
+        List<Film> filmovi = Kontroler.getInstanca().vratiSveFilmove();
         jtblFilmovi.setModel(new FilmTableModel(filmovi));
     }
 
     private void popuniZanrove() {
-        jcomboFiltriraj.removeAllItems();
+        jcomboPretraziPoZanru.removeAllItems();
         
-        jcomboFiltriraj.addItem(Zanr.AKCIJA);
-        jcomboFiltriraj.addItem(Zanr.DOKUMENTARNI);
-        jcomboFiltriraj.addItem(Zanr.DRAMA);
-        jcomboFiltriraj.addItem(Zanr.HOROR);
-        jcomboFiltriraj.addItem(Zanr.KOMEDIJA);
-        jcomboFiltriraj.addItem(Zanr.MISTERIJA);
-        jcomboFiltriraj.addItem(Zanr.NAUCNA_FANTASTIKA);
-        jcomboFiltriraj.addItem(Zanr.TRILER);
+        jcomboPretraziPoZanru.addItem(Zanr.AKCIJA);
+        jcomboPretraziPoZanru.addItem(Zanr.DOKUMENTARNI);
+        jcomboPretraziPoZanru.addItem(Zanr.DRAMA);
+        jcomboPretraziPoZanru.addItem(Zanr.HOROR);
+        jcomboPretraziPoZanru.addItem(Zanr.KOMEDIJA);
+        jcomboPretraziPoZanru.addItem(Zanr.MISTERIJA);
+        jcomboPretraziPoZanru.addItem(Zanr.NAUCNA_FANTASTIKA);
+        jcomboPretraziPoZanru.addItem(Zanr.TRILER);
     }
 
 }

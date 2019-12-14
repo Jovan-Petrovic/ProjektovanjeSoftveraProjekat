@@ -7,11 +7,13 @@ package skladiste.bazapodataka;
 
 import baza.Broker;
 import domen.Film;
+import domen.Zanr;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,7 +55,30 @@ public class BazapodatakaSkladisteFilm  implements SkladisteFilm {
 
     @Override
     public List<Film> vratiSve() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Film> filmovi = new ArrayList<>();
+        try {
+            broker.otvoriKonekciju();
+            String upit = "select * from film";
+            Connection koneckija = broker.getKonekcija();
+            Statement statement = koneckija.createStatement();
+            ResultSet rs = statement.executeQuery(upit);
+            while(rs.next()) {
+                Long id = rs.getLong("id");
+                String naziv = rs.getString("naziv");
+                int trajanje = rs.getInt("trajanje");
+                Zanr zanr = Zanr.valueOf(rs.getString("zanr"));
+                int godina = rs.getInt("godina");
+                String jezik = rs.getString("jezik");
+                double ocenaIMDb = rs.getInt("ocenaIMDb");
+                Film film = new Film(id, naziv, trajanje, zanr, godina, jezik, ocenaIMDb);
+                filmovi.add(film);
+            }
+            statement.close();
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return filmovi;
     }
     
 }

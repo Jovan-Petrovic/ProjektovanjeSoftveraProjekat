@@ -6,6 +6,8 @@
 package model;
 
 import domen.Film;
+import domen.Zanr;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -72,7 +74,36 @@ public class FilmTableModel extends AbstractTableModel {
         return klaseKolona[kolona];
     }
 
-    
-    
+    public void pretraziFilmovePoZanru(Zanr zanr) {
+        List<Film> zaUklanjanje = new ArrayList<>();
+        for (Film film : filmovi) {
+            if(!film.getZanr().equals(zanr)) {
+                zaUklanjanje.add(film);
+            }
+        }
+        filmovi.removeAll(zaUklanjanje);
+        fireTableDataChanged();
+    }
+
+    public void pretraziFilmovePoImenu(String naziv) {
+        List<Film> zaUklanjanje = new ArrayList<>();
+        for (Film film : filmovi) {
+            if(!film.getNaziv().toLowerCase().contains(naziv.toLowerCase())) {
+                zaUklanjanje.add(film);
+            }
+        }
+        filmovi.removeAll(zaUklanjanje);
+        fireTableDataChanged();
+    }
+
+    public Film nadjiFilm(Long id) {
+        for (Film film : filmovi) {
+            if(film.getId().equals(id)) {
+                return film;
+            }
+        }
+        return null;
+    }
+
     
 }

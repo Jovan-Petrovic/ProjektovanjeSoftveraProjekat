@@ -51,4 +51,8 @@ public class Kontroler {
     public List<Glumac> vratiSveGlumce() throws Exception {
         return servisGlumac.vratiSve();
     }
+
+    public List<Film> vratiSveFilmove() throws Exception {
+        return servisFilm.vratiSve();
+    }
 }

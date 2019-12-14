@@ -30,7 +30,7 @@ public class ServisFilmImplementacija implements ServisFilm {
 
     @Override
     public List<Film> vratiSve() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return skladisteFilm.vratiSve();
     }
     
     

@@ -28,17 +28,20 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jlblPretrazi" max="32767" attributes="0"/>
-                          <Component id="jlblFiltriraj" min="-2" pref="112" max="-2" attributes="0"/>
+                          <Component id="jlblPretraziPoImenu" max="32767" attributes="0"/>
+                          <Component id="jlblPretraziPoZanru" min="-2" pref="112" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jcomboFiltriraj" pref="284" max="32767" attributes="0"/>
-                          <Component id="jtxtPretrazi" max="32767" attributes="0"/>
+                          <Component id="jcomboPretraziPoZanru" pref="284" max="32767" attributes="0"/>
+                          <Component id="jtxtPretraziPoImenu" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                      <Component id="jbtnPretrazi" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="196" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jbtnPretraziPoImenu" pref="131" max="32767" attributes="0"/>
+                          <Component id="jbtnPretraziPoZanru" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
@@ -56,14 +59,15 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlblFiltriraj" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                  <Component id="jcomboFiltriraj" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlblPretraziPoZanru" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="jcomboPretraziPoZanru" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbtnPretraziPoZanru" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jlblPretrazi" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jtxtPretrazi" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbtnPretrazi" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlblPretraziPoImenu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtxtPretraziPoImenu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbtnPretraziPoImenu" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="162" max="-2" attributes="0"/>
@@ -99,12 +103,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="jlblFiltriraj">
+    <Component class="javax.swing.JLabel" name="jlblPretraziPoZanru">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Filtriraj po zanru:"/>
+        <Property name="text" type="java.lang.String" value="Pretrazi po zanru:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jcomboFiltriraj">
+    <Component class="javax.swing.JComboBox" name="jcomboPretraziPoZanru">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -119,22 +123,28 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Object&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="jlblPretrazi">
+    <Component class="javax.swing.JLabel" name="jlblPretraziPoImenu">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pretrazi po imenu:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jtxtPretrazi">
+    <Component class="javax.swing.JTextField" name="jtxtPretraziPoImenu">
     </Component>
-    <Component class="javax.swing.JButton" name="jbtnPretrazi">
+    <Component class="javax.swing.JButton" name="jbtnPretraziPoImenu">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pretrazi"/>
+        <Property name="text" type="java.lang.String" value="Pretrazi po imenu"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnPretraziPoImenuActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnDetalji">
       <Properties>
         <Property name="text" type="java.lang.String" value="Detalji"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnDetaljiActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbtnIzadji">
       <Properties>
@@ -142,6 +152,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnIzadjiActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbtnPretraziPoZanru">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pretrazi po zanru"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnPretraziPoZanruActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
