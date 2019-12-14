@@ -7,6 +7,8 @@ package forme;
 
 import domen.Projekcija;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 import kontroler.Kontroler;
 import model.ProjekcijaTableModel;
 
@@ -38,8 +40,8 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
     private void initComponents() {
 
         jlblPretraziPoImenu = new javax.swing.JLabel();
-        jtxtPretraziPoImenu = new javax.swing.JTextField();
-        jbtnPretraziPoImenu = new javax.swing.JButton();
+        jtxtPretraziPoImenuFilma = new javax.swing.JTextField();
+        jbtnPretraziPoImenuFilma = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblProjekcije = new javax.swing.JTable();
         jbtnIzadji = new javax.swing.JButton();
@@ -49,10 +51,10 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
 
         jlblPretraziPoImenu.setText("Pretrazi po imenu:");
 
-        jbtnPretraziPoImenu.setText("Pretrazi po imenu");
-        jbtnPretraziPoImenu.addActionListener(new java.awt.event.ActionListener() {
+        jbtnPretraziPoImenuFilma.setText("Pretrazi po imenu filma");
+        jbtnPretraziPoImenuFilma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnPretraziPoImenuActionPerformed(evt);
+                jbtnPretraziPoImenuFilmaActionPerformed(evt);
             }
         });
 
@@ -93,9 +95,9 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jlblPretraziPoImenu, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jtxtPretraziPoImenu, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtxtPretraziPoImenuFilma, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jbtnPretraziPoImenu, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)))
+                        .addComponent(jbtnPretraziPoImenuFilma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
@@ -104,8 +106,8 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblPretraziPoImenu)
-                    .addComponent(jtxtPretraziPoImenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnPretraziPoImenu))
+                    .addComponent(jtxtPretraziPoImenuFilma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnPretraziPoImenuFilma))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -118,22 +120,28 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtnPretraziPoImenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPretraziPoImenuActionPerformed
-        
-    }//GEN-LAST:event_jbtnPretraziPoImenuActionPerformed
-
     private void jbtnIzadjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIzadjiActionPerformed
         dispose();
     }//GEN-LAST:event_jbtnIzadjiActionPerformed
+
+    private void jbtnPretraziPoImenuFilmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPretraziPoImenuFilmaActionPerformed
+        String naziv = jtxtPretraziPoImenuFilma.getText().trim();
+        TableModel tm = jtblProjekcije.getModel();
+        ProjekcijaTableModel ptm = (ProjekcijaTableModel) tm;
+        ptm.pretraziProjekcijePoNazivuFilma(naziv);
+        if(jtblProjekcije.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje filmove po zadatoj vrednosti!");
+        }
+    }//GEN-LAST:event_jbtnPretraziPoImenuFilmaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnDetalji;
     private javax.swing.JButton jbtnIzadji;
-    private javax.swing.JButton jbtnPretraziPoImenu;
+    private javax.swing.JButton jbtnPretraziPoImenuFilma;
     private javax.swing.JLabel jlblPretraziPoImenu;
     private javax.swing.JTable jtblProjekcije;
-    private javax.swing.JTextField jtxtPretraziPoImenu;
+    private javax.swing.JTextField jtxtPretraziPoImenuFilma;
     // End of variables declaration//GEN-END:variables
 
     private void pripremiFormu() throws Exception {

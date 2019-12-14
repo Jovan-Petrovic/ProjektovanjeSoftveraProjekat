@@ -6,6 +6,7 @@
 package model;
 
 import domen.Projekcija;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -65,6 +66,17 @@ public class ProjekcijaTableModel extends AbstractTableModel {
     @Override
     public Class<?> getColumnClass(int kolona) {
         return klaseKolona[kolona];
+    }
+
+    public void pretraziProjekcijePoNazivuFilma(String naziv) {
+        List<Projekcija> zaUklanjanje = new ArrayList<>();
+        for (Projekcija projekcija : projekcije) {
+            if(!projekcija.getFilm().getNaziv().toLowerCase().contains(naziv.toLowerCase())) {
+                zaUklanjanje.add(projekcija);
+            }
+        }
+        projekcije.removeAll(zaUklanjanje);
+        fireTableDataChanged();
     }
     
     
