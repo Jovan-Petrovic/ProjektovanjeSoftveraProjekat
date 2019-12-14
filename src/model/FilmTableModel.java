@@ -104,6 +104,5 @@ public class FilmTableModel extends AbstractTableModel {
         }
         return null;
     }
-
-    
+   
 }

@@ -47,6 +47,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jbtnIzadji" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jbtnDodaj" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       <Component id="jbtnDetalji" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -75,6 +77,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbtnDetalji" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbtnIzadji" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbtnDodaj" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="41" max="32767" attributes="0"/>
           </Group>
@@ -160,6 +163,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnPretraziPoZanruActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbtnDodaj">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Dodaj"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnDodajActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -8,6 +8,12 @@ package forme;
 import domen.Film;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JTextField;
+import javax.swing.table.TableModel;
 import kontroler.Kontroler;
 import model.FilmTableModel;
 
@@ -46,12 +52,10 @@ public class FProjekcija extends javax.swing.JDialog {
         jlabSala = new javax.swing.JLabel();
         jtxtSala = new javax.swing.JTextField();
         jlabFilm = new javax.swing.JLabel();
-        jcomboFilm = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtblFilmovi = new javax.swing.JTable();
         jbtnIzadji = new javax.swing.JButton();
         jbtnSacuvaj = new javax.swing.JButton();
-        jbtnDodajFilm = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jtxtFilm = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,21 +71,6 @@ public class FProjekcija extends javax.swing.JDialog {
 
         jlabFilm.setText("Film:");
 
-        jcomboFilm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jtblFilmovi.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jtblFilmovi);
-
         jbtnIzadji.setText("Izadji");
         jbtnIzadji.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +80,12 @@ public class FProjekcija extends javax.swing.JDialog {
 
         jbtnSacuvaj.setText("Sacuvaj");
 
-        jbtnDodajFilm.setText("Dodaj");
+        jButton1.setText("Pretrazi film");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -99,7 +93,11 @@ public class FProjekcija extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbtnIzadji)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
+                        .addComponent(jbtnSacuvaj))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jlabFilm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -108,21 +106,13 @@ public class FProjekcija extends javax.swing.JDialog {
                             .addComponent(jlabId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jtxtDatum, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtxtDatum, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
                             .addComponent(jtxtSala, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jcomboFilm, javax.swing.GroupLayout.Alignment.LEADING, 0, 312, Short.MAX_VALUE)
-                            .addComponent(jtxtId))
-                        .addGap(32, 32, 32)
-                        .addComponent(jbtnDodajFilm)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jbtnIzadji)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbtnSacuvaj))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE))
-                        .addContainerGap())))
+                            .addComponent(jtxtId)
+                            .addComponent(jtxtFilm, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,15 +132,13 @@ public class FProjekcija extends javax.swing.JDialog {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlabFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcomboFilm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnDodajFilm))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                    .addComponent(jButton1)
+                    .addComponent(jtxtFilm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnIzadji)
                     .addComponent(jbtnSacuvaj))
-                .addContainerGap())
+                .addGap(24, 24, 24))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -177,36 +165,40 @@ public class FProjekcija extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jbtnIzadjiActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            JDialog forma = new FPretragaFilma(this, true, FormaMod.FORMA_DODAVANJE);
+            forma.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbtnDodajFilm;
     private javax.swing.JButton jbtnIzadji;
     private javax.swing.JButton jbtnSacuvaj;
-    private javax.swing.JComboBox<Object> jcomboFilm;
     private javax.swing.JLabel jlabDatum;
     private javax.swing.JLabel jlabFilm;
     private javax.swing.JLabel jlabId;
     private javax.swing.JLabel jlabSala;
-    private javax.swing.JTable jtblFilmovi;
     private javax.swing.JTextField jtxtDatum;
+    private javax.swing.JTextField jtxtFilm;
     private javax.swing.JTextField jtxtId;
     private javax.swing.JTextField jtxtSala;
     // End of variables declaration//GEN-END:variables
 
     private void pripremiFormu() throws Exception {
-        popuniFilmove();
-        
-        List<Film> filmovi = new ArrayList<>();
-        jtblFilmovi.setModel(new FilmTableModel(filmovi));
+        jtxtFilm.setEditable(false);
     }
 
-    private void popuniFilmove() throws Exception {
-        jcomboFilm.removeAllItems();
-        
-        List<Film> filmovi = Kontroler.getInstanca().vratiSveFilmove();
-        for (Film film : filmovi) {
-            jcomboFilm.addItem(film);
-        }
+    public JTextField getJtxtFilm() {
+        return jtxtFilm;
     }
+
+    public void setJtxtFilm(JTextField jtxtFilm) {
+        this.jtxtFilm = jtxtFilm;
+    }
+    
 }
