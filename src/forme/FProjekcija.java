@@ -6,12 +6,17 @@
 package forme;
 
 import domen.Film;
+import domen.Projekcija;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 import kontroler.Kontroler;
@@ -79,6 +84,11 @@ public class FProjekcija extends javax.swing.JDialog {
         });
 
         jbtnSacuvaj.setText("Sacuvaj");
+        jbtnSacuvaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSacuvajActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Pretrazi film");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -174,6 +184,14 @@ public class FProjekcija extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jbtnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSacuvajActionPerformed
+        try {
+            sacuvajProjekciju();
+        } catch (Exception ex) {
+            Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbtnSacuvajActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
@@ -199,6 +217,26 @@ public class FProjekcija extends javax.swing.JDialog {
 
     public void setJtxtFilm(JTextField jtxtFilm) {
         this.jtxtFilm = jtxtFilm;
+    }
+
+    private void sacuvajProjekciju() throws Exception {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy.");
+            Date datum = sdf.parse(jtxtDatum.getText().trim());
+            int sala = Integer.parseInt(jtxtSala.getText().trim());
+            List<Film> filmovi = Kontroler.getInstanca().vratiSveFilmove();
+            Film f = null;
+            for (Film film : filmovi) {
+                if(jtxtFilm.getText().equals(film.getNaziv())) {
+                    f = film;
+                }
+            }
+            Projekcija projekcija = new Projekcija(null, datum, sala, f);
+            projekcija = Kontroler.getInstanca().sacuvajProjekciju(projekcija);
+            JOptionPane.showMessageDialog(this, "Projekcija je sacuvana sa ID-em: " + projekcija.getId());
+        } catch (ParseException ex) {
+            Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

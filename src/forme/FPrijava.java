@@ -48,6 +48,11 @@ public class FPrijava extends javax.swing.JFrame {
         jabLozinka.setText("Lozinka:");
 
         jbtnIzlaz.setText("Izlaz");
+        jbtnIzlaz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnIzlazActionPerformed(evt);
+            }
+        });
 
         jbtnPrijava.setText("Prijava");
         jbtnPrijava.addActionListener(new java.awt.event.ActionListener() {
@@ -118,6 +123,10 @@ public class FPrijava extends javax.swing.JFrame {
             Logger.getLogger(FPrijava.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbtnPrijavaActionPerformed
+
+    private void jbtnIzlazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIzlazActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbtnIzlazActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

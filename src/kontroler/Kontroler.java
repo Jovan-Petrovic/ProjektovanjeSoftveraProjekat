@@ -7,13 +7,16 @@ package kontroler;
 
 import domen.Film;
 import domen.Glumac;
+import domen.Projekcija;
 import domen.Reditelj;
 import java.util.List;
 import servis.ServisFilm;
 import servis.ServisGlumac;
+import servis.ServisProjekcija;
 import servis.ServisReditelj;
 import servis.implementacija.ServisFilmImplementacija;
 import servis.implementacija.ServisGlumacImplementacija;
+import servis.implementacija.ServisProjekcijaImplementacija;
 import servis.implementacija.ServisRediteljImplementacija;
 
 /**
@@ -26,11 +29,13 @@ public class Kontroler {
     private final ServisFilm servisFilm;
     private final ServisReditelj servisReditelj;
     private final ServisGlumac servisGlumac;
+    private final ServisProjekcija servisProjekcija;
     
     public Kontroler() {
         servisFilm = new ServisFilmImplementacija();
         servisReditelj = new ServisRediteljImplementacija();
         servisGlumac = new ServisGlumacImplementacija();
+        servisProjekcija = new ServisProjekcijaImplementacija();
     }
 
     public static Kontroler getInstanca() {
@@ -55,4 +60,9 @@ public class Kontroler {
     public List<Film> vratiSveFilmove() throws Exception {
         return servisFilm.vratiSve();
     }
+
+    public Projekcija sacuvajProjekciju(Projekcija projekcija) throws Exception {
+        return servisProjekcija.sacuvaj(projekcija);
+    }
+
 }

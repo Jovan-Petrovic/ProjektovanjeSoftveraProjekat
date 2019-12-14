@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.Parent;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import kontroler.Kontroler;
 import model.FilmTableModel;
@@ -215,6 +216,7 @@ public class FPretragaFilma extends javax.swing.JDialog {
         FilmTableModel ftm = (FilmTableModel) tm;
         String naziv = (String) ftm.getValueAt(selektovanRed, 1);
         fp.getJtxtFilm().setText(naziv);
+        JOptionPane.showMessageDialog(this, "Uspesno dodat film: " + naziv);
     }//GEN-LAST:event_jbtnDodajActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
