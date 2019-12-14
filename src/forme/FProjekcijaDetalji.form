@@ -138,6 +138,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Prikazi detalje o filmu"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnFilmDetaljiActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

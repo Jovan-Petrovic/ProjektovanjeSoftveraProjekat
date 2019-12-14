@@ -5,7 +5,13 @@
  */
 package forme;
 
+import domen.Film;
 import domen.Projekcija;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
+import kontroler.Kontroler;
 
 /**
  *
@@ -82,6 +88,11 @@ public class FProjekcijaDetalji extends javax.swing.JDialog {
         });
 
         jbtnFilmDetalji.setText("Prikazi detalje o filmu");
+        jbtnFilmDetalji.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnFilmDetaljiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,6 +151,24 @@ public class FProjekcijaDetalji extends javax.swing.JDialog {
     private void jtxtIzadjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtIzadjiActionPerformed
         dispose();
     }//GEN-LAST:event_jtxtIzadjiActionPerformed
+
+    private void jbtnFilmDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnFilmDetaljiActionPerformed
+        try {
+            String naziv = jtxtFilm.getText();
+            List<Film> filmovi = Kontroler.getInstanca().vratiSveFilmove();
+            Film f = null;
+            for (Film film : filmovi) {
+                if(film.getNaziv().equals(naziv)) {
+                    f = film;
+                }
+            }
+            JDialog forma = new FFilmDetalji(this, true, f);
+            forma.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(FProjekcijaDetalji.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jbtnFilmDetaljiActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
