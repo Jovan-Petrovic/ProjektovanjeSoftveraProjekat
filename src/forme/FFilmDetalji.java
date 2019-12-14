@@ -67,7 +67,7 @@ public class FFilmDetalji extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Novi film"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Film"));
 
         jlabID.setText("ID:");
 

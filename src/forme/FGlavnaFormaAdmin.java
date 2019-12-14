@@ -70,6 +70,11 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
         jMenuProjekcija.add(jMenuItemPretragaProjekcija);
 
         jMenuItemNovaProjekcija.setText("Nova projekcija");
+        jMenuItemNovaProjekcija.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemNovaProjekcijaActionPerformed(evt);
+            }
+        });
         jMenuProjekcija.add(jMenuItemNovaProjekcija);
 
         jMenuItemBrisanjeProjekcije.setText("Brisanje projekcije");
@@ -110,6 +115,15 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
             Logger.getLogger(FGlavnaFormaAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItemPretragaFilmovaActionPerformed
+
+    private void jMenuItemNovaProjekcijaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNovaProjekcijaActionPerformed
+        try {
+            JDialog forma = new FProjekcija(this, true);
+            forma.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(FGlavnaFormaAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItemNovaProjekcijaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
