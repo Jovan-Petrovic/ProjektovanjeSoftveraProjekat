@@ -78,6 +78,15 @@ public class ProjekcijaTableModel extends AbstractTableModel {
         projekcije.removeAll(zaUklanjanje);
         fireTableDataChanged();
     }
+
+    public Projekcija nadjiProjekciju(Long id) {
+        for (Projekcija projekcija : projekcije) {
+            if(projekcija.getId().equals(id)) {
+                return projekcija;
+            }
+        }
+        return null;
+    }
     
     
 }

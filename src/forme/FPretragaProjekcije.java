@@ -7,6 +7,7 @@ package forme;
 
 import domen.Projekcija;
 import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import kontroler.Kontroler;
@@ -79,6 +80,11 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         });
 
         jbtnDetalji.setText("Detalji");
+        jbtnDetalji.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnDetaljiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,9 +136,20 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) tm;
         ptm.pretraziProjekcijePoNazivuFilma(naziv);
         if(jtblProjekcije.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje filmove po zadatoj vrednosti!");
+            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje projekcije po zadatoj vrednosti!");
         }
     }//GEN-LAST:event_jbtnPretraziPoImenuFilmaActionPerformed
+
+    private void jbtnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDetaljiActionPerformed
+        int selektovanRed = jtblProjekcije.getSelectedRow();
+        TableModel tm = jtblProjekcije.getModel();
+        ProjekcijaTableModel ptm = (ProjekcijaTableModel) tm;
+        Long id = (Long) ptm.getValueAt(selektovanRed, 0);
+        Projekcija projekcija = ptm.nadjiProjekciju(id);
+        JDialog forma = new FProjekcijaDetalji(this, true, projekcija);
+        forma.setVisible(true);
+        
+    }//GEN-LAST:event_jbtnDetaljiActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
