@@ -9,6 +9,7 @@ import domen.Film;
 import domen.Zanr;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.table.TableModel;
 import kontroler.Kontroler;
 import model.FilmTableModel;
@@ -176,6 +177,8 @@ public class FPretragaFilma extends javax.swing.JDialog {
         FilmTableModel ftm = (FilmTableModel) tm;
         Long id = (Long) ftm.getValueAt(selektovanRed, 0);
         Film film = ftm.nadjiFilm(id);
+        JDialog forma = new FFilmDetalji(this, true, film);
+        forma.setVisible(true);
     }//GEN-LAST:event_jbtnDetaljiActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
