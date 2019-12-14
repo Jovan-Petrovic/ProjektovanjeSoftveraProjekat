@@ -6,14 +6,19 @@
 package skladiste.bazapodataka;
 
 import baza.Broker;
+import domen.Film;
 import domen.Projekcija;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import kontroler.Kontroler;
 import skladistee.SkladisteProjekcija;
 
 /**
@@ -44,6 +49,43 @@ public class BazapodatakaSkladisteProjekcija implements SkladisteProjekcija {
             Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
         }
         return projekcija;
+    }
+
+    @Override
+    public List<Projekcija> vratiSve() {
+        List<Projekcija> projekcije = new ArrayList<>();
+        List<Film> filmovi = null;
+        try {
+            filmovi = Kontroler.getInstanca().vratiSveFilmove();
+        } catch (Exception ex) {
+            Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            broker.otvoriKonekciju();
+            String upit = "select * from projekcija";
+            Connection koneckija = broker.getKonekcija();
+            Statement statement = koneckija.createStatement();
+            ResultSet rs = statement.executeQuery(upit);
+            while(rs.next()) {
+                Long id = rs.getLong("id");
+                Date datum = rs.getDate("datum");
+                int sala = rs.getInt("sala");
+                Long filmID = rs.getLong("filmID");
+                Film f = null;
+                for(Film film : filmovi) {
+                    if(film.getId().equals(filmID)) {
+                        f = film;
+                    }
+                }
+                Projekcija projekcija = new Projekcija(id, datum, sala, f);
+                projekcije.add(projekcija);
+            }
+            statement.close();
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return projekcije;
     }
     
 }

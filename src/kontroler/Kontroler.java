@@ -65,4 +65,8 @@ public class Kontroler {
         return servisProjekcija.sacuvaj(projekcija);
     }
 
+    public List<Projekcija> vratiSveProjekcije() throws Exception {
+        return servisProjekcija.vratiSve();
+    }
+
 }

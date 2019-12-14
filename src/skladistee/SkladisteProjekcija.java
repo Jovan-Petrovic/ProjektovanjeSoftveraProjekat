@@ -6,6 +6,7 @@
 package skladistee;
 
 import domen.Projekcija;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,6 @@ import domen.Projekcija;
 public interface SkladisteProjekcija {
     
     Projekcija sacuvaj(Projekcija projekcija);
+
+    public List<Projekcija> vratiSve();
 }

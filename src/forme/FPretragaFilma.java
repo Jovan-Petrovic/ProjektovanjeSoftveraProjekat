@@ -191,6 +191,9 @@ public class FPretragaFilma extends javax.swing.JDialog {
         TableModel tm = jtblFilmovi.getModel();
         FilmTableModel ftm = (FilmTableModel) tm;
         ftm.pretraziFilmovePoZanru(zanr);
+        if(jtblFilmovi.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje filmove po zadatoj vrednosti!");
+        }
     }//GEN-LAST:event_jbtnPretraziPoZanruActionPerformed
 
     private void jbtnPretraziPoImenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPretraziPoImenuActionPerformed
@@ -198,6 +201,9 @@ public class FPretragaFilma extends javax.swing.JDialog {
         TableModel tm = jtblFilmovi.getModel();
         FilmTableModel ftm = (FilmTableModel) tm;
         ftm.pretraziFilmovePoImenu(naziv);
+        if(jtblFilmovi.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje filmove po zadatoj vrednosti!");
+        }
     }//GEN-LAST:event_jbtnPretraziPoImenuActionPerformed
 
     private void jbtnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDetaljiActionPerformed

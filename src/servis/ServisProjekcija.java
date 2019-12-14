@@ -6,6 +6,7 @@
 package servis;
 
 import domen.Projekcija;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,6 @@ import domen.Projekcija;
 public interface ServisProjekcija {
     
     Projekcija sacuvaj(Projekcija projekcija) throws Exception;
+
+    public List<Projekcija> vratiSve() throws Exception;
 }
