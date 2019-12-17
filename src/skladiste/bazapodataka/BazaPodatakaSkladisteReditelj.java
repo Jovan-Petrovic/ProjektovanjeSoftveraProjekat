@@ -39,7 +39,8 @@ public class BazaPodatakaSkladisteReditelj implements SkladisteReditelj {
                 String ime = rs.getString("ime");
                 String prezime = rs.getString("prezime");
                 String drzanljanstvo = rs.getString("drzanljanstvo");
-                Reditelj reditelj = new Reditelj(id, ime, prezime, drzanljanstvo);
+                int brojFilmova = rs.getInt("brojFilmova");
+                Reditelj reditelj = new Reditelj(id, ime, prezime, drzanljanstvo, brojFilmova);
                 reditelji.add(reditelj);
             }
             statement.close();

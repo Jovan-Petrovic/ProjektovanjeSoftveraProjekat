@@ -14,12 +14,14 @@ public class Reditelj {
     private String ime;
     private String prezime;
     private String drzanljanstvo;
+    private int brojFilmova;
 
-    public Reditelj(Long id, String ime, String prezime, String drzanljanstvo) {
+    public Reditelj(Long id, String ime, String prezime, String drzanljanstvo, int brojFilmova) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
         this.drzanljanstvo = drzanljanstvo;
+        this.brojFilmova = brojFilmova;
     }
 
     public String getDrzanljanstvo() {
@@ -53,10 +55,18 @@ public class Reditelj {
     public void setPrezime(String prezime) {
         this.prezime = prezime;
     }
+    
+     public int getBrojFilmova() {
+        return brojFilmova;
+    }
 
+    public void setBrojFilmova(int brojFilmova) {
+        this.brojFilmova = brojFilmova;
+    }
+    
     @Override
     public String toString() {
         return getIme() + " " + getPrezime();
     }
-    
+
 }

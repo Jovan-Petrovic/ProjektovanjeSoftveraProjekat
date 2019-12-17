@@ -18,8 +18,8 @@ import javax.swing.table.AbstractTableModel;
 public class RediteljTableModel extends AbstractTableModel {
     
     private final List<Reditelj> reditelji;
-    private final String[] imenaKolona = new String[]{"ID","IME","PREZIME","DRZANLJANSTVO"};
-    private final Class[] klaseKolona = new Class[]{Long.class, String.class, String.class, String.class};
+    private final String[] imenaKolona = new String[]{"ID","IME","PREZIME","DRZANLJANSTVO","BROJ FILMOVA"};
+    private final Class[] klaseKolona = new Class[]{Long.class, String.class, String.class, String.class, Integer.class};
 
     public RediteljTableModel(List<Reditelj> reditelji) {
         this.reditelji = reditelji;
@@ -50,6 +50,8 @@ public class RediteljTableModel extends AbstractTableModel {
                 return reditelj.getPrezime();
             case 3:
                 return reditelj.getDrzanljanstvo();
+            case 4:
+                return reditelj.getBrojFilmova();
             default:
                 return "N/A";
         }
