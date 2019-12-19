@@ -6,6 +6,7 @@
 package servis;
 
 import domen.Rezira;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,6 @@ import domen.Rezira;
 public interface ServisRezira {
     
     void sacuvaj(Rezira rezira) throws Exception;
+
+    public List<Rezira> vratiSve() throws Exception;
 }

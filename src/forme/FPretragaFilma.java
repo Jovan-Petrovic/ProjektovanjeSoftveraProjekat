@@ -9,6 +9,8 @@ import domen.Film;
 import domen.Zanr;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.Parent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -195,8 +197,13 @@ public class FPretragaFilma extends javax.swing.JDialog {
         FilmTableModel ftm = (FilmTableModel) tm;
         Long id = (Long) ftm.getValueAt(selektovanRed, 0);
         Film film = ftm.nadjiFilm(id);
-        JDialog forma = new FFilmDetalji(this, true, film);
-        forma.setVisible(true);
+        JDialog forma;
+        try {
+            forma = new FFilmDetalji(this, true, film);
+            forma.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(FPretragaFilma.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jbtnDetaljiActionPerformed
 
     private void jbtnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDodajActionPerformed

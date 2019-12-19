@@ -6,6 +6,7 @@
 package skladistee;
 
 import domen.Rezira;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,6 @@ import domen.Rezira;
 public interface SkladisteRezira {
     
     void sacuvaj(Rezira rezira);
+
+    public List<Rezira> vratiSve();
 }

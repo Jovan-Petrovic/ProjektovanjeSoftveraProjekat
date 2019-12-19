@@ -91,6 +91,10 @@ public class Kontroler {
         servisGlumi.sacuvaj(glumi);
     }
 
+    public List<Rezira> vratiSvaReziranja() throws Exception {
+        return servisRezira.vratiSve();
+    }
+
     
 
 }

@@ -6,6 +6,13 @@
 package forme;
 
 import domen.Film;
+import domen.Reditelj;
+import domen.Rezira;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.TableModel;
+import kontroler.Kontroler;
+import model.RediteljTableModel;
 
 /**
  *
@@ -18,14 +25,14 @@ public class FFilmDetalji extends javax.swing.JDialog {
     /**
      * Creates new form FFilmDetalji
      */
-    public FFilmDetalji(java.awt.Frame parent, boolean modal) {
+    public FFilmDetalji(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
         
         pripremiFormu();
     }
 
-    FFilmDetalji(FPretragaFilma aThis, boolean b, Film film) {
+    FFilmDetalji(FPretragaFilma aThis, boolean b, Film film) throws Exception {
         super(aThis, b);
         this.film = film;
         initComponents();
@@ -34,7 +41,7 @@ public class FFilmDetalji extends javax.swing.JDialog {
         pripremiFormu();
     }
     
-    FFilmDetalji(FProjekcijaDetalji aThis, boolean b, Film film) {
+    FFilmDetalji(FProjekcijaDetalji aThis, boolean b, Film film) throws Exception {
         super(aThis, b);
         this.film = film;
         initComponents();
@@ -274,7 +281,7 @@ public class FFilmDetalji extends javax.swing.JDialog {
     private javax.swing.JTextField jtxtZanr;
     // End of variables declaration//GEN-END:variables
 
-    private void pripremiFormu() {
+    private void pripremiFormu() throws Exception {
         jtxtID.setText(film.getId().toString());
         jtxtNaziv.setText(film.getNaziv());
         jtxtTrajanje.setText(film.getTrajanje()+"");
@@ -282,5 +289,26 @@ public class FFilmDetalji extends javax.swing.JDialog {
         jtxtGodina.setText(film.getGodina()+"");
         jtxtJezik.setText(film.getJezik());
         jtxtOcenaIMDb.setText(film.getOcenaIMDb()+"");
+        
+        popuniTabeluReditelji();
+        
+    }
+
+    private void popuniTabeluReditelji() throws Exception {
+        List<Rezira> reziranja = Kontroler.getInstanca().vratiSvaReziranja();
+        List<Reditelj> reditelji = new ArrayList<>();
+        for (Rezira rezira : reziranja) {
+            if(rezira.getFilm().getId().equals(film.getId())) {
+                Long rediteljID = rezira.getReditelj().getId();
+                List<Reditelj> sviSvireditelji = Kontroler.getInstanca().vratiSveReditelje();
+                for (Reditelj reditelj : sviSvireditelji) {
+                    if(rediteljID.equals(reditelj.getId())) {
+                        reditelji.add(reditelj);
+                    }
+                }
+            }
+        }
+        jtblReditelji.setModel(new RediteljTableModel(reditelji));
+        
     }
 }

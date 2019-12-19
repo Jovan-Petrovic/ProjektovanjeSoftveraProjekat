@@ -6,6 +6,7 @@
 package servis.implementacija;
 
 import domen.Rezira;
+import java.util.List;
 import servis.ServisRezira;
 import skladiste.bazapodataka.BazapodatakaSkladisteRezira;
 import skladistee.SkladisteRezira;
@@ -25,6 +26,11 @@ public class ServisReziraImplementacija implements ServisRezira{
     @Override
     public void sacuvaj(Rezira rezira) throws Exception {
         skladisteRezira.sacuvaj(rezira);
+    }
+
+    @Override
+    public List<Rezira> vratiSve() throws Exception {
+        return skladisteRezira.vratiSve();
     }
     
     
