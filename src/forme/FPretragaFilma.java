@@ -65,10 +65,9 @@ public class FPretragaFilma extends javax.swing.JDialog {
         jcomboPretraziPoZanru = new javax.swing.JComboBox<>();
         jlblPretraziPoImenu = new javax.swing.JLabel();
         jtxtPretraziPoImenu = new javax.swing.JTextField();
-        jbtnPretraziPoImenu = new javax.swing.JButton();
         jbtnDetalji = new javax.swing.JButton();
         jbtnIzadji = new javax.swing.JButton();
-        jbtnPretraziPoZanru = new javax.swing.JButton();
+        jbtnPretrazi = new javax.swing.JButton();
         jbtnDodaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -92,13 +91,6 @@ public class FPretragaFilma extends javax.swing.JDialog {
 
         jlblPretraziPoImenu.setText("Pretrazi po imenu:");
 
-        jbtnPretraziPoImenu.setText("Pretrazi po imenu");
-        jbtnPretraziPoImenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnPretraziPoImenuActionPerformed(evt);
-            }
-        });
-
         jbtnDetalji.setText("Detalji");
         jbtnDetalji.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,10 +105,10 @@ public class FPretragaFilma extends javax.swing.JDialog {
             }
         });
 
-        jbtnPretraziPoZanru.setText("Pretrazi po zanru");
-        jbtnPretraziPoZanru.addActionListener(new java.awt.event.ActionListener() {
+        jbtnPretrazi.setText("Pretrazi");
+        jbtnPretrazi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnPretraziPoZanruActionPerformed(evt);
+                jbtnPretraziActionPerformed(evt);
             }
         });
 
@@ -142,11 +134,7 @@ public class FPretragaFilma extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jcomboPretraziPoZanru, 0, 284, Short.MAX_VALUE)
                             .addComponent(jtxtPretraziPoImenu))
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jbtnPretraziPoImenu, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                            .addComponent(jbtnPretraziPoZanru, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(134, 134, 134))
+                        .addGap(309, 309, 309))
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jbtnIzadji)
@@ -155,6 +143,10 @@ public class FPretragaFilma extends javax.swing.JDialog {
                         .addGap(55, 55, 55)
                         .addComponent(jbtnDetalji)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbtnPretrazi, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(142, 142, 142))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,21 +154,21 @@ public class FPretragaFilma extends javax.swing.JDialog {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblPretraziPoZanru, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcomboPretraziPoZanru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnPretraziPoZanru))
-                .addGap(27, 27, 27)
+                    .addComponent(jcomboPretraziPoZanru, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbtnPretrazi)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblPretraziPoImenu)
-                    .addComponent(jtxtPretraziPoImenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnPretraziPoImenu))
-                .addGap(37, 37, 37)
+                    .addComponent(jtxtPretraziPoImenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnDetalji)
                     .addComponent(jbtnIzadji)
                     .addComponent(jbtnDodaj))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -186,25 +178,16 @@ public class FPretragaFilma extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jbtnIzadjiActionPerformed
 
-    private void jbtnPretraziPoZanruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPretraziPoZanruActionPerformed
+    private void jbtnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPretraziActionPerformed
         Zanr zanr = (Zanr) jcomboPretraziPoZanru.getSelectedItem();
-        TableModel tm = jtblFilmovi.getModel();
-        FilmTableModel ftm = (FilmTableModel) tm;
-        ftm.pretraziFilmovePoZanru(zanr);
-        if(jtblFilmovi.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje filmove po zadatoj vrednosti!");
-        }
-    }//GEN-LAST:event_jbtnPretraziPoZanruActionPerformed
-
-    private void jbtnPretraziPoImenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPretraziPoImenuActionPerformed
         String naziv = jtxtPretraziPoImenu.getText().trim();
         TableModel tm = jtblFilmovi.getModel();
         FilmTableModel ftm = (FilmTableModel) tm;
-        ftm.pretraziFilmovePoImenu(naziv);
+        ftm.pretraziFilmove(zanr, naziv);
         if(jtblFilmovi.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje filmove po zadatoj vrednosti!");
         }
-    }//GEN-LAST:event_jbtnPretraziPoImenuActionPerformed
+    }//GEN-LAST:event_jbtnPretraziActionPerformed
 
     private void jbtnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDetaljiActionPerformed
         int selektovanRed = jtblFilmovi.getSelectedRow();
@@ -230,8 +213,7 @@ public class FPretragaFilma extends javax.swing.JDialog {
     private javax.swing.JButton jbtnDetalji;
     private javax.swing.JButton jbtnDodaj;
     private javax.swing.JButton jbtnIzadji;
-    private javax.swing.JButton jbtnPretraziPoImenu;
-    private javax.swing.JButton jbtnPretraziPoZanru;
+    private javax.swing.JButton jbtnPretrazi;
     private javax.swing.JComboBox<Object> jcomboPretraziPoZanru;
     private javax.swing.JLabel jlblPretraziPoImenu;
     private javax.swing.JLabel jlblPretraziPoZanru;

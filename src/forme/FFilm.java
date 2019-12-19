@@ -159,6 +159,11 @@ public class FFilm extends javax.swing.JDialog {
         });
 
         jbtnObrisiGlumca.setText("Obrisi glumca");
+        jbtnObrisiGlumca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnObrisiGlumcaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -326,7 +331,7 @@ public class FFilm extends javax.swing.JDialog {
         TableModel tm = jtblReditelji.getModel();
         RediteljTableModel rtm = (RediteljTableModel) tm;
         Long id = (Long) rtm.getValueAt(selectovanRed, 0);
-        //rtm.obrisiReditelja(id);
+        rtm.obrisiReditelja(id);
     }//GEN-LAST:event_jbtnObrisiRediteljaActionPerformed
 
     private void jbtnDodajGlumcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDodajGlumcaActionPerformed
@@ -335,6 +340,14 @@ public class FFilm extends javax.swing.JDialog {
         GlumacTableModel gtm = (GlumacTableModel) tm;
         gtm.dodajGlumca(glumac);
     }//GEN-LAST:event_jbtnDodajGlumcaActionPerformed
+
+    private void jbtnObrisiGlumcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnObrisiGlumcaActionPerformed
+        int selectovanRed = jtblGlumci.getSelectedRow();
+        TableModel tm = jtblGlumci.getModel();
+        GlumacTableModel gtm = (GlumacTableModel) tm;
+        Long id = (Long) gtm.getValueAt(selectovanRed, 0);
+        gtm.obrisiGlumca(id);
+    }//GEN-LAST:event_jbtnObrisiGlumcaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

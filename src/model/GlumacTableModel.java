@@ -73,6 +73,17 @@ public class GlumacTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
+    public void obrisiGlumca(Long id) {
+        Glumac g = null;
+        for (Glumac glumac : glumci) {
+            if(glumac.getId().equals(id)) {
+                g = glumac;
+            }
+        }
+        glumci.remove(g);
+        fireTableDataChanged();
+    }
+
     
 
     

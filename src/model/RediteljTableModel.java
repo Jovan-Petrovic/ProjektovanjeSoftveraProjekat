@@ -78,11 +78,13 @@ public class RediteljTableModel extends AbstractTableModel {
     }
 
     public void obrisiReditelja(Long id) {
+        Reditelj r = null;
         for (Reditelj reditelj : reditelji) {
             if(reditelj.getId().equals(id)) {
-                reditelji.remove(reditelj);
+                r = reditelj;
             }
         }
+        reditelji.remove(r);
         fireTableDataChanged();
     }
     
