@@ -87,6 +87,10 @@ public class RediteljTableModel extends AbstractTableModel {
         reditelji.remove(r);
         fireTableDataChanged();
     }
+
+    public List<Reditelj> getReditelji() {
+        return reditelji;
+    }
     
     
 }

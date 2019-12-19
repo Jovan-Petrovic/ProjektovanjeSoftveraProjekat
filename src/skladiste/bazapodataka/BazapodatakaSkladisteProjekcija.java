@@ -96,8 +96,10 @@ public class BazapodatakaSkladisteProjekcija implements SkladisteProjekcija {
             PreparedStatement preparedStatement = broker.getKonekcija().prepareStatement(upit);
             preparedStatement.setLong(1, id);
             preparedStatement.execute();
+            broker.commit();
             preparedStatement.close();
         } catch (SQLException ex) {
+            broker.rollback();
             Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }

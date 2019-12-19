@@ -9,15 +9,18 @@ import domen.Film;
 import domen.Glumac;
 import domen.Projekcija;
 import domen.Reditelj;
+import domen.Rezira;
 import java.util.List;
 import servis.ServisFilm;
 import servis.ServisGlumac;
 import servis.ServisProjekcija;
 import servis.ServisReditelj;
+import servis.ServisRezira;
 import servis.implementacija.ServisFilmImplementacija;
 import servis.implementacija.ServisGlumacImplementacija;
 import servis.implementacija.ServisProjekcijaImplementacija;
 import servis.implementacija.ServisRediteljImplementacija;
+import servis.implementacija.ServisReziraImplementacija;
 
 /**
  *
@@ -30,12 +33,14 @@ public class Kontroler {
     private final ServisReditelj servisReditelj;
     private final ServisGlumac servisGlumac;
     private final ServisProjekcija servisProjekcija;
+    private final ServisRezira servisRezira;
     
     public Kontroler() {
         servisFilm = new ServisFilmImplementacija();
         servisReditelj = new ServisRediteljImplementacija();
         servisGlumac = new ServisGlumacImplementacija();
         servisProjekcija = new ServisProjekcijaImplementacija();
+        servisRezira = new ServisReziraImplementacija();
     }
 
     public static Kontroler getInstanca() {
@@ -71,6 +76,10 @@ public class Kontroler {
 
     public boolean obrisiProjekciju(Long id) throws Exception {
         return servisProjekcija.obrisi(id);
+    }
+
+    public void sacuvajRezira(Rezira rezira) throws Exception {
+        servisRezira.sacuvaj(rezira);
     }
 
     
