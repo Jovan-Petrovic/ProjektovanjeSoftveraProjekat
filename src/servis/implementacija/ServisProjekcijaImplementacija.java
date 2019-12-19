@@ -33,6 +33,11 @@ public class ServisProjekcijaImplementacija implements ServisProjekcija {
         return skladisteProjekcija.vratiSve();
     }
 
+    @Override
+    public boolean obrisi(Long id) throws Exception {
+        return skladisteProjekcija.obrisi(id);
+    }
+
     
     
     

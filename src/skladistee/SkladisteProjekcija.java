@@ -17,4 +17,6 @@ public interface SkladisteProjekcija {
     Projekcija sacuvaj(Projekcija projekcija);
 
     public List<Projekcija> vratiSve();
+
+    public boolean obrisi(Long id);
 }

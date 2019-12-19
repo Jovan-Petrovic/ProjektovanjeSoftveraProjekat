@@ -7,6 +7,8 @@ package forme;
 
 import domen.Projekcija;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
@@ -47,6 +49,7 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         jtblProjekcije = new javax.swing.JTable();
         jbtnIzadji = new javax.swing.JButton();
         jbtnDetalji = new javax.swing.JButton();
+        jbtnObrisi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -86,6 +89,13 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
             }
         });
 
+        jbtnObrisi.setText("Obrisi");
+        jbtnObrisi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnObrisiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,7 +106,9 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbtnIzadji)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnDetalji, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jbtnDetalji, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jbtnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jlblPretraziPoImenu, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,10 +128,15 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
                     .addComponent(jbtnPretraziPoImenuFilma))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnIzadji)
-                    .addComponent(jbtnDetalji))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnIzadji))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbtnObrisi)
+                            .addComponent(jbtnDetalji))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -151,10 +168,28 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jbtnDetaljiActionPerformed
 
+    private void jbtnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnObrisiActionPerformed
+        int selektovanRed = jtblProjekcije.getSelectedRow();
+        TableModel tm = jtblProjekcije.getModel();
+        ProjekcijaTableModel ptm = (ProjekcijaTableModel) tm;
+        Long id = (Long) ptm.getValueAt(selektovanRed, 0);
+        try {
+            if(Kontroler.getInstanca().obrisiProjekciju(id)) {
+                pripremiFormu();
+                JOptionPane.showMessageDialog(this, "Projekcija je uspesno obrisana");
+            } else {
+                JOptionPane.showMessageDialog(this, "Doslo je do greske prilikom brisanja, projekcijan nije obrisana");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(FPretragaProjekcije.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbtnObrisiActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnDetalji;
     private javax.swing.JButton jbtnIzadji;
+    private javax.swing.JButton jbtnObrisi;
     private javax.swing.JButton jbtnPretraziPoImenuFilma;
     private javax.swing.JLabel jlblPretraziPoImenu;
     private javax.swing.JTable jtblProjekcije;

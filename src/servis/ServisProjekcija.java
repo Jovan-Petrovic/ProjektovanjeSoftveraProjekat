@@ -17,4 +17,6 @@ public interface ServisProjekcija {
     Projekcija sacuvaj(Projekcija projekcija) throws Exception;
 
     public List<Projekcija> vratiSve() throws Exception;
+
+    public boolean obrisi(Long id) throws Exception;
 }

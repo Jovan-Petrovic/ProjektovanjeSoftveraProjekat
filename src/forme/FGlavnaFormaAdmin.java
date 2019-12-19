@@ -40,7 +40,6 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
         jMenuProjekcija = new javax.swing.JMenu();
         jMenuItemPretragaProjekcija = new javax.swing.JMenuItem();
         jMenuItemNovaProjekcija = new javax.swing.JMenuItem();
-        jMenuItemBrisanjeProjekcije = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,9 +80,6 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
             }
         });
         jMenuProjekcija.add(jMenuItemNovaProjekcija);
-
-        jMenuItemBrisanjeProjekcije.setText("Brisanje projekcije");
-        jMenuProjekcija.add(jMenuItemBrisanjeProjekcije);
 
         jMenuBar1.add(jMenuProjekcija);
 
@@ -143,7 +139,6 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFilm;
-    private javax.swing.JMenuItem jMenuItemBrisanjeProjekcije;
     private javax.swing.JMenuItem jMenuItemNovaProjekcija;
     private javax.swing.JMenuItem jMenuItemNoviFilm;
     private javax.swing.JMenuItem jMenuItemPretragaFilmova;

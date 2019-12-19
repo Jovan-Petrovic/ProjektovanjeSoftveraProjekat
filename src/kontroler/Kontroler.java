@@ -69,4 +69,10 @@ public class Kontroler {
         return servisProjekcija.vratiSve();
     }
 
+    public boolean obrisiProjekciju(Long id) throws Exception {
+        return servisProjekcija.obrisi(id);
+    }
+
+    
+
 }

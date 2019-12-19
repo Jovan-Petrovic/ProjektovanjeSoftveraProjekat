@@ -87,5 +87,21 @@ public class BazapodatakaSkladisteProjekcija implements SkladisteProjekcija {
         }
         return projekcije;
     }
+
+    @Override
+    public boolean obrisi(Long id) {
+        try {
+            broker.otvoriKonekciju();
+            String upit = "delete from projekcija where id=?";
+            PreparedStatement preparedStatement = broker.getKonekcija().prepareStatement(upit);
+            preparedStatement.setLong(1, id);
+            preparedStatement.execute();
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
     
 }
