@@ -7,17 +7,20 @@ package kontroler;
 
 import domen.Film;
 import domen.Glumac;
+import domen.Glumi;
 import domen.Projekcija;
 import domen.Reditelj;
 import domen.Rezira;
 import java.util.List;
 import servis.ServisFilm;
 import servis.ServisGlumac;
+import servis.ServisGlumi;
 import servis.ServisProjekcija;
 import servis.ServisReditelj;
 import servis.ServisRezira;
 import servis.implementacija.ServisFilmImplementacija;
 import servis.implementacija.ServisGlumacImplementacija;
+import servis.implementacija.ServisGlumiImplementacija;
 import servis.implementacija.ServisProjekcijaImplementacija;
 import servis.implementacija.ServisRediteljImplementacija;
 import servis.implementacija.ServisReziraImplementacija;
@@ -34,6 +37,7 @@ public class Kontroler {
     private final ServisGlumac servisGlumac;
     private final ServisProjekcija servisProjekcija;
     private final ServisRezira servisRezira;
+    private final ServisGlumi servisGlumi;
     
     public Kontroler() {
         servisFilm = new ServisFilmImplementacija();
@@ -41,6 +45,7 @@ public class Kontroler {
         servisGlumac = new ServisGlumacImplementacija();
         servisProjekcija = new ServisProjekcijaImplementacija();
         servisRezira = new ServisReziraImplementacija();
+        servisGlumi = new ServisGlumiImplementacija();
     }
 
     public static Kontroler getInstanca() {
@@ -80,6 +85,10 @@ public class Kontroler {
 
     public void sacuvajRezira(Rezira rezira) throws Exception {
         servisRezira.sacuvaj(rezira);
+    }
+
+    public void sacuvajGlumi(Glumi glumi) throws Exception {
+        servisGlumi.sacuvaj(glumi);
     }
 
     
