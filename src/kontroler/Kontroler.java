@@ -95,6 +95,10 @@ public class Kontroler {
         return servisRezira.vratiSve();
     }
 
+    public List<Glumi> vratiSveUloge() {
+        return servisGlumi.vratiSve();
+    }
+
     
 
 }

@@ -6,6 +6,7 @@
 package servis;
 
 import domen.Glumi;
+import java.util.List;
 
 /**
  *
@@ -14,5 +15,7 @@ import domen.Glumi;
 public interface ServisGlumi {
     
     void sacuvaj(Glumi glumi) throws Exception;
+
+    public List<Glumi> vratiSve();
     
 }

@@ -6,6 +6,7 @@
 package skladistee;
 
 import domen.Glumi;
+import java.util.List;
 
 /**
  *
@@ -14,5 +15,7 @@ import domen.Glumi;
 public interface SkladisteGlumi {
     
     void sacuvaj(Glumi glumi);
+
+    public List<Glumi> vratiSve();
     
 }

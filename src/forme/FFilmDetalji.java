@@ -6,12 +6,15 @@
 package forme;
 
 import domen.Film;
+import domen.Glumac;
+import domen.Glumi;
 import domen.Reditelj;
 import domen.Rezira;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.TableModel;
 import kontroler.Kontroler;
+import model.GlumacTableModel;
 import model.RediteljTableModel;
 
 /**
@@ -291,6 +294,7 @@ public class FFilmDetalji extends javax.swing.JDialog {
         jtxtOcenaIMDb.setText(film.getOcenaIMDb()+"");
         
         popuniTabeluReditelji();
+        popuniTabeluGlumci();
         
     }
 
@@ -310,5 +314,22 @@ public class FFilmDetalji extends javax.swing.JDialog {
         }
         jtblReditelji.setModel(new RediteljTableModel(reditelji));
         
+    }
+
+    private void popuniTabeluGlumci() throws Exception {
+        List<Glumi> uloge = Kontroler.getInstanca().vratiSveUloge();
+        List<Glumac> glumci = new ArrayList<>();
+        for (Glumi glumi : uloge) {
+            if(glumi.getFilm().getId().equals(film.getId())) {
+                Long glumacID = glumi.getGlumac().getId();
+                List<Glumac> sviGlumci = Kontroler.getInstanca().vratiSveGlumce();
+                for (Glumac glumac : sviGlumci) {
+                    if(glumacID.equals(glumac.getId())) {
+                        glumci.add(glumac);
+                    }
+                }
+            }
+        }
+        jtblGlumci.setModel(new GlumacTableModel(glumci));
     }
 }
