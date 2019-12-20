@@ -10,5 +10,5 @@ package forme;
  * @author Bron Zilar
  */
 public enum FormaMod {
-    FORMA_PRETRAGA, FORMA_DODAVANJE;
+    FORMA_PRETRAGA, FORMA_DODAVANJE, FORMA_IZMENA;
 }

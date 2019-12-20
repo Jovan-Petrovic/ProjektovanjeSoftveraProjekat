@@ -80,5 +80,31 @@ public class BazapodatakaSkladisteFilm  implements SkladisteFilm {
         }
         return filmovi;
     }
+
+    @Override
+    public boolean izmeni(Film film) {
+        boolean signal = false;
+        try {
+            broker.otvoriKonekciju();
+            String upit = "update film set naziv = ?, trajanje = ?, zanr = ?, godina = ?, jezik = ?, ocenaIMDb = ? where id = ?";
+            Connection konekcija = broker.getKonekcija();
+            PreparedStatement ps = konekcija.prepareStatement(upit);
+            ps.setString(1, film.getNaziv());
+            ps.setInt(2, film.getTrajanje());
+            ps.setString(3, film.getZanr().toString());
+            ps.setInt(4, film.getGodina());
+            ps.setString(5, film.getJezik());
+            ps.setDouble(6, film.getOcenaIMDb());
+            ps.setLong(7, film.getId());
+            ps.executeUpdate();
+            broker.commit();
+            konekcija.close();
+            signal = true;
+        } catch (SQLException ex) {
+            broker.rollback();
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return signal;
+    }
     
 }

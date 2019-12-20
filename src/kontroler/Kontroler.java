@@ -99,6 +99,10 @@ public class Kontroler {
         return servisGlumi.vratiSve();
     }
 
+    public boolean izmeniFilm(Film film) {
+        return servisFilm.izmeni(film);
+    }
+
     
 
 }

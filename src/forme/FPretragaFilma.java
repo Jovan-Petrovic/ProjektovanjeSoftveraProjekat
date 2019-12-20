@@ -43,7 +43,8 @@ public class FPretragaFilma extends javax.swing.JDialog {
     public FPretragaFilma(java.awt.Dialog parent, boolean modal, FormaMod formaMod) throws Exception {
         super(parent, modal);
         fp = (FProjekcija) parent;
-        initComponents();       
+        initComponents();
+        jbtnIzmeni.setVisible(false);
         setLocationRelativeTo(null);
         if(formaMod.equals(FormaMod.FORMA_PRETRAGA)) {
             jbtnDodaj.setEnabled(false);
@@ -71,6 +72,7 @@ public class FPretragaFilma extends javax.swing.JDialog {
         jbtnIzadji = new javax.swing.JButton();
         jbtnPretrazi = new javax.swing.JButton();
         jbtnDodaj = new javax.swing.JButton();
+        jbtnIzmeni = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -121,6 +123,13 @@ public class FPretragaFilma extends javax.swing.JDialog {
             }
         });
 
+        jbtnIzmeni.setText("Izmeni");
+        jbtnIzmeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnIzmeniActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,6 +150,8 @@ public class FPretragaFilma extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jbtnIzadji)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtnIzmeni)
+                        .addGap(36, 36, 36)
                         .addComponent(jbtnDodaj)
                         .addGap(55, 55, 55)
                         .addComponent(jbtnDetalji)))
@@ -169,7 +180,8 @@ public class FPretragaFilma extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnDetalji)
                     .addComponent(jbtnIzadji)
-                    .addComponent(jbtnDodaj))
+                    .addComponent(jbtnDodaj)
+                    .addComponent(jbtnIzmeni))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -199,7 +211,7 @@ public class FPretragaFilma extends javax.swing.JDialog {
         Film film = ftm.nadjiFilm(id);
         JDialog forma;
         try {
-            forma = new FFilmDetalji(this, true, film);
+            forma = new FFilmDetalji(this, true, film, FormaMod.FORMA_PRETRAGA);
             forma.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(FPretragaFilma.class.getName()).log(Level.SEVERE, null, ex);
@@ -215,11 +227,27 @@ public class FPretragaFilma extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(this, "Uspesno dodat film: " + naziv);
     }//GEN-LAST:event_jbtnDodajActionPerformed
 
+    private void jbtnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIzmeniActionPerformed
+        int selektovanRed = jtblFilmovi.getSelectedRow();
+        TableModel tm = jtblFilmovi.getModel();
+        FilmTableModel ftm = (FilmTableModel) tm;
+        Long id = (Long) ftm.getValueAt(selektovanRed, 0);
+        Film film = ftm.nadjiFilm(id);
+        JDialog forma;
+        try {
+            forma = new FFilmDetalji(this, true, film, FormaMod.FORMA_IZMENA);
+            forma.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(FPretragaFilma.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbtnIzmeniActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnDetalji;
     private javax.swing.JButton jbtnDodaj;
     private javax.swing.JButton jbtnIzadji;
+    private javax.swing.JButton jbtnIzmeni;
     private javax.swing.JButton jbtnPretrazi;
     private javax.swing.JComboBox<Object> jcomboPretraziPoZanru;
     private javax.swing.JLabel jlblPretraziPoImenu;

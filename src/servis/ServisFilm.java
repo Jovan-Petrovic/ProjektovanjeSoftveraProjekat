@@ -17,4 +17,7 @@ public interface ServisFilm {
     Film sacuvaj(Film film) throws Exception;
     
     List<Film> vratiSve() throws Exception;
+
+    public boolean izmeni(Film film);
+   
 }

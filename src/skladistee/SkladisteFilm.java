@@ -17,4 +17,6 @@ public interface SkladisteFilm {
     Film sacuvaj(Film film);
     
     List<Film> vratiSve();
+
+    public boolean izmeni(Film film);
 }

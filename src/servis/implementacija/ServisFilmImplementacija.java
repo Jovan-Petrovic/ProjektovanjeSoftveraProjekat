@@ -32,6 +32,11 @@ public class ServisFilmImplementacija implements ServisFilm {
     public List<Film> vratiSve() {
         return skladisteFilm.vratiSve();
     }
+
+    @Override
+    public boolean izmeni(Film film) {
+        return skladisteFilm.izmeni(film);
+    }
     
     
 }

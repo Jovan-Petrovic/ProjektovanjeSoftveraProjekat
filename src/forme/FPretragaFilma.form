@@ -42,6 +42,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jbtnIzadji" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jbtnIzmeni" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       <Component id="jbtnDodaj" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       <Component id="jbtnDetalji" min="-2" max="-2" attributes="0"/>
@@ -78,6 +80,7 @@
                   <Component id="jbtnDetalji" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbtnIzadji" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbtnDodaj" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbtnIzmeni" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="35" max="32767" attributes="0"/>
           </Group>
@@ -163,6 +166,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnDodajActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbtnIzmeni">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Izmeni"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnIzmeniActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
