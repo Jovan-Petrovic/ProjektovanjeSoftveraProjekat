@@ -6,6 +6,7 @@
 package skladistee;
 
 import domen.Rezervisanje;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,6 @@ import domen.Rezervisanje;
 public interface SkladisteRezervisanje {
     
     boolean sacuvaj(Rezervisanje rezervisanje);
+
+    public List<Rezervisanje> vratiSva();
 }

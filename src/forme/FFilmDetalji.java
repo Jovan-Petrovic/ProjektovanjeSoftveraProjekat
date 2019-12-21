@@ -58,6 +58,19 @@ public class FFilmDetalji extends javax.swing.JDialog {
         
         pripremiFormu1();
     }
+    
+    FFilmDetalji(FPretragaRezervacija aThis, boolean b, Film film, FormaMod formaMod) throws Exception {
+        super(aThis, b);
+        this.film = film;
+        initComponents();
+        setLocationRelativeTo(null);
+        
+        if(formaMod.equals(FormaMod.FORMA_PRETRAGA)) {
+            pripremiFormu1();
+        } else {
+            pripremiFormu2();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

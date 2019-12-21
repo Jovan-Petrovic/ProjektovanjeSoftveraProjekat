@@ -6,13 +6,22 @@
 package skladiste.bazapodataka;
 
 import baza.Broker;
+import domen.Korisnik;
+import domen.Projekcija;
 import domen.Rezervisanje;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import kontroler.Kontroler;
 import skladistee.SkladisteRezervisanje;
+import sun.security.ec.point.ProjectivePoint;
 
 /**
  *
@@ -27,7 +36,7 @@ public class BazapodatakaSkladisteRezervisanje implements SkladisteRezervisanje{
         boolean signal = false;
         try {
             broker.otvoriKonekciju();
-            String upit = "insert into rezervisanje (projekcija, korisnik, datum) values (?,?,?)";
+            String upit = "insert into rezervisanje (projekcija, korisnik, datumRezervacije) values (?,?,?)";
             PreparedStatement preparedStatement = broker.getKonekcija().prepareStatement(upit);
             preparedStatement.setLong(1, rezervisanje.getProjekcija().getId());
             preparedStatement.setLong(2, rezervisanje.getKorisnik().getId());
@@ -41,6 +50,48 @@ public class BazapodatakaSkladisteRezervisanje implements SkladisteRezervisanje{
             Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
         }
         return signal;
+    }
+
+    @Override
+    public List<Rezervisanje> vratiSva() {
+        List<Rezervisanje> rezervisanja = new ArrayList<>();
+        try {
+            broker.otvoriKonekciju();
+            String upit = "select * from rezervisanje";
+            Connection koneckija = broker.getKonekcija();
+            Statement statement = koneckija.createStatement();
+            ResultSet rs = statement.executeQuery(upit);
+            while(rs.next()) {
+                Long projekcijaID = rs.getLong("projekcija");
+                List<Projekcija> projekcije = Kontroler.getInstanca().vratiSveProjekcije();
+                Projekcija p = null;
+                for (Projekcija projekcija : projekcije) {
+                    if(projekcija.getId().equals(projekcijaID)) {
+                        p = projekcija;
+                        break;
+                    }
+                }
+                Long korisnikID = rs.getLong("korisnik");
+                List<Korisnik> korisnici = Kontroler.getInstanca().vratiSveKorisnike();
+                Korisnik k = null;
+                for (Korisnik korisnik : korisnici) {
+                    if(korisnik.getId().equals(korisnikID)) {
+                        k = korisnik;
+                        break;
+                    }
+                }
+                Date datum = rs.getDate("datumRezervacije");
+                Rezervisanje rezervisanje = new Rezervisanje(datum, k, p);
+                rezervisanja.add(rezervisanje);
+            }
+            statement.close();
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rezervisanja;
     }
     
 }

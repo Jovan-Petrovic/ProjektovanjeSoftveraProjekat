@@ -221,7 +221,7 @@ public class FProjekcija extends javax.swing.JDialog {
 
     private void sacuvajProjekciju() throws Exception {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy.");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy.");
             Date datum = sdf.parse(jtxtDatum.getText().trim());
             int sala = Integer.parseInt(jtxtSala.getText().trim());
             List<Film> filmovi = Kontroler.getInstanca().vratiSveFilmove();

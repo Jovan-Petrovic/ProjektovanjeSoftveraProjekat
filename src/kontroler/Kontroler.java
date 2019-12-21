@@ -121,6 +121,10 @@ public class Kontroler {
         return servisRezervisanje.sacuvaj(rezervisanje);
     }
 
+    public List<Rezervisanje> vratiSvaRezervisanja() throws Exception {
+        return servisRezervisanje.vratiSva();
+    }
+
     
 
 }

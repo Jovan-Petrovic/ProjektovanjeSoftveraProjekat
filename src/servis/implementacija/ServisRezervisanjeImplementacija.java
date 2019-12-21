@@ -6,6 +6,7 @@
 package servis.implementacija;
 
 import domen.Rezervisanje;
+import java.util.List;
 import servis.ServisRezervisanje;
 import skladiste.bazapodataka.BazapodatakaSkladisteRezervisanje;
 import skladistee.SkladisteRezervisanje;
@@ -22,11 +23,14 @@ public class ServisRezervisanjeImplementacija implements ServisRezervisanje{
         skladisteRezervisanje = new BazapodatakaSkladisteRezervisanje();
     }
     
-    
-    
     @Override
     public boolean sacuvaj(Rezervisanje rezervisanje) throws Exception {
         return skladisteRezervisanje.sacuvaj(rezervisanje);
+    }
+
+    @Override
+    public List<Rezervisanje> vratiSva() throws Exception {
+        return skladisteRezervisanje.vratiSva();
     }
     
 }

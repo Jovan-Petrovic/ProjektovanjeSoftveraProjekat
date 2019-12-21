@@ -6,6 +6,7 @@
 package servis;
 
 import domen.Rezervisanje;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,6 @@ import domen.Rezervisanje;
 public interface ServisRezervisanje {
     
     boolean sacuvaj(Rezervisanje rezervisanje) throws Exception;
+
+    public List<Rezervisanje> vratiSva() throws Exception;
 }
