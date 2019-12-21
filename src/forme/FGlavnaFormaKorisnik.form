@@ -11,8 +11,11 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemFilmovi">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Svi filmovi"/>
+                <Property name="text" type="java.lang.String" value="Pretraga filmova"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemFilmoviActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -23,10 +26,18 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemProjekcije">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Projekcije"/>
+                <Property name="text" type="java.lang.String" value="Pretraga projekcija"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemProjekcijeActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jMenu1"/>
+          </Properties>
         </Menu>
       </SubComponents>
     </Menu>

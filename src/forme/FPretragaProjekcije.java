@@ -28,6 +28,10 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
+        if(parent instanceof FGlavnaFormaKorisnik) {
+            jbtnObrisi.setVisible(false);
+        }
+        
         setLocationRelativeTo(null);
         
         pripremiFormu();

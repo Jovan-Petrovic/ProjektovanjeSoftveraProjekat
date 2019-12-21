@@ -34,6 +34,9 @@ public class FPretragaFilma extends javax.swing.JDialog {
         if(formaMod.equals(FormaMod.FORMA_PRETRAGA)) {
             jbtnDodaj.setVisible(false);
         }
+        if(parent instanceof FGlavnaFormaKorisnik) {
+            jbtnIzmeni.setVisible(false);
+        }
         
         setLocationRelativeTo(null);
         

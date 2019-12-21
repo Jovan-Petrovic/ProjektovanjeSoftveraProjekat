@@ -5,6 +5,12 @@
  */
 package forme;
 
+import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Bron Zilar
@@ -33,22 +39,36 @@ public class FGlavnaFormaKorisnik extends javax.swing.JFrame {
         jMenuItemFilmovi = new javax.swing.JMenuItem();
         jMenuProjekcija = new javax.swing.JMenu();
         jMenuItemProjekcije = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenuFilm.setText("Film");
 
-        jMenuItemFilmovi.setText("Svi filmovi");
+        jMenuItemFilmovi.setText("Pretraga filmova");
+        jMenuItemFilmovi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFilmoviActionPerformed(evt);
+            }
+        });
         jMenuFilm.add(jMenuItemFilmovi);
 
         jMenuBar1.add(jMenuFilm);
 
         jMenuProjekcija.setText("Projekcija");
 
-        jMenuItemProjekcije.setText("Projekcije");
+        jMenuItemProjekcije.setText("Pretraga projekcija");
+        jMenuItemProjekcije.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemProjekcijeActionPerformed(evt);
+            }
+        });
         jMenuProjekcija.add(jMenuItemProjekcije);
 
         jMenuBar1.add(jMenuProjekcija);
+
+        jMenu1.setText("jMenu1");
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -66,42 +86,27 @@ public class FGlavnaFormaKorisnik extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void jMenuItemFilmoviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFilmoviActionPerformed
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FGlavnaFormaKorisnik.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FGlavnaFormaKorisnik.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FGlavnaFormaKorisnik.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FGlavnaFormaKorisnik.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            JDialog forma = new FPretragaFilma(this, true, FormaMod.FORMA_PRETRAGA);
+            forma.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(FGlavnaFormaKorisnik.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+        
+    }//GEN-LAST:event_jMenuItemFilmoviActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FGlavnaFormaKorisnik().setVisible(true);
-            }
-        });
-    }
+    private void jMenuItemProjekcijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProjekcijeActionPerformed
+        try {
+            JDialog forma = new FPretragaProjekcije(this, true);
+            forma.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(FGlavnaFormaKorisnik.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItemProjekcijeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFilm;
     private javax.swing.JMenuItem jMenuItemFilmovi;
