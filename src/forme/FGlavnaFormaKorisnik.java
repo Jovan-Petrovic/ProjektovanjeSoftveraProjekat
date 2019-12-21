@@ -5,6 +5,7 @@
  */
 package forme;
 
+import domen.Korisnik;
 import java.awt.event.WindowEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,12 +18,16 @@ import javax.swing.JFrame;
  */
 public class FGlavnaFormaKorisnik extends javax.swing.JFrame {
 
+    private final Korisnik k;
+    
     /**
      * Creates new form FGlavnaFormaKorisnik
      */
-    public FGlavnaFormaKorisnik() {
+    public FGlavnaFormaKorisnik(Korisnik korisnik) {
         initComponents();
         setLocationRelativeTo(null);
+        k = korisnik;
+        setTitle("Dobrodosli " + k.getIme() + " " + k.getPrezime());
     }
 
     /**
@@ -39,7 +44,6 @@ public class FGlavnaFormaKorisnik extends javax.swing.JFrame {
         jMenuItemFilmovi = new javax.swing.JMenuItem();
         jMenuProjekcija = new javax.swing.JMenu();
         jMenuItemProjekcije = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,9 +70,6 @@ public class FGlavnaFormaKorisnik extends javax.swing.JFrame {
         jMenuProjekcija.add(jMenuItemProjekcije);
 
         jMenuBar1.add(jMenuProjekcija);
-
-        jMenu1.setText("jMenu1");
-        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -98,7 +99,7 @@ public class FGlavnaFormaKorisnik extends javax.swing.JFrame {
 
     private void jMenuItemProjekcijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProjekcijeActionPerformed
         try {
-            JDialog forma = new FPretragaProjekcije(this, true);
+            JDialog forma = new FPretragaProjekcije(this, true, k);
             forma.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(FGlavnaFormaKorisnik.class.getName()).log(Level.SEVERE, null, ex);
@@ -106,7 +107,6 @@ public class FGlavnaFormaKorisnik extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemProjekcijeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFilm;
     private javax.swing.JMenuItem jMenuItemFilmovi;

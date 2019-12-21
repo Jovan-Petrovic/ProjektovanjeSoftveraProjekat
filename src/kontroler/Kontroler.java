@@ -8,21 +8,27 @@ package kontroler;
 import domen.Film;
 import domen.Glumac;
 import domen.Glumi;
+import domen.Korisnik;
 import domen.Projekcija;
 import domen.Reditelj;
+import domen.Rezervisanje;
 import domen.Rezira;
 import java.util.List;
 import servis.ServisFilm;
 import servis.ServisGlumac;
 import servis.ServisGlumi;
+import servis.ServisKorisnik;
 import servis.ServisProjekcija;
 import servis.ServisReditelj;
+import servis.ServisRezervisanje;
 import servis.ServisRezira;
 import servis.implementacija.ServisFilmImplementacija;
 import servis.implementacija.ServisGlumacImplementacija;
 import servis.implementacija.ServisGlumiImplementacija;
+import servis.implementacija.ServisKorisnikImplementacija;
 import servis.implementacija.ServisProjekcijaImplementacija;
 import servis.implementacija.ServisRediteljImplementacija;
+import servis.implementacija.ServisRezervisanjeImplementacija;
 import servis.implementacija.ServisReziraImplementacija;
 
 /**
@@ -38,6 +44,8 @@ public class Kontroler {
     private final ServisProjekcija servisProjekcija;
     private final ServisRezira servisRezira;
     private final ServisGlumi servisGlumi;
+    private final ServisKorisnik servisKorisnik;
+    private final ServisRezervisanje servisRezervisanje;
     
     public Kontroler() {
         servisFilm = new ServisFilmImplementacija();
@@ -46,6 +54,8 @@ public class Kontroler {
         servisProjekcija = new ServisProjekcijaImplementacija();
         servisRezira = new ServisReziraImplementacija();
         servisGlumi = new ServisGlumiImplementacija();
+        servisKorisnik = new ServisKorisnikImplementacija();
+        servisRezervisanje = new ServisRezervisanjeImplementacija();
     }
 
     public static Kontroler getInstanca() {
@@ -101,6 +111,14 @@ public class Kontroler {
 
     public boolean izmeniFilm(Film film) {
         return servisFilm.izmeni(film);
+    }
+
+    public List<Korisnik> vratiSveKorisnike() throws Exception {
+        return servisKorisnik.vratiSve();
+    }
+
+    public boolean sacuvajRezervisanje(Rezervisanje rezervisanje) throws Exception {
+        return servisRezervisanje.sacuvaj(rezervisanje);
     }
 
     

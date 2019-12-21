@@ -12,13 +12,11 @@ import java.util.Date;
  * @author Bron Zilar
  */
 public class Rezervisanje {
-    private Long id;
     private Date datumRezervacije;
     private Korisnik korisnik;
     private Projekcija projekcija;
 
-    public Rezervisanje(Long id, Date datumRezervacije, Korisnik korisnik, Projekcija projekcija) {
-        this.id = id;
+    public Rezervisanje(Date datumRezervacije, Korisnik korisnik, Projekcija projekcija) {
         this.datumRezervacije = datumRezervacije;
         this.korisnik = korisnik;
         this.projekcija = projekcija;
@@ -30,14 +28,6 @@ public class Rezervisanje {
 
     public void setProjekcija(Projekcija projekcija) {
         this.projekcija = projekcija;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Date getDatumRezervacije() {

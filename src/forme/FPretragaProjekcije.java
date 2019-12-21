@@ -5,7 +5,10 @@
  */
 package forme;
 
+import domen.Korisnik;
 import domen.Projekcija;
+import domen.Rezervisanje;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,15 +24,21 @@ import model.ProjekcijaTableModel;
  */
 public class FPretragaProjekcije extends javax.swing.JDialog {
 
+    private final Korisnik k;
+    
     /**
      * Creates new form FPretragaProjekcije
      */
-    public FPretragaProjekcije(java.awt.Frame parent, boolean modal) throws Exception {
+    public FPretragaProjekcije(java.awt.Frame parent, boolean modal, Korisnik korisnik) throws Exception {
         super(parent, modal);
         initComponents();
+        k = korisnik;
         
         if(parent instanceof FGlavnaFormaKorisnik) {
             jbtnObrisi.setVisible(false);
+        }
+        if(parent instanceof FGlavnaFormaAdmin) {
+            jbtnRezervisiMesto.setVisible(false);
         }
         
         setLocationRelativeTo(null);
@@ -54,6 +63,7 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         jbtnIzadji = new javax.swing.JButton();
         jbtnDetalji = new javax.swing.JButton();
         jbtnObrisi = new javax.swing.JButton();
+        jbtnRezervisiMesto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -100,6 +110,13 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
             }
         });
 
+        jbtnRezervisiMesto.setText("Rezervisi mesto");
+        jbtnRezervisiMesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRezervisiMestoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,6 +127,8 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbtnIzadji)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtnRezervisiMesto)
+                        .addGap(46, 46, 46)
                         .addComponent(jbtnDetalji, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(jbtnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -132,15 +151,13 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
                     .addComponent(jbtnPretraziPoImenuFilma))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jbtnIzadji))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbtnObrisi)
-                            .addComponent(jbtnDetalji))))
+                    .addComponent(jbtnIzadji)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbtnObrisi)
+                        .addComponent(jbtnDetalji)
+                        .addComponent(jbtnRezervisiMesto)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -189,12 +206,44 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jbtnObrisiActionPerformed
 
+    private void jbtnRezervisiMestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRezervisiMestoActionPerformed
+        int selektovanRed = jtblProjekcije.getSelectedRow();
+        Long projekcijaID = (Long) jtblProjekcije.getValueAt(selektovanRed, 0);
+        List<Projekcija> projekcije = null;
+        Projekcija p = null;
+        try {
+            projekcije = Kontroler.getInstanca().vratiSveProjekcije();
+        } catch (Exception ex) {
+            Logger.getLogger(FPretragaProjekcije.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (Projekcija projekcija : projekcije) {
+            if(projekcija.getId().equals(projekcijaID)) {
+                p = projekcija;
+                break;
+            }
+        }
+        Date datum = (Date) jtblProjekcije.getValueAt(selektovanRed, 1);
+        Rezervisanje rezervisanje = new Rezervisanje(datum, k, p);
+        boolean signal = false;
+        try {
+            signal = Kontroler.getInstanca().sacuvajRezervisanje(rezervisanje);
+        } catch (Exception ex) {
+            Logger.getLogger(FPretragaProjekcije.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(signal) {
+            JOptionPane.showMessageDialog(this, "Rezeracija je uspesno sacuvana!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Doslo je do greske, rezervacija nije sacuvana!");
+        }
+    }//GEN-LAST:event_jbtnRezervisiMestoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnDetalji;
     private javax.swing.JButton jbtnIzadji;
     private javax.swing.JButton jbtnObrisi;
     private javax.swing.JButton jbtnPretraziPoImenuFilma;
+    private javax.swing.JButton jbtnRezervisiMesto;
     private javax.swing.JLabel jlblPretraziPoImenu;
     private javax.swing.JTable jtblProjekcije;
     private javax.swing.JTextField jtxtPretraziPoImenuFilma;

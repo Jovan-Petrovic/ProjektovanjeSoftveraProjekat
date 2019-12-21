@@ -128,7 +128,7 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
 
     private void jMenuItemPretragaProjekcijaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPretragaProjekcijaActionPerformed
         try {
-            JDialog forma = new FPretragaProjekcije(this, true);
+            JDialog forma = new FPretragaProjekcije(this, true, null);
             forma.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(FGlavnaFormaAdmin.class.getName()).log(Level.SEVERE, null, ex);

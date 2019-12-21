@@ -5,9 +5,13 @@
  */
 package forme;
 
+import domen.Korisnik;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
+import kontroler.Kontroler;
 
 /**
  *
@@ -113,11 +117,20 @@ public class FPrijava extends javax.swing.JFrame {
         try {
             validacija(jtxtKorisnickoIme, jtxtLozinka);
             
-            dispose();
+            //dispose();
             if(jtxtKorisnickoIme.getText().equals("a") && jtxtLozinka.getText().equals("a")) {
                 new FGlavnaFormaAdmin().setVisible(true);
+                dispose();
             } else {
-                new FGlavnaFormaKorisnik().setVisible(true);
+                List<Korisnik> korisnici = new ArrayList<>();
+                korisnici = Kontroler.getInstanca().vratiSveKorisnike();
+                for (Korisnik korisnik : korisnici) {
+                    if(korisnik.getKorisnickoIme().equals(jtxtKorisnickoIme.getText().trim()) && korisnik.getSifra().equals(jtxtLozinka.getText().trim())) {
+                        new FGlavnaFormaKorisnik(korisnik).setVisible(true);
+                        dispose();
+                        break;
+                    }
+                }
             }
         } catch (Exception ex) {
             Logger.getLogger(FPrijava.class.getName()).log(Level.SEVERE, null, ex);

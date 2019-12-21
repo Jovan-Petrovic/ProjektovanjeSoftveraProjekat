@@ -29,6 +29,8 @@
                   <Group type="102" attributes="0">
                       <Component id="jbtnIzadji" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jbtnRezervisiMesto" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       <Component id="jbtnDetalji" min="-2" pref="84" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="jbtnObrisi" min="-2" pref="77" max="-2" attributes="0"/>
@@ -57,17 +59,13 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="160" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jbtnIzadji" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jbtnObrisi" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jbtnDetalji" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <Component id="jbtnIzadji" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="jbtnObrisi" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbtnDetalji" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbtnRezervisiMesto" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -134,6 +132,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnObrisiActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jbtnRezervisiMesto">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Rezervisi mesto"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnRezervisiMestoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
