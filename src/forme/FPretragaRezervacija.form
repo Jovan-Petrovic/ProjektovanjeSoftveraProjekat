@@ -26,17 +26,19 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="jbtnIzadji" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jbtnFilmDetalji" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="jbtnOtkazivanjeRezervacije" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jScrollPane1" min="-2" pref="375" max="-2" attributes="0"/>
                   <Component id="jlabSveProjekcije" min="-2" pref="193" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jbtnIzadji" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jbtnFilmDetalji" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                          <Component id="jbtnOtkazivanjeRezervacije" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jScrollPane1" alignment="0" min="-2" pref="498" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace pref="31" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -53,7 +55,7 @@
                   <Component id="jbtnFilmDetalji" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbtnOtkazivanjeRezervacije" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -105,6 +107,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Otkazi rezervaciju"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnOtkazivanjeRezervacijeActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

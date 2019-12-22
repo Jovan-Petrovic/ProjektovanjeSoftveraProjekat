@@ -7,12 +7,14 @@ package forme;
 
 import domen.Film;
 import domen.Korisnik;
+import domen.Projekcija;
 import domen.Rezervisanje;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import kontroler.Kontroler;
 import model.RezervisanjeTableModel;
@@ -23,14 +25,17 @@ import model.RezervisanjeTableModel;
  */
 public class FPretragaRezervacija extends javax.swing.JDialog {
  
+    Korisnik k;
+    
     /**
      * Creates new form FPretragaRezervacija
      */
     public FPretragaRezervacija(java.awt.Frame parent, boolean modal, Korisnik korisnik) throws Exception {
         super(parent, modal);
         initComponents();
+        k = korisnik;
         setLocationRelativeTo(null);
-        setTitle("Korisnik: " + korisnik.getIme() + " " + korisnik.getPrezime());
+        setTitle("Korisnik: " + k.getIme() + " " + k.getPrezime());
         
         pripremiFormu();
     }
@@ -83,6 +88,11 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
         });
 
         jbtnOtkazivanjeRezervacije.setText("Otkazi rezervaciju");
+        jbtnOtkazivanjeRezervacije.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnOtkazivanjeRezervacijeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,15 +101,16 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbtnIzadji)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnFilmDetalji)
-                        .addGap(39, 39, 39)
-                        .addComponent(jbtnOtkazivanjeRezervacije))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlabSveProjekcije, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addComponent(jlabSveProjekcije, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jbtnIzadji)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbtnFilmDetalji)
+                            .addGap(51, 51, 51)
+                            .addComponent(jbtnOtkazivanjeRezervacije))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,7 +124,7 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
                     .addComponent(jbtnIzadji)
                     .addComponent(jbtnFilmDetalji)
                     .addComponent(jbtnOtkazivanjeRezervacije))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,6 +158,13 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jbtnFilmDetaljiActionPerformed
 
+    private void jbtnOtkazivanjeRezervacijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnOtkazivanjeRezervacijeActionPerformed
+        int rezultat = JOptionPane.showConfirmDialog(this, "Da li zaista zelite da otkazete rezervaciju?", "Potvrda", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(rezultat == JOptionPane.YES_OPTION) {
+            otkaziRezervaciju();
+        }
+    }//GEN-LAST:event_jbtnOtkazivanjeRezervacijeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnFilmDetalji;
@@ -157,7 +175,41 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void pripremiFormu() throws Exception {
-        List<Rezervisanje> rezervisanja = Kontroler.getInstanca().vratiSvaRezervisanja();
-        jtblRezervacije.setModel(new RezervisanjeTableModel(rezervisanja));
+        List<Rezervisanje> svaRezervisanja = Kontroler.getInstanca().vratiSvaRezervisanja();
+        List<Rezervisanje> korisnikovaRezervisanja = new ArrayList<>();
+        for (Rezervisanje rezervisanje : svaRezervisanja) {
+            if(rezervisanje.getKorisnik().getId().equals(k.getId())) {
+                korisnikovaRezervisanja.add(rezervisanje);
+            }
+        }
+        jtblRezervacije.setModel(new RezervisanjeTableModel(korisnikovaRezervisanja));
+    }
+
+    private void otkaziRezervaciju() {
+        int selektovanRed = jtblRezervacije.getSelectedRow();
+        Long projekcijaID = (Long) jtblRezervacije.getValueAt(selektovanRed, 0);
+        List<Projekcija> projekcije = null;
+        try {
+            projekcije = Kontroler.getInstanca().vratiSveProjekcije();
+        } catch (Exception ex) {
+            Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Projekcija p = null;
+        for (Projekcija projekcija : projekcije) {
+            if(projekcija.getId().equals(projekcijaID)) {
+                p = projekcija;
+            }
+        }
+        boolean signal = false;
+        try {
+            signal = Kontroler.getInstanca().obrisiRezervaciju(projekcijaID, k.getId());
+        } catch (Exception ex) {
+            Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if(signal) {
+            JOptionPane.showMessageDialog(this, "Rezervacija filma " + p.getFilm().getNaziv() + " je uspesno obrisana");
+        } else {
+            JOptionPane.showMessageDialog(this, "Doslo je do greske. Rezervacija filma " + p.getFilm().getNaziv() + " nije uspesno obrisana");
+        }
     }
 }

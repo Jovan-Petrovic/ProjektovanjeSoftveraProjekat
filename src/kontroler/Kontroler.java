@@ -125,6 +125,10 @@ public class Kontroler {
         return servisRezervisanje.vratiSva();
     }
 
+    public boolean obrisiRezervaciju(Long projekcijaID, Long korisnikID) throws Exception {
+        return servisRezervisanje.obrisi(projekcijaID, korisnikID);
+    }
+
     
 
 }

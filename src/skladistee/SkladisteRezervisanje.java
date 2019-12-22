@@ -17,4 +17,6 @@ public interface SkladisteRezervisanje {
     boolean sacuvaj(Rezervisanje rezervisanje);
 
     public List<Rezervisanje> vratiSva();
+
+    public boolean obrisi(Long projekcijaID, Long korisnikID);
 }

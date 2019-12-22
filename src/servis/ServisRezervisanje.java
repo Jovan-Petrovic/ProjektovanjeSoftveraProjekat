@@ -17,4 +17,6 @@ public interface ServisRezervisanje {
     boolean sacuvaj(Rezervisanje rezervisanje) throws Exception;
 
     public List<Rezervisanje> vratiSva() throws Exception;
+
+    public boolean obrisi(Long projekcijaID, Long korisnikID) throws Exception;
 }

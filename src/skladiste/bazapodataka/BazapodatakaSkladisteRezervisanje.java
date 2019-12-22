@@ -93,5 +93,24 @@ public class BazapodatakaSkladisteRezervisanje implements SkladisteRezervisanje{
         }
         return rezervisanja;
     }
+
+    @Override
+    public boolean obrisi(Long projekcijaID, Long korisnikID) {
+        try {
+            broker.otvoriKonekciju();
+            String upit = "delete from rezervisanje where projekcija=? and korisnik=?";
+            PreparedStatement preparedStatement = broker.getKonekcija().prepareStatement(upit);
+            preparedStatement.setLong(1, projekcijaID);
+            preparedStatement.setLong(2, korisnikID);
+            preparedStatement.execute();
+            broker.commit();
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            broker.rollback();
+            Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
     
 }

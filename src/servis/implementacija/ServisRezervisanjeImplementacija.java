@@ -32,5 +32,10 @@ public class ServisRezervisanjeImplementacija implements ServisRezervisanje{
     public List<Rezervisanje> vratiSva() throws Exception {
         return skladisteRezervisanje.vratiSva();
     }
+
+    @Override
+    public boolean obrisi(Long projekcijaID, Long korisnikID) throws Exception {
+        return skladisteRezervisanje.obrisi(projekcijaID, korisnikID);
+    }
     
 }
