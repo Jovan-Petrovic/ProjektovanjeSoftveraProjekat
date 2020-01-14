@@ -33,12 +33,10 @@ public class BazapodatakaSkladisteRezira implements SkladisteRezira{
     public void sacuvaj(Rezira rezira) {
         try {
             broker.otvoriKonekciju();
-            String upit = "insert into rezira (film, reditelj, ocena, napomena) values (?, ?, ?, ?)";
+            String upit = "insert into rezira (film, reditelj) values (?, ?)";
             PreparedStatement preparedStatement = broker.getKonekcija().prepareStatement(upit);
             preparedStatement.setLong(1, rezira.getFilm().getId());
             preparedStatement.setLong(2, rezira.getReditelj().getId());
-            preparedStatement.setDouble(3, rezira.getOcena());
-            preparedStatement.setString(4, rezira.getNapomena());
             preparedStatement.executeUpdate();
             broker.commit();
             preparedStatement.close();
@@ -76,9 +74,7 @@ public class BazapodatakaSkladisteRezira implements SkladisteRezira{
                         break;
                     }
                 }
-                double ocena = rs.getDouble("ocena");
-                String napomena = rs.getString("napomena");
-                Rezira rezira = new Rezira(ocena, napomena, f, r);
+                Rezira rezira = new Rezira(f, r);
                 reziranja.add(rezira);
             }
             statement.close();

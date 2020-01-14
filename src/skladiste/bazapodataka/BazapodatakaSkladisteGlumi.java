@@ -35,12 +35,10 @@ public class BazapodatakaSkladisteGlumi implements SkladisteGlumi {
     public void sacuvaj(Glumi glumi) {
         try {
             broker.otvoriKonekciju();
-            String upit = "insert into glumi (film, glumac, ocena, napomena) values (?, ?, ?, ?)";
+            String upit = "insert into glumi (film, glumac) values (?, ?)";
             PreparedStatement preparedStatement = broker.getKonekcija().prepareStatement(upit);
             preparedStatement.setLong(1, glumi.getFilm().getId());
             preparedStatement.setLong(2, glumi.getGlumac().getId());
-            preparedStatement.setDouble(3, glumi.getOcena());
-            preparedStatement.setString(4, glumi.getNapomena());
             preparedStatement.executeUpdate();
             broker.commit();
             preparedStatement.close();
@@ -78,9 +76,7 @@ public class BazapodatakaSkladisteGlumi implements SkladisteGlumi {
                         break;
                     }
                 }
-                double ocena = rs.getDouble("ocena");
-                String napomena = rs.getString("napomena");
-                Glumi glumi = new Glumi(ocena, napomena, f, g);
+                Glumi glumi = new Glumi(f, g);
                 uloge.add(glumi);
             }
             statement.close();

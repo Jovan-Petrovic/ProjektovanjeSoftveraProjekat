@@ -10,14 +10,10 @@ package domen;
  * @author Bron Zilar
  */
 public class Glumi {
-    private double ocena;
-    private String napomena;
     private Film film;
     private Glumac glumac;
 
-    public Glumi(double ocena, String napomena, Film film, Glumac glumac) {
-        this.ocena = ocena;
-        this.napomena = napomena;
+    public Glumi(Film film, Glumac glumac) {
         this.film = film;
         this.glumac = glumac;
     }
@@ -28,22 +24,6 @@ public class Glumi {
 
     public void setGlumac(Glumac glumac) {
         this.glumac = glumac;
-    }
-
-    public double getOcena() {
-        return ocena;
-    }
-
-    public void setOcena(double ocena) {
-        this.ocena = ocena;
-    }
-
-    public String getNapomena() {
-        return napomena;
-    }
-
-    public void setNapomena(String napomena) {
-        this.napomena = napomena;
     }
 
     public Film getFilm() {

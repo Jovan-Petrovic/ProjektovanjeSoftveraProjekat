@@ -10,14 +10,10 @@ package domen;
  * @author Bron Zilar
  */
 public class Rezira {
-    private double ocena;
-    private String napomena;
     private Film film;
     private Reditelj reditelj;
 
-    public Rezira(double Ocena, String napomena, Film film, Reditelj reditelj) {
-        this.ocena = Ocena;
-        this.napomena = napomena;
+    public Rezira(Film film, Reditelj reditelj) {
         this.film = film;
         this.reditelj = reditelj;
     }
@@ -28,22 +24,6 @@ public class Rezira {
 
     public void setReditelj(Reditelj reditelj) {
         this.reditelj = reditelj;
-    }
-
-    public double getOcena() {
-        return ocena;
-    }
-
-    public void setOcena(double Ocena) {
-        this.ocena = Ocena;
-    }
-
-    public String getNapomena() {
-        return napomena;
-    }
-
-    public void setNapomena(String napomena) {
-        this.napomena = napomena;
     }
 
     public Film getFilm() {
