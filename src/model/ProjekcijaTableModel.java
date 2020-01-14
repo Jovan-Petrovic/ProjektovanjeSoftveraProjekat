@@ -5,6 +5,7 @@
  */
 package model;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import domen.Projekcija;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,12 @@ public class ProjekcijaTableModel extends AbstractTableModel {
     public ProjekcijaTableModel(List<Projekcija> projekcije) {
         this.projekcije = projekcije;
     }
+
+    public ProjekcijaTableModel() {
+        projekcije = new ArrayList<>();
+    }
+    
+    
  
     @Override
     public int getRowCount() {
@@ -88,6 +95,20 @@ public class ProjekcijaTableModel extends AbstractTableModel {
             }
         }
         return null;
+    }
+
+    public void dodajProjekciju(Projekcija p) {
+        projekcije.add(p);
+        fireTableDataChanged();
+    }
+
+    public void obrisiProjekciju(int selektovanRed) {
+        projekcije.remove(selektovanRed);
+        fireTableDataChanged();
+    }
+
+    public List<Projekcija> vratiProjekcije() {
+        return projekcije;
     }
     
     

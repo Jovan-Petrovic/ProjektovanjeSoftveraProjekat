@@ -227,6 +227,7 @@ public class FPretragaFilma extends javax.swing.JDialog {
         FilmTableModel ftm = (FilmTableModel) tm;
         String naziv = (String) ftm.getValueAt(selektovanRed, 1);
         fp.getJtxtFilm().setText(naziv);
+        fp.setFilm(ftm.nadjiFilm(Long.valueOf(selektovanRed)));
         JOptionPane.showMessageDialog(this, "Uspesno dodat film: " + naziv);
     }//GEN-LAST:event_jbtnDodajActionPerformed
 

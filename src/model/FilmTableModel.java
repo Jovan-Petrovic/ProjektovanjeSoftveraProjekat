@@ -75,11 +75,19 @@ public class FilmTableModel extends AbstractTableModel {
         return klaseKolona[kolona];
     }
 
-    public void pretraziFilmove(Zanr zanr, String naziv) {
+    public void pretraziFilmove(Zanr zanr, String naziv) {       
         List<Film> zaUklanjanje = new ArrayList<>();
-        for (Film film : filmovi) {
-            if(!film.getZanr().equals(zanr) && (!film.getNaziv().toLowerCase().contains(naziv.toLowerCase()) || naziv.isEmpty())) {
-                zaUklanjanje.add(film);
+        if(naziv.isEmpty()) {
+            for (Film film : filmovi) {
+                if(!film.getZanr().equals(zanr)) {
+                    zaUklanjanje.add(film);
+                }
+            }
+        } else {
+            for (Film film : filmovi) {
+                if(!film.getZanr().equals(zanr) || !film.getNaziv().toLowerCase().contains(naziv.toLowerCase())) {
+                    zaUklanjanje.add(film);
+                }
             }
         }
         filmovi.removeAll(zaUklanjanje);
