@@ -222,7 +222,8 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
                 break;
             }
         }
-        Date datum = (Date) jtblProjekcije.getValueAt(selektovanRed, 1);
+        //Date datum = (Date) jtblProjekcije.getValueAt(selektovanRed, 1);
+        Date datum = new Date();
         Rezervisanje rezervisanje = new Rezervisanje(datum, k, p);
         boolean signal = false;
         try {
