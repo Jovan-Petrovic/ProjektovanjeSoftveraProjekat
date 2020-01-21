@@ -5,6 +5,7 @@
  */
 package model;
 
+import domen.Projekcija;
 import domen.Rezervisanje;
 import java.util.Date;
 import java.util.List;
@@ -66,5 +67,11 @@ public class RezervisanjeTableModel extends AbstractTableModel {
     public Class<?> getColumnClass(int kolona) {
         return klaseKolona[kolona];
     }
+
+    public Rezervisanje vratiRezervisanje(int selektovanRed) {
+        return rezervisanja.get(selektovanRed);
+    }
+
+    
 
 }

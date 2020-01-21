@@ -20,7 +20,7 @@ public class ProjekcijaTableModel extends AbstractTableModel {
 
     private final List<Projekcija> projekcije;
     private final String[] imenaKolona = new String[]{"ID","DATUM","SALA","FILMID","NAZIV_FILMA"};
-    private final Class[] klaseKolona = new Class[]{Long.class, Date.class, Integer.class, Long.class, String.class};
+    private final Class[] klaseKolona = new Class[]{Long.class, Date.class, String.class, Long.class, String.class};
 
     public ProjekcijaTableModel(List<Projekcija> projekcije) {
         this.projekcije = projekcije;
@@ -30,8 +30,6 @@ public class ProjekcijaTableModel extends AbstractTableModel {
         projekcije = new ArrayList<>();
     }
     
-    
- 
     @Override
     public int getRowCount() {
         if(projekcije == null) {

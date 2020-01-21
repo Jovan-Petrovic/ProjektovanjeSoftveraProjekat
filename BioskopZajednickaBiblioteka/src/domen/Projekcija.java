@@ -15,15 +15,17 @@ import java.util.Date;
 public class Projekcija implements Serializable {
     private Long id;
     private Date datum;
-    private int sala;
+    private String sala;
     private Film film;
 
-    public Projekcija(Long id, Date datum, int sala, Film film) {
+    public Projekcija(Long id, Date datum, String sala, Film film) {
         this.id = id;
         this.datum = datum;
         this.sala = sala;
         this.film = film;
     }
+
+    
 
     public Film getFilm() {
         return film;
@@ -49,13 +51,15 @@ public class Projekcija implements Serializable {
         this.datum = datum;
     }
 
-    public int getSala() {
+    public String getSala() {
         return sala;
     }
 
-    public void setSala(int sala) {
+    public void setSala(String sala) {
         this.sala = sala;
     }
+
+    
     
     
 }

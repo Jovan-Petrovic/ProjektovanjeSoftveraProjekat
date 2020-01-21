@@ -7,6 +7,7 @@ package forme;
 
 import domen.Film;
 import domen.Projekcija;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -236,14 +237,25 @@ public class FProjekcija extends javax.swing.JDialog {
 
     private void jbtnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSacuvajActionPerformed
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) jtblProjekcije.getModel();
-        List<Projekcija> projekcije = ptm.vratiProjekcije();
+        List<Projekcija> projekcije = ptm.vratiProjekcije();        
+            //        try {
+//            for (Projekcija projekcija : projekcije) {
+//                projekcija = Kontroler.getInstanca().sacuvajProjekciju(projekcija);                
+//            }
+//            
+//        } catch (Exception ex) {
+//            Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         try {
-            for (Projekcija projekcija : projekcije) {
-                projekcija = Kontroler.getInstanca().sacuvajProjekciju(projekcija);
-                
+            boolean odgovor = Kontroler.getInstanca().sacuvajSveprojekcije(projekcije);
+            if(odgovor) {
+                JOptionPane.showMessageDialog(this, "Sve projekcije su uspesno sacuvane.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Doslo je do greske. Projekcije nisu uspesno sacuvane.");
             }
-            //JOptionPane.showMessageDialog(this, "Sve projekcije su uspesno sacuvane");
-        } catch (Exception ex) {
+        } catch (IOException ex) {
+            Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbtnSacuvajActionPerformed
@@ -257,7 +269,7 @@ public class FProjekcija extends javax.swing.JDialog {
         } catch (ParseException ex) {
             Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int sala = Integer.parseInt(jtxtSala.getText().trim());
+        String sala = jtxtSala.getText().trim();
         Projekcija p = new Projekcija(-1l, datum, sala, film);
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) jtblProjekcije.getModel();
         ptm.dodajProjekciju(p);
@@ -310,7 +322,7 @@ public class FProjekcija extends javax.swing.JDialog {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy.");
             Date datum = sdf.parse(jtxtDatum.getText().trim());
-            int sala = Integer.parseInt(jtxtSala.getText().trim());
+            String sala = jtxtSala.getText().trim();
             List<Film> filmovi = Kontroler.getInstanca().vratiSveFilmove();
             Film f = null;
             for (Film film : filmovi) {

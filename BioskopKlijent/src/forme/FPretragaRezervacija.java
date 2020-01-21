@@ -138,7 +138,9 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
 
     private void jbtnFilmDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnFilmDetaljiActionPerformed
         int selektovanRed = jtblRezervacije.getSelectedRow();
-        Long filmID = (Long) jtblRezervacije.getValueAt(selektovanRed, 0);
+        RezervisanjeTableModel rtm = (RezervisanjeTableModel) jtblRezervacije.getModel();
+        Rezervisanje rezervisanje = rtm.vratiRezervisanje(selektovanRed);
+        Long filmID = rezervisanje.getProjekcija().getFilm().getId();
         List<Film> filmovi = null;
         try {
            filmovi = Kontroler.getInstanca().vratiSveFilmove();
@@ -149,6 +151,7 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
         for (Film film : filmovi) {
             if(film.getId().equals(filmID)) {
                 f = film;
+                break;
             }
         }
         JDialog forma;

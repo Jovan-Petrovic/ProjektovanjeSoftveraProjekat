@@ -254,14 +254,11 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
     private ServerskiOdgovor sacuvajProjekciju(Projekcija projekcija) throws Exception {
         ServerskiOdgovor so = new ServerskiOdgovor();
         Projekcija p = Kontroler.getInstanca().sacuvajProjekciju(projekcija);
+        so.setOdgovor(p);
         if(p != null) {
-            so.setOdgovor(p);
             so.setStatus(Status.U_REDU);
-            so.setPoruka("Uspesno sacuvana projekcija sa Id-em: " + p.getId());
         } else {
-            so.setOdgovor(p);
             so.setStatus(Status.GRESKA);
-            so.setPoruka("Projekcija nije uspesno sacuvana");
         }
         return so;
     }

@@ -270,7 +270,6 @@ public class Kontroler {
         kz.setParametar(projekcija);
         posaljiZahtev(kz);
         ServerskiOdgovor so = primiOdgovor();
-        JOptionPane.showMessageDialog(null, "Sve projekcije su uspesno sacuvane");
         return (Projekcija) so.getOdgovor();
     }
 
@@ -293,6 +292,20 @@ public class Kontroler {
         if(so.getStatus().equals(Status.GRESKA)) {
             return false;
         }
+        return true;
+    }
+
+    public boolean sacuvajSveprojekcije(List<Projekcija> projekcije) throws IOException, ClassNotFoundException {
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacije.SACUVAJ_PROJEKCIJU);
+        for (Projekcija projekcija : projekcije) {
+            kz.setParametar(projekcija);
+            posaljiZahtev(kz);
+            ServerskiOdgovor so = primiOdgovor();
+            if(so.getStatus().equals(Status.GRESKA)) {
+                return false;
+            }
+        } 
         return true;
     }
 

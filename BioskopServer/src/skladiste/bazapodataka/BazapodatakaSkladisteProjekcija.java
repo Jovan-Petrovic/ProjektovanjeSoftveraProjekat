@@ -36,7 +36,7 @@ public class BazapodatakaSkladisteProjekcija implements SkladisteProjekcija {
             String upit = "insert into projekcija (datum, sala, filmID) values (?, ?, ?)";
             PreparedStatement preparedStatement = broker.getKonekcija().prepareStatement(upit, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setDate(1, new Date(projekcija.getDatum().getTime()));
-            preparedStatement.setInt(2, projekcija.getSala());
+            preparedStatement.setString(2, projekcija.getSala());
             preparedStatement.setLong(3, projekcija.getFilm().getId());
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -69,7 +69,7 @@ public class BazapodatakaSkladisteProjekcija implements SkladisteProjekcija {
             while(rs.next()) {
                 Long id = rs.getLong("id");
                 Date datum = rs.getDate("datum");
-                int sala = rs.getInt("sala");
+                String sala = rs.getString("sala");
                 Long filmID = rs.getLong("filmID");
                 Film f = null;
                 for(Film film : filmovi) {

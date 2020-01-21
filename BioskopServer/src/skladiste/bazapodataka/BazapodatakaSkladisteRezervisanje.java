@@ -78,7 +78,7 @@ public class BazapodatakaSkladisteRezervisanje implements SkladisteRezervisanje{
                 
                 Long projekcijaId = rs.getLong("p.id");
                 java.util.Date datumProjekcije = rs.getDate("p.datum");
-                int salaProjekcije = rs.getInt("p.sala");
+                String salaProjekcije = rs.getString("p.sala");
                 Projekcija projekcija = new Projekcija(projekcijaId, datumProjekcije, salaProjekcije, film);
                 
                 Long korisnikID = rs.getLong("k.id");
