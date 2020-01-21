@@ -75,6 +75,10 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
                         Projekcija p = (Projekcija) kz.getParametar();
                         so = obrisiProjekciju(p);
                         break;
+                    case Operacije.SACUVAJ_PROJEKCIJU:
+                        Projekcija projekcija = (Projekcija) kz.getParametar();
+                        so = sacuvajProjekciju(projekcija);
+                        break;
                 }
                 posaljiOdgovor(so);
             } catch (IOException ex) {
@@ -227,6 +231,21 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
             so.setOdgovor(false);
             so.setPoruka("projekcija nije uspesno obrisana");
             so.setStatus(Status.GRESKA);
+        }
+        return so;
+    }
+
+    private ServerskiOdgovor sacuvajProjekciju(Projekcija projekcija) throws Exception {
+        ServerskiOdgovor so = new ServerskiOdgovor();
+        Projekcija p = Kontroler.getInstanca().sacuvajProjekciju(projekcija);
+        if(p != null) {
+            so.setOdgovor(p);
+            so.setStatus(Status.U_REDU);
+            so.setPoruka("Uspesno sacuvana projekcija sa Id-em: " + p.getId());
+        } else {
+            so.setOdgovor(p);
+            so.setStatus(Status.GRESKA);
+            so.setPoruka("Projekcija nije uspesno sacuvana");
         }
         return so;
     }

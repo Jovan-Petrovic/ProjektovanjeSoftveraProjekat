@@ -243,8 +243,14 @@ public class Kontroler {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Projekcija sacuvajProjekciju(Projekcija projekcija) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Projekcija sacuvajProjekciju(Projekcija projekcija) throws IOException, ClassNotFoundException {
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacije.SACUVAJ_PROJEKCIJU);
+        kz.setParametar(projekcija);
+        posaljiZahtev(kz);
+        ServerskiOdgovor so = primiOdgovor();
+        JOptionPane.showMessageDialog(null, "Sve projekcije su uspesno sacuvane");
+        return (Projekcija) so.getOdgovor();
     }
 
     public Film sacuvajFilmReziraGlumi(Map<String, Object> podaci) throws IOException, ClassNotFoundException {

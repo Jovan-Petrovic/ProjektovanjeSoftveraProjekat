@@ -242,7 +242,7 @@ public class FProjekcija extends javax.swing.JDialog {
                 projekcija = Kontroler.getInstanca().sacuvajProjekciju(projekcija);
                 
             }
-            JOptionPane.showMessageDialog(this, "Sve projekcije su uspesno sacuvane");
+            //JOptionPane.showMessageDialog(this, "Sve projekcije su uspesno sacuvane");
         } catch (Exception ex) {
             Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);
         }
