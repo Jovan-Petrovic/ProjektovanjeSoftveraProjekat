@@ -9,6 +9,7 @@ import domen.Film;
 import domen.Glumac;
 import domen.Glumi;
 import domen.Korisnik;
+import domen.Projekcija;
 import domen.Reditelj;
 import domen.Rezira;
 import domen.Status;
@@ -67,11 +68,20 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
                         Map<String,Object> podaci = (Map<String,Object>) kz.getParametar();
                         so = sacuvajFilmReziraGlumi(podaci);
                         break;
+                    case Operacije.VRATI_PROJEKCIJE:
+                        so = vratiSveProjekcije();
+                        break;
+                    case Operacije.OBRISI_PROJEKCIJU:
+                        Projekcija p = (Projekcija) kz.getParametar();
+                        so = obrisiProjekciju(p);
+                        break;
                 }
                 posaljiOdgovor(so);
             } catch (IOException ex) {
                 Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
                 Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -191,4 +201,35 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         }
         return so;
     }
+
+    private ServerskiOdgovor vratiSveProjekcije() {
+        ServerskiOdgovor so = new ServerskiOdgovor();
+        try {
+            ArrayList<Projekcija> projekcije = (ArrayList<Projekcija>) Kontroler.getInstanca().vratiSveProjekcije();
+            so.setOdgovor(projekcije);
+            so.setStatus(Status.U_REDU);
+        } catch (Exception ex) {
+            so.setStatus(Status.GRESKA);
+            so.setPoruka("Doslo je do greske prilikom citanja filmova iz baze");
+            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return so;
+    }
+
+    private ServerskiOdgovor obrisiProjekciju(Projekcija p) throws Exception {
+        ServerskiOdgovor so = new ServerskiOdgovor();
+        boolean odgovor = Kontroler.getInstanca().obrisiProjekciju(p.getId());
+        if(odgovor) {
+            so.setOdgovor(true);
+            so.setPoruka("Uspesno obrisana projekcija");
+            so.setStatus(Status.U_REDU);
+        } else {
+            so.setOdgovor(false);
+            so.setPoruka("projekcija nije uspesno obrisana");
+            so.setStatus(Status.GRESKA);
+        }
+        return so;
+    }
+
+    
 }

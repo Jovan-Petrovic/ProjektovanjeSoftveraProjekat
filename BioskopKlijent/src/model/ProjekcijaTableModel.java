@@ -110,6 +110,10 @@ public class ProjekcijaTableModel extends AbstractTableModel {
     public List<Projekcija> vratiProjekcije() {
         return projekcije;
     }
+
+    public Projekcija vratiProjekciju(int red) {
+        return projekcije.get(red);
+    }
     
     
 }

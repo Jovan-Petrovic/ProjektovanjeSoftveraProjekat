@@ -207,12 +207,28 @@ public class Kontroler {
         return (List<Film>) so.getOdgovor();
     }
 
-    public boolean obrisiProjekciju(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean obrisiProjekciju(Projekcija p) throws IOException, ClassNotFoundException {
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacije.OBRISI_PROJEKCIJU);
+        kz.setParametar(p);
+        posaljiZahtev(kz);
+        ServerskiOdgovor so = primiOdgovor();
+        JOptionPane.showMessageDialog(null, so.getPoruka());
+        if(so.getStatus().equals(Status.GRESKA)) {
+            return false;
+        }
+        return true;
     }
 
-    public List<Projekcija> vratiSveProjekcije() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Projekcija> vratiSveProjekcije() throws IOException, ClassNotFoundException, Exception {
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacije.VRATI_PROJEKCIJE);
+        posaljiZahtev(kz);
+        ServerskiOdgovor so = primiOdgovor();
+        if(so.getStatus().equals(Status.GRESKA)) {
+            throw new Exception(so.getPoruka());
+        }
+        return (List<Projekcija>) so.getOdgovor();
     }
 
     public boolean sacuvajRezervisanje(Rezervisanje rezervisanje) {

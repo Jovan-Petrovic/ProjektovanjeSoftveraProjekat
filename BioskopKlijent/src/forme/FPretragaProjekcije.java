@@ -193,9 +193,10 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         int selektovanRed = jtblProjekcije.getSelectedRow();
         TableModel tm = jtblProjekcije.getModel();
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) tm;
-        Long id = (Long) ptm.getValueAt(selektovanRed, 0);
+        //Long id = (Long) ptm.getValueAt(selektovanRed, 0);
+        Projekcija p = ptm.vratiProjekciju(selektovanRed);
         try {
-            if(Kontroler.getInstanca().obrisiProjekciju(id)) {
+            if(Kontroler.getInstanca().obrisiProjekciju(p)) {
                 pripremiFormu();
                 JOptionPane.showMessageDialog(this, "Projekcija je uspesno obrisana");
             } else {

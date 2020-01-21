@@ -19,5 +19,7 @@ public class Operacije implements Serializable {
     public static final int VRATI_ULOGE = 5;
     public static final int VRATI_GLUMCE = 6;
     public static final int SACUVAJ_FILM_REZIRA_GLUMI = 7;
+    public static final int VRATI_PROJEKCIJE = 8;
+    public static final int OBRISI_PROJEKCIJU = 9;
     
 }
