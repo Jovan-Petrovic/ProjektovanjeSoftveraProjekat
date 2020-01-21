@@ -330,11 +330,13 @@ public class FFilmDetalji extends javax.swing.JDialog {
             status = Kontroler.getInstanca().izmeniFilm(film);
         } catch (IOException ex) {
             Logger.getLogger(FFilmDetalji.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FFilmDetalji.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(status) {
-            JOptionPane.showMessageDialog(this, "Uspesno izmenjen film");
+            JOptionPane.showMessageDialog(this, "Uspesno izmenjen film: " + film);
         } else {
-            JOptionPane.showMessageDialog(this, "Film nije uspesno izmenjen");
+            JOptionPane.showMessageDialog(this, "Doslo je do greske. Film nije uspesno izmenjen: " + film);
         }
     }//GEN-LAST:event_jbtnSacuvajActionPerformed
 

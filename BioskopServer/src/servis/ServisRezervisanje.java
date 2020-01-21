@@ -7,6 +7,7 @@ package servis;
 
 import domen.Rezervisanje;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -19,4 +20,6 @@ public interface ServisRezervisanje {
     public List<Rezervisanje> vratiSva() throws Exception;
 
     public boolean obrisi(Long projekcijaID, Long korisnikID) throws Exception;
+
+    public boolean obrisi(Map<String, Long> mapa);
 }

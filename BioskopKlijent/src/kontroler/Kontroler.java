@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -162,16 +163,24 @@ public class Kontroler {
         return glumci;
     }
 
-    public void sacuvajRezira(Rezira rezira) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public void sacuvajRezira(Rezira rezira) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    public void sacuvajGlumi(Glumi glumi) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
-    public void sacuvajGlumi(Glumi glumi) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public boolean izmeniFilm(Film film) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean izmeniFilm(Film film) throws IOException, ClassNotFoundException {
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacije.IZMENI_FILM);
+        kz.setParametar(film);
+        posaljiZahtev(kz);
+        ServerskiOdgovor so = primiOdgovor();
+        if(so.getStatus().equals(Status.GRESKA)) {
+            return false;
+        }
+        return true;
     }
 
     public List<Rezira> vratiSvaReziranja() throws IOException, ClassNotFoundException, Exception {
@@ -231,17 +240,29 @@ public class Kontroler {
         return (List<Projekcija>) so.getOdgovor();
     }
 
-    public boolean sacuvajRezervisanje(Rezervisanje rezervisanje) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean sacuvajRezervisanje(Rezervisanje rezervisanje) throws IOException, ClassNotFoundException {
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacije.SACUVAJ_REZERVACIJU);
+        kz.setParametar(rezervisanje);
+        posaljiZahtev(kz);
+        ServerskiOdgovor so = primiOdgovor();
+        return (boolean) so.getOdgovor();
     }
 
-    public List<Rezervisanje> vratiSvaRezervisanja() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Rezervisanje> vratiSvaRezervisanja() throws IOException, ClassNotFoundException, Exception {
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacije.VRATI_REZERVACIJE);
+        posaljiZahtev(kz);
+        ServerskiOdgovor so = primiOdgovor();
+        if(so.getStatus().equals(Status.GRESKA)) {
+            throw new Exception(so.getPoruka());
+        }
+        return (List<Rezervisanje>) so.getOdgovor();
     }
 
-    public boolean obrisiRezervaciju(Long projekcijaID, Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public boolean obrisiRezervaciju(Long projekcijaID, int korisnikID) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     public Projekcija sacuvajProjekciju(Projekcija projekcija) throws IOException, ClassNotFoundException {
         KlijentskiZahtev kz = new KlijentskiZahtev();
@@ -262,5 +283,19 @@ public class Kontroler {
         JOptionPane.showMessageDialog(null, so.getPoruka());
         return (Film) so.getOdgovor();
     }
+
+    public boolean obrisiRezervaciju(Map<String, Long> podaci) throws IOException, ClassNotFoundException {
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacije.OTAKZI_REZERVACIJU);
+        kz.setParametar(podaci);
+        posaljiZahtev(kz);
+        ServerskiOdgovor so = primiOdgovor();
+        if(so.getStatus().equals(Status.GRESKA)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 
 }

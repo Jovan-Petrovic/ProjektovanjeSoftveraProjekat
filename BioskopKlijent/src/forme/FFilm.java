@@ -492,14 +492,14 @@ public class FFilm extends javax.swing.JDialog {
     private void sacuvajRezira() throws Exception {
         for (Rezira rezira : reditelji) {
             rezira.setFilm(f);
-            Kontroler.getInstanca().sacuvajRezira(rezira);
+//            Kontroler.getInstanca().sacuvajRezira(rezira);
         }
     }
 
     private void sacuvajGlumi() throws Exception {
         for (Glumi glumi : glumci) {
             glumi.setFilm(f);
-            Kontroler.getInstanca().sacuvajGlumi(glumi);
+//            Kontroler.getInstanca().sacuvajGlumi(glumi);
         }
     }
 

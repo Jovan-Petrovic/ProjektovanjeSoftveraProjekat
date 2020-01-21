@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import kontroler.Kontroler;
@@ -108,6 +109,27 @@ public class BazapodatakaSkladisteRezervisanje implements SkladisteRezervisanje{
             broker.otvoriKonekciju();
             String upit = "delete from rezervisanje where projekcija=? and korisnik=?";
             PreparedStatement preparedStatement = broker.getKonekcija().prepareStatement(upit);
+            preparedStatement.setLong(1, projekcijaID);
+            preparedStatement.setLong(2, korisnikID);
+            preparedStatement.execute();
+            broker.commit();
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            broker.rollback();
+            Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean obrisi(Map<String, Long> mapa) {
+         try {
+            broker.otvoriKonekciju();
+            String upit = "delete from rezervisanje where projekcija=? and korisnik=?";
+            PreparedStatement preparedStatement = broker.getKonekcija().prepareStatement(upit);
+            long projekcijaID = mapa.get("projekcijaID");
+            long korisnikID = mapa.get("korisnikID");
             preparedStatement.setLong(1, projekcijaID);
             preparedStatement.setLong(2, korisnikID);
             preparedStatement.execute();

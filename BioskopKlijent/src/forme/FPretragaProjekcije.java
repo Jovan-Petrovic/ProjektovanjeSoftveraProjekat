@@ -233,9 +233,9 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
             Logger.getLogger(FPretragaProjekcije.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(signal) {
-            JOptionPane.showMessageDialog(this, "Rezeracija je uspesno sacuvana!");
+            JOptionPane.showMessageDialog(this, "Rezeracija za film " + rezervisanje.getProjekcija().getFilm().getNaziv() + " datuma " + rezervisanje.getProjekcija().getDatum() + " je uspesno sacuvana");
         } else {
-            JOptionPane.showMessageDialog(this, "Doslo je do greske, rezervacija nije sacuvana!");
+            JOptionPane.showMessageDialog(this, "Doslo je do greske. Rezeracija za film " + rezervisanje.getProjekcija().getFilm().getNaziv() + " datuma " + rezervisanje.getProjekcija().getDatum() + " nije uspesno sacuvana");
         }
     }//GEN-LAST:event_jbtnRezervisiMestoActionPerformed
 

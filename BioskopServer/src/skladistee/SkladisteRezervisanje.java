@@ -7,6 +7,7 @@ package skladistee;
 
 import domen.Rezervisanje;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -19,4 +20,6 @@ public interface SkladisteRezervisanje {
     public List<Rezervisanje> vratiSva();
 
     public boolean obrisi(Long projekcijaID, Long korisnikID);
+
+    public boolean obrisi(Map<String, Long> mapa);
 }

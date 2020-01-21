@@ -10,7 +10,9 @@ import domen.Korisnik;
 import domen.Projekcija;
 import domen.Rezervisanje;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -201,15 +203,19 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
             }
         }
         boolean signal = false;
+        Map<String,Long> podaci = new HashMap<>();
+        podaci.put("projekcijaID", projekcijaID);
+        podaci.put("korisnikID", k.getId());
         try {
-            signal = Kontroler.getInstanca().obrisiRezervaciju(projekcijaID, k.getId());
+            //signal = Kontroler.getInstanca().obrisiRezervaciju(projekcijaID, k.getId());
+            signal = Kontroler.getInstanca().obrisiRezervaciju(podaci);
         } catch (Exception ex) {
             Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(signal) {
-            JOptionPane.showMessageDialog(this, "Rezervacija filma " + p.getFilm().getNaziv() + " je uspesno obrisana");
+            JOptionPane.showMessageDialog(this, "Rezervacija filma " + p.getFilm().getNaziv() + " datuma " + p.getDatum() + " je uspesno obrisana");
         } else {
-            JOptionPane.showMessageDialog(this, "Doslo je do greske. Rezervacija filma " + p.getFilm().getNaziv() + " nije uspesno obrisana");
+            JOptionPane.showMessageDialog(this, "Doslo je do greske. Rezervacija filma " + p.getFilm().getNaziv() + " datuma " + p.getDatum() + " nije uspesno obrisana");
         }
     }
 }

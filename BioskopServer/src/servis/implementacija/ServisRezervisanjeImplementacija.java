@@ -7,6 +7,7 @@ package servis.implementacija;
 
 import domen.Rezervisanje;
 import java.util.List;
+import java.util.Map;
 import servis.ServisRezervisanje;
 import skladiste.bazapodataka.BazapodatakaSkladisteRezervisanje;
 import skladistee.SkladisteRezervisanje;
@@ -36,6 +37,11 @@ public class ServisRezervisanjeImplementacija implements ServisRezervisanje{
     @Override
     public boolean obrisi(Long projekcijaID, Long korisnikID) throws Exception {
         return skladisteRezervisanje.obrisi(projekcijaID, korisnikID);
+    }
+
+    @Override
+    public boolean obrisi(Map<String, Long> mapa) {
+        return skladisteRezervisanje.obrisi(mapa);
     }
     
 }

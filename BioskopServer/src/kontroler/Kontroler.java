@@ -134,6 +134,10 @@ public class Kontroler {
         return servisFilm.sacuvajFilmReziraglumi(podaci);
     }
 
+    public boolean obrisiRezervaciju(Map<String, Long> mapa) {
+        return servisRezervisanje.obrisi(mapa);
+    }
+
     
 
 }

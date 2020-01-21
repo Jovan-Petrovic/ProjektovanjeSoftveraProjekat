@@ -11,6 +11,7 @@ import domen.Glumi;
 import domen.Korisnik;
 import domen.Projekcija;
 import domen.Reditelj;
+import domen.Rezervisanje;
 import domen.Rezira;
 import domen.Status;
 import java.io.IOException;
@@ -78,6 +79,21 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
                     case Operacije.SACUVAJ_PROJEKCIJU:
                         Projekcija projekcija = (Projekcija) kz.getParametar();
                         so = sacuvajProjekciju(projekcija);
+                        break;
+                    case Operacije.SACUVAJ_REZERVACIJU:
+                        Rezervisanje rezervisanje = (Rezervisanje) kz.getParametar();
+                        so = sacuvajRezervisanje(rezervisanje);
+                        break;
+                    case Operacije.VRATI_REZERVACIJE:
+                        so = vratiSvaRezervisanja();
+                        break;
+                    case Operacije.OTAKZI_REZERVACIJU:
+                        Map<String,Long> mapa = (Map<String,Long>) kz.getParametar();
+                        so = otkaziRezervaciju(mapa);
+                        break;
+                    case Operacije.IZMENI_FILM:
+                        Film film = (Film) kz.getParametar();
+                        so = izmeniFilm(film);
                         break;
                 }
                 posaljiOdgovor(so);
@@ -246,6 +262,59 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
             so.setOdgovor(p);
             so.setStatus(Status.GRESKA);
             so.setPoruka("Projekcija nije uspesno sacuvana");
+        }
+        return so;
+    }
+
+    private ServerskiOdgovor sacuvajRezervisanje(Rezervisanje rezervisanje) throws Exception {
+        ServerskiOdgovor so = new ServerskiOdgovor();
+        Boolean odgovor = Kontroler.getInstanca().sacuvajRezervisanje(rezervisanje);
+        if(odgovor) {
+            so.setOdgovor(true);
+            so.setStatus(Status.U_REDU);
+        } else {
+            so.setOdgovor(false);
+            so.setStatus(Status.GRESKA);
+        }
+        return so;
+    }
+
+    private ServerskiOdgovor vratiSvaRezervisanja() {
+        ServerskiOdgovor so = new ServerskiOdgovor();
+        try {
+            ArrayList<Rezervisanje> rezervisanja = (ArrayList<Rezervisanje>) Kontroler.getInstanca().vratiSvaRezervisanja();
+            so.setOdgovor(rezervisanja);
+            so.setStatus(Status.U_REDU);
+        } catch (Exception ex) {
+             so.setStatus(Status.GRESKA);
+            so.setPoruka("Doslo je do greske prilikom citanja rezervacija iz baze");
+            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return so;
+    }
+
+    private ServerskiOdgovor otkaziRezervaciju(Map<String, Long> mapa) {
+        ServerskiOdgovor so = new ServerskiOdgovor();
+        boolean odgovor = Kontroler.getInstanca().obrisiRezervaciju(mapa);
+        if(odgovor) {
+            so.setOdgovor(true);
+            so.setStatus(Status.U_REDU);
+        } else {
+            so.setOdgovor(false);
+            so.setStatus(Status.GRESKA);
+        }
+        return so;
+    }
+
+    private ServerskiOdgovor izmeniFilm(Film film) {
+        ServerskiOdgovor so = new ServerskiOdgovor();
+        boolean p = Kontroler.getInstanca().izmeniFilm(film);
+        if(p) {
+            so.setOdgovor(p);
+            so.setStatus(Status.U_REDU);
+        } else {
+            so.setOdgovor(p);
+            so.setStatus(Status.GRESKA);
         }
         return so;
     }
