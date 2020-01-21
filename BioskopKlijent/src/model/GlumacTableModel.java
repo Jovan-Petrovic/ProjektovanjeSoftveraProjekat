@@ -18,9 +18,11 @@ public class GlumacTableModel extends AbstractTableModel {
     private final List<Glumac> glumci;
     private final String[] imenaKolona = new String[]{"ID","IME","PREZIME","DRZANLJANSTVO"};
     private final Class[] klaseKolona = new Class[]{Long.class, String.class, String.class, String.class};
+    private boolean izmena;
 
     public GlumacTableModel(List<Glumac> glumci) {
         this.glumci = glumci;
+        izmena = false;
     }
 
     @Override
@@ -84,7 +86,38 @@ public class GlumacTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    
+    public void setIzmena(boolean izmena) {
+        this.izmena = izmena;
+    }
 
+    @Override
+    public boolean isCellEditable(int red, int kolona) {
+        if(izmena) {
+            return kolona == 1 || kolona == 2 || kolona == 3;
+        }
+        return false;
+    }
+
+    @Override
+    public void setValueAt(Object vrednost, int red, int kolona) {
+        Glumac glumac = glumci.get(red);
+        switch(kolona) {
+            case 1:
+                glumac.setIme((String) vrednost);
+                break;
+            case 2:
+                glumac.setPrezime((String) vrednost);
+                break;
+            case 3:
+                glumac.setDrzanljanstvo((String) vrednost);
+                break;
+        }
+    }
+
+    public List<Glumac> getGlumci() {
+        return glumci;
+    }
+
+    
     
 }

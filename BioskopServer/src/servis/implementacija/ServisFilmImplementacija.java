@@ -43,6 +43,11 @@ public class ServisFilmImplementacija implements ServisFilm {
     public Film sacuvajFilmReziraglumi(Map<String, Object> podaci) {
         return skladisteFilm.sacuvajFilmReziraGlumi(podaci);
     }
+
+    @Override
+    public boolean izmeniFilmRediteljeGlumce(Map<String, Object> podaci) {
+        return skladisteFilm.izmeniFilmRediteljeGlumce(podaci);
+    }
     
     
 }

@@ -138,6 +138,10 @@ public class Kontroler {
         return servisRezervisanje.obrisi(mapa);
     }
 
+    public boolean izmeniFilmRediteljeGlumce(Map<String, Object> podaci) {
+        return servisFilm.izmeniFilmRediteljeGlumce(podaci);
+    }
+
     
 
 }

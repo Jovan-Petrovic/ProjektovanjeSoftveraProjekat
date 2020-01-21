@@ -9,6 +9,7 @@ import baza.Broker;
 import domen.Film;
 import domen.Glumac;
 import domen.Glumi;
+import domen.Reditelj;
 import domen.Rezira;
 import domen.Zanr;
 import java.sql.Connection;
@@ -158,6 +159,57 @@ public class BazapodatakaSkladisteFilm  implements SkladisteFilm {
             return null;
         }
         return film;
+    }
+
+    @Override
+    public boolean izmeniFilmRediteljeGlumce(Map<String, Object> podaci) {
+        boolean signal = false;
+        Film film = (Film) podaci.get("film");
+        List<Reditelj> reditelji = (List<Reditelj>) podaci.get("reditelji");
+        List<Glumac> glumci = (List<Glumac>) podaci.get("glumci");
+        try {
+            broker.otvoriKonekciju();
+            String upit = "update film set naziv = ?, trajanje = ?, zanr = ?, godina = ?, jezik = ?, ocenaIMDb = ? where id = ?";
+            Connection konekcija = broker.getKonekcija();
+            PreparedStatement ps = konekcija.prepareStatement(upit);
+            ps.setString(1, film.getNaziv());
+            ps.setInt(2, film.getTrajanje());
+            ps.setString(3, film.getZanr().toString());
+            ps.setInt(4, film.getGodina());
+            ps.setString(5, film.getJezik());
+            ps.setDouble(6, film.getOcenaIMDb());
+            ps.setLong(7, film.getId());
+            ps.executeUpdate();
+            
+            upit = "update reditelj set ime = ?, prezime = ?, drzanljanstvo = ?, brojFilmova = ? where id = ?";
+            for (Reditelj reditelj : reditelji) {
+                ps = broker.getKonekcija().prepareStatement(upit);
+                ps.setString(1, reditelj.getIme());
+                ps.setString(2, reditelj.getPrezime());
+                ps.setString(3, reditelj.getDrzanljanstvo());
+                ps.setInt(4, reditelj.getBrojFilmova());
+                ps.setLong(5, reditelj.getId());
+                ps.executeUpdate();
+            }
+            
+            upit = "update glumac set ime = ?, prezime = ?, drzanljanstvo = ? where id = ?";
+            for (Glumac glumac : glumci) {
+                ps = broker.getKonekcija().prepareStatement(upit);
+                ps.setString(1, glumac.getIme());
+                ps.setString(2, glumac.getPrezime());
+                ps.setString(3, glumac.getDrzanljanstvo());
+                ps.setLong(4, glumac.getId());
+                ps.executeUpdate();
+            }
+            
+            broker.commit();
+            konekcija.close();
+            signal = true;
+        } catch (SQLException ex) {
+            broker.rollback();
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return signal;
     }
 
     

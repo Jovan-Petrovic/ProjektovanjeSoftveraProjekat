@@ -309,6 +309,18 @@ public class Kontroler {
         return true;
     }
 
+    public boolean izmeniFilmRediteljeGlumce(Map<String, Object> podaci) throws IOException, ClassNotFoundException {
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacije.IZMENI_FILM_REDITELJE_GLUMCE);
+        kz.setParametar(podaci);
+        posaljiZahtev(kz);
+        ServerskiOdgovor so = primiOdgovor();
+        if(so.getStatus().equals(Status.GRESKA)) {
+            return false;
+        }
+        return true;
+    }
+
     
 
 }

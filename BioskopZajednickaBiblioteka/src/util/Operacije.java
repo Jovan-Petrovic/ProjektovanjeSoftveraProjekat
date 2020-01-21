@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @author Bron Zilar
  */
 public class Operacije implements Serializable {
+    
     public static final int VRATI_KORISNIKE = 1;
     public static final int VRATI_FILMOVE = 2;
     public static final int VRATI_REZIRANJA = 3;
@@ -26,6 +27,6 @@ public class Operacije implements Serializable {
     public static final int VRATI_REZERVACIJE = 12;
     public static final int OTAKZI_REZERVACIJU = 13;
     public static final int IZMENI_FILM = 14;
-    
-    
+    public static final int IZMENI_FILM_REDITELJE_GLUMCE = 15;
+ 
 }

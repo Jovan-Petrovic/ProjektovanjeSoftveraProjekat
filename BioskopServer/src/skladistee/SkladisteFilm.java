@@ -23,5 +23,7 @@ public interface SkladisteFilm {
 
     public Film sacuvajFilmReziraGlumi(Map<String, Object> podaci);
 
+    public boolean izmeniFilmRediteljeGlumce(Map<String, Object> podaci);
+
     
 }

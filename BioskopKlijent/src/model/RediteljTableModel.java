@@ -20,9 +20,11 @@ public class RediteljTableModel extends AbstractTableModel {
     private final List<Reditelj> reditelji;
     private final String[] imenaKolona = new String[]{"ID","IME","PREZIME","DRZANLJANSTVO","BROJ FILMOVA"};
     private final Class[] klaseKolona = new Class[]{Long.class, String.class, String.class, String.class, Integer.class};
+    private boolean izmena;
 
     public RediteljTableModel(List<Reditelj> reditelji) {
         this.reditelji = reditelji;
+        izmena = false;
     }
 
     @Override
@@ -91,6 +93,36 @@ public class RediteljTableModel extends AbstractTableModel {
     public List<Reditelj> getReditelji() {
         return reditelji;
     }
-    
-    
+
+    public void setIzmena(boolean izmena) {
+        this.izmena = izmena;
+    }
+
+    @Override
+    public boolean isCellEditable(int red, int kolona) {
+        if(izmena) {
+            return kolona == 1 || kolona == 2 || kolona == 3 || kolona == 4;
+        }
+        return false;
+    }
+
+    @Override
+    public void setValueAt(Object vrednost, int red, int kolona) {
+        Reditelj reditelj = reditelji.get(red);
+        switch(kolona) {
+            case 1:
+                reditelj.setIme((String) vrednost);
+                break;
+            case 2:
+                reditelj.setPrezime((String) vrednost);
+                break;
+            case 3:
+                reditelj.setDrzanljanstvo((String) vrednost);
+                break;
+            case 4:
+                reditelj.setBrojFilmova((int) vrednost);
+                break;
+        }
+    }
+ 
 }

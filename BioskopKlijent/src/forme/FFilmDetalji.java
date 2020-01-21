@@ -13,7 +13,9 @@ import domen.Rezira;
 import domen.Zanr;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -325,9 +327,19 @@ public class FFilmDetalji extends javax.swing.JDialog {
         double ocenaIMDb = Double.parseDouble(jtxtOcenaIMDb.getText().trim());
         
         Film film = new Film(id, naziv, trajanje, zanr, godina, jezik, ocenaIMDb);
+        
+        RediteljTableModel rtm = (RediteljTableModel) jtblReditelji.getModel();
+        List<Reditelj> reditelji = rtm.getReditelji();
+        GlumacTableModel gtm = (GlumacTableModel) jtblGlumci.getModel();
+        List<Glumac> glumci = gtm.getGlumci();
+        Map<String,Object> podaci = new HashMap<>();
+        podaci.put("film", film);
+        podaci.put("reditelji", reditelji);
+        podaci.put("glumci", glumci);
         boolean status = false;
         try {
-            status = Kontroler.getInstanca().izmeniFilm(film);
+            //status = Kontroler.getInstanca().izmeniFilm(film);
+            status = Kontroler.getInstanca().izmeniFilmRediteljeGlumce(podaci);
         } catch (IOException ex) {
             Logger.getLogger(FFilmDetalji.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -415,7 +427,9 @@ public class FFilmDetalji extends javax.swing.JDialog {
                 }
             }
         }
-        jtblReditelji.setModel(new RediteljTableModel(reditelji));
+        RediteljTableModel rtm = new RediteljTableModel(reditelji);
+        rtm.setIzmena(true);
+        jtblReditelji.setModel(rtm);
         
     }
 
@@ -433,7 +447,9 @@ public class FFilmDetalji extends javax.swing.JDialog {
                 }
             }
         }
-        jtblGlumci.setModel(new GlumacTableModel(glumci));
+        GlumacTableModel gtm = new GlumacTableModel(glumci);
+        gtm.setIzmena(true);
+        jtblGlumci.setModel(gtm);
     }
 
 }
