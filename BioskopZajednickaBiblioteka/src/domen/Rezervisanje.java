@@ -49,22 +49,22 @@ public class Rezervisanje implements Serializable, DomenskiObjekat {
 
     @Override
     public String getImeTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "rezervisanje";
     }
 
     @Override
     public String getImenaAtributaZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "projekcija, korisnik, datumRezervacije";
     }
 
     @Override
     public String getVrednostiAtributaZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return projekcija.getId()+", "+korisnik.getId()+", '"+new java.sql.Date(datumRezervacije.getTime())+"'";
     }
 
     @Override
     public boolean isAutoincrement() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
     @Override

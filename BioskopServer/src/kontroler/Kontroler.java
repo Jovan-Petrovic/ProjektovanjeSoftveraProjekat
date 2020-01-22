@@ -19,6 +19,7 @@ import java.util.Map;
 import logika.SOUbaciFilm;
 import logika.SOUbaciGlumi;
 import logika.SOUbaciProjekciju;
+import logika.SOUbaciRezervisanje;
 import logika.SOUbaciRezira;
 import logika.SistemskaOperacija;
 import servis.ServisFilm;
@@ -129,8 +130,13 @@ public class Kontroler {
         return servisKorisnik.vratiSve();
     }
 
-    public boolean sacuvajRezervisanje(Rezervisanje rezervisanje) throws Exception {
-        return servisRezervisanje.sacuvaj(rezervisanje);
+//    public boolean sacuvajRezervisanje(Rezervisanje rezervisanje) throws Exception {
+//        return servisRezervisanje.sacuvaj(rezervisanje);
+//    }
+    
+    public void sacuvajRezervisanje(Rezervisanje rezervisanje) throws Exception {
+        SistemskaOperacija so = new SOUbaciRezervisanje(rezervisanje);
+        so.execute();
     }
 
     public List<Rezervisanje> vratiSvaRezervisanja() throws Exception {

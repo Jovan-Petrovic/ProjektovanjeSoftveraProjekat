@@ -293,13 +293,27 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         return so;
     }
 
+//    private ServerskiOdgovor sacuvajRezervisanje(Rezervisanje rezervisanje) throws Exception {
+//        ServerskiOdgovor so = new ServerskiOdgovor();
+//        Boolean odgovor = Kontroler.getInstanca().sacuvajRezervisanje(rezervisanje);
+//        if(odgovor) {
+//            so.setOdgovor(true);
+//            so.setStatus(Status.U_REDU);
+//        } else {
+//            so.setOdgovor(false);
+//            so.setStatus(Status.GRESKA);
+//        }
+//        return so;
+//    }
+    
     private ServerskiOdgovor sacuvajRezervisanje(Rezervisanje rezervisanje) throws Exception {
         ServerskiOdgovor so = new ServerskiOdgovor();
-        Boolean odgovor = Kontroler.getInstanca().sacuvajRezervisanje(rezervisanje);
-        if(odgovor) {
-            so.setOdgovor(true);
+        try {
+            Kontroler.getInstanca().sacuvajRezervisanje(rezervisanje);
             so.setStatus(Status.U_REDU);
-        } else {
+            so.setOdgovor(true);
+        } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
             so.setOdgovor(false);
             so.setStatus(Status.GRESKA);
         }
