@@ -93,27 +93,27 @@ public class Film implements Serializable, DomenskiObjekat {
 
     @Override
     public String getImeTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "film";
     }
 
     @Override
     public String getImenaAtributaZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "naziv, trajanje, zanr, godina, jezik, ocenaIMDb";
     }
 
     @Override
     public String getVrednostiAtributaZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         return "'"+naziv+"', "+trajanje+", '"+zanr.toString()+"', "+godina+", '"+jezik+"', "+ocenaIMDb;
     }
 
     @Override
     public boolean isAutoincrement() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return true;
     }
 
     @Override
     public void setObjekatID(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setId(id);
     }
     
     

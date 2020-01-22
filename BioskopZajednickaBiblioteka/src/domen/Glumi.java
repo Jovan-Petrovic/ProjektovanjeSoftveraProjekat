@@ -38,22 +38,22 @@ public class Glumi implements Serializable, DomenskiObjekat {
 
     @Override
     public String getImeTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "glumi";
     }
 
     @Override
     public String getImenaAtributaZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "film, glumac";
     }
 
     @Override
     public String getVrednostiAtributaZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return film.getId()+", "+glumac.getId();
     }
 
     @Override
     public boolean isAutoincrement() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
     @Override

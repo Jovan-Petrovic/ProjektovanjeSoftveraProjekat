@@ -211,14 +211,27 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         return so;
     }
 
+//    private ServerskiOdgovor sacuvajFilmReziraGlumi(Map<String, Object> podaci) {
+//        ServerskiOdgovor so = new ServerskiOdgovor();
+//        Film film = Kontroler.getInstanca().sacuvajFilmReziraGlumi(podaci);
+//        if(film != null) {
+//            so.setOdgovor(film);
+//            so.setStatus(Status.U_REDU);
+//        } else {
+//            so.setOdgovor(film);
+//            so.setStatus(Status.GRESKA);
+//        }
+//        return so;
+//    }
+    
     private ServerskiOdgovor sacuvajFilmReziraGlumi(Map<String, Object> podaci) {
         ServerskiOdgovor so = new ServerskiOdgovor();
-        Film film = Kontroler.getInstanca().sacuvajFilmReziraGlumi(podaci);
-        if(film != null) {
-            so.setOdgovor(film);
+        try {
+            Film f = Kontroler.getInstanca().sacuvajFilmReziraGlumi(podaci);
             so.setStatus(Status.U_REDU);
-        } else {
-            so.setOdgovor(film);
+            so.setOdgovor(f);
+        } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
             so.setStatus(Status.GRESKA);
         }
         return so;

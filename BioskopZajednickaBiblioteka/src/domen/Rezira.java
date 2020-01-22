@@ -38,22 +38,22 @@ public class Rezira implements Serializable, DomenskiObjekat {
 
     @Override
     public String getImeTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "rezira";
     }
 
     @Override
     public String getImenaAtributaZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "film, reditelj";
     }
 
     @Override
     public String getVrednostiAtributaZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return film.getId()+", "+reditelj.getId();
     }
 
     @Override
     public boolean isAutoincrement() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return false;
     }
 
     @Override

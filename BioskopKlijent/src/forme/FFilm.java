@@ -349,7 +349,12 @@ public class FFilm extends javax.swing.JDialog {
             podaci.put("glumi", glumci);
             
             film = Kontroler.getInstanca().sacuvajFilmReziraGlumi(podaci);
-            JOptionPane.showMessageDialog(this, "Film je sacuvan sa id-em: " + film.getId());
+            if(film != null) {
+                JOptionPane.showMessageDialog(this, "Film je sacuvan sa id-em: " + film.getId());
+            } else {
+                JOptionPane.showMessageDialog(this, "Doslo je do greske. Film nije sacuvan.");
+                return;
+            }
             f = film;
         } catch (Exception ex) {
             Logger.getLogger(FFilm.class.getName()).log(Level.SEVERE, null, ex);

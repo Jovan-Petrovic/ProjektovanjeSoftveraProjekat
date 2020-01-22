@@ -13,10 +13,13 @@ import domen.Projekcija;
 import domen.Reditelj;
 import domen.Rezervisanje;
 import domen.Rezira;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import logika.SOUbaciFilm;
+import logika.SOUbaciGlumi;
 import logika.SOUbaciProjekciju;
+import logika.SOUbaciRezira;
 import logika.SistemskaOperacija;
 import servis.ServisFilm;
 import servis.ServisGlumac;
@@ -138,8 +141,30 @@ public class Kontroler {
         return servisRezervisanje.obrisi(projekcijaID, korisnikID);
     }
 
-    public Film sacuvajFilmReziraGlumi(Map<String, Object> podaci) {
-        return servisFilm.sacuvajFilmReziraglumi(podaci);
+//    public Film sacuvajFilmReziraGlumi(Map<String, Object> podaci) {
+//        return servisFilm.sacuvajFilmReziraglumi(podaci);
+//    }
+    
+    public Film sacuvajFilmReziraGlumi(Map<String, Object> podaci) throws Exception {
+        Film film = (Film) podaci.get("film");
+        ArrayList<Rezira> reziranja = (ArrayList<Rezira>) podaci.get("rezira");
+        ArrayList<Glumi> glumljenja = (ArrayList<Glumi>) podaci.get("glumi");
+        SistemskaOperacija so = new SOUbaciFilm(film);
+        so.execute();
+        
+        for (Rezira rezira : reziranja) {
+            rezira.setFilm(film);
+            SistemskaOperacija so1 = new SOUbaciRezira(rezira);
+            so1.execute();
+        }
+        
+        for (Glumi glumi : glumljenja) {
+            glumi.setFilm(film);
+            SistemskaOperacija so2 = new SOUbaciGlumi(glumi);
+            so2.execute();
+        }
+        
+        return film;
     }
 
     public boolean obrisiRezervaciju(Map<String, Long> mapa) {
