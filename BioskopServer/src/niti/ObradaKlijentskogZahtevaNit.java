@@ -253,13 +253,28 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         return so;
     }
 
-    private ServerskiOdgovor sacuvajProjekciju(Projekcija projekcija) throws Exception {
+//    private ServerskiOdgovor sacuvajProjekciju(Projekcija projekcija) throws Exception {
+//        ServerskiOdgovor so = new ServerskiOdgovor();
+//        Projekcija p = Kontroler.getInstanca().sacuvajProjekciju(projekcija);
+//        so.setOdgovor(p);
+//        if(p != null) {
+//            so.setStatus(Status.U_REDU);
+//        } else {
+//            so.setStatus(Status.GRESKA);
+//        }
+//        return so;
+//    }
+    
+    private ServerskiOdgovor sacuvajProjekciju(Projekcija projekcija){
         ServerskiOdgovor so = new ServerskiOdgovor();
-        Projekcija p = Kontroler.getInstanca().sacuvajProjekciju(projekcija);
-        so.setOdgovor(p);
-        if(p != null) {
+        try {
+            Kontroler.getInstanca().sacuvajProjekciju(projekcija);
             so.setStatus(Status.U_REDU);
-        } else {
+            so.setOdgovor(projekcija);
+            so.setPoruka("Projekcija je uspeno sacuvana");
+        } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
+            so.setPoruka("Doslo je do greske. Projekcija nije uspesno sacuvana.");
             so.setStatus(Status.GRESKA);
         }
         return so;

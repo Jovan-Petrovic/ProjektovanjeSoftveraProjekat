@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Bron Zilar
  */
-public class Rezervisanje implements Serializable {
+public class Rezervisanje implements Serializable, DomenskiObjekat {
     private Date datumRezervacije;
     private Korisnik korisnik;
     private Projekcija projekcija;
@@ -45,6 +45,31 @@ public class Rezervisanje implements Serializable {
 
     public void setKorisnik(Korisnik korisnik) {
         this.korisnik = korisnik;
+    }
+
+    @Override
+    public String getImeTabele() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getImenaAtributaZaUbacivanje() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getVrednostiAtributaZaUbacivanje() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean isAutoincrement() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setObjekatID(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

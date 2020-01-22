@@ -5,12 +5,15 @@
  */
 package baza;
 
+import domen.DomenskiObjekat;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,6 +77,27 @@ public class Broker {
 
     public Connection getKonekcija() {
         return konekcija;
+    }
+
+    public DomenskiObjekat ubaci(DomenskiObjekat odo) throws Exception {
+        try {
+            String upit = "insert into "+odo.getImeTabele()+" ("+odo.getImenaAtributaZaUbacivanje()+") values ("+odo.getVrednostiAtributaZaUbacivanje()+")";
+            System.out.println(upit);
+            Statement statement = konekcija.createStatement();
+            statement.executeUpdate(upit, Statement.RETURN_GENERATED_KEYS);
+            
+            if(odo.isAutoincrement()) {
+                ResultSet rs=statement.getGeneratedKeys();
+                if(rs.next()){
+                    odo.setObjekatID(rs.getLong(1));
+                }
+            }           
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new Exception(ex.getLocalizedMessage()+"Greska prilikom kreiranja "+odo.getImeTabele()+" u bazi!\n");
+        }
+        return odo;
     }
     
     

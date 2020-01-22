@@ -15,6 +15,9 @@ import domen.Rezervisanje;
 import domen.Rezira;
 import java.util.List;
 import java.util.Map;
+import logika.SOUbaciFilm;
+import logika.SOUbaciProjekciju;
+import logika.SistemskaOperacija;
 import servis.ServisFilm;
 import servis.ServisGlumac;
 import servis.ServisGlumi;
@@ -82,8 +85,13 @@ public class Kontroler {
         return servisFilm.vratiSve();
     }
 
-    public Projekcija sacuvajProjekciju(Projekcija projekcija) throws Exception {
-        return servisProjekcija.sacuvaj(projekcija);
+//    public Projekcija sacuvajProjekciju(Projekcija projekcija) throws Exception {
+//        return servisProjekcija.sacuvaj(projekcija);
+//    }
+    
+    public void sacuvajProjekciju(Projekcija projekcija) throws Exception {
+        SistemskaOperacija so = new SOUbaciProjekciju(projekcija);
+        so.execute();
     }
 
     public List<Projekcija> vratiSveProjekcije() throws Exception {

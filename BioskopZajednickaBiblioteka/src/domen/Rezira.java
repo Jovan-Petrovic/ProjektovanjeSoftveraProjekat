@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author Bron Zilar
  */
-public class Rezira implements Serializable {
+public class Rezira implements Serializable, DomenskiObjekat {
     private Film film;
     private Reditelj reditelj;
 
@@ -34,6 +34,31 @@ public class Rezira implements Serializable {
 
     public void setFilm(Film film) {
         this.film = film;
+    }
+
+    @Override
+    public String getImeTabele() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getImenaAtributaZaUbacivanje() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getVrednostiAtributaZaUbacivanje() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean isAutoincrement() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setObjekatID(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

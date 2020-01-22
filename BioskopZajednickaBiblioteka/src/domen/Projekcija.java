@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Bron Zilar
  */
-public class Projekcija implements Serializable {
+public class Projekcija implements Serializable, DomenskiObjekat {
     private Long id;
     private Date datum;
     private String sala;
@@ -57,6 +57,31 @@ public class Projekcija implements Serializable {
 
     public void setSala(String sala) {
         this.sala = sala;
+    }
+
+    @Override
+    public String getImeTabele() {
+        return "projekcija";
+    }
+
+    @Override
+    public String getImenaAtributaZaUbacivanje() {
+        return "datum, sala, filmID";
+    }
+
+    @Override
+    public String getVrednostiAtributaZaUbacivanje() {
+        return "'"+new java.sql.Date(datum.getTime())+"', '"+sala+"', "+film.getId();
+    }
+
+    @Override
+    public boolean isAutoincrement() {
+        return true;
+    }
+
+    @Override
+    public void setObjekatID(Long id) {
+        setId(id);
     }
 
     
