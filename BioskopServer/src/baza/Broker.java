@@ -5,9 +5,13 @@
  */
 package baza;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,9 +23,19 @@ public class Broker {
     
     private Connection konekcija;
     
-    public void otvoriKonekciju() {
+    public void otvoriKonekciju() throws FileNotFoundException, IOException, ClassNotFoundException {
         try {
-            konekcija = DriverManager.getConnection("jdbc:mysql://localhost:3306/bioskop", "root", "");
+            FileInputStream in=new FileInputStream("db.properties");
+            Properties props=new Properties();
+            props.load(in);
+            String driver=props.getProperty("driver");
+            String url=props.getProperty("url");
+            String user=props.getProperty("user");
+            String password=props.getProperty("password");
+            
+            Class.forName(driver);
+            
+            konekcija = DriverManager.getConnection(url, user, password);
             konekcija.setAutoCommit(false);
         } catch (SQLException ex) {
             Logger.getLogger(Broker.class.getName()).log(Level.SEVERE, null, ex);
@@ -29,26 +43,32 @@ public class Broker {
     }
     
     public void zatvoriKonekciju() {
-        try {
-            konekcija.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Broker.class.getName()).log(Level.SEVERE, null, ex);
+        if(konekcija != null) {
+            try {
+                konekcija.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Broker.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
     public void commit() {
-        try {
-            konekcija.commit();
-        } catch (SQLException ex) {
-            Logger.getLogger(Broker.class.getName()).log(Level.SEVERE, null, ex);
+        if(konekcija != null) {
+            try {
+                konekcija.commit();
+            } catch (SQLException ex) {
+                Logger.getLogger(Broker.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
     public void rollback() {
-        try {
-            konekcija.rollback();
-        } catch (SQLException ex) {
-            Logger.getLogger(Broker.class.getName()).log(Level.SEVERE, null, ex);
+        if(konekcija != null) {
+            try {
+                konekcija.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(Broker.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
