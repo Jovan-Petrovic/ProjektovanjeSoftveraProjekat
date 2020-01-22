@@ -7,6 +7,7 @@ package skladiste.bazapodataka;
 
 import baza.Broker;
 import domen.Korisnik;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,6 +48,10 @@ public class BazapodatakaSkladisteKorisnik implements SkladisteKorisnik{
             statement.close();
             rs.close();
         } catch (SQLException ex) {
+            Logger.getLogger(BazapodatakaSkladisteKorisnik.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteKorisnik.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(BazapodatakaSkladisteKorisnik.class.getName()).log(Level.SEVERE, null, ex);
         }
         return korisnici;

@@ -11,6 +11,7 @@ import domen.Glumac;
 import domen.Glumi;
 import domen.Reditelj;
 import domen.Rezira;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,6 +45,10 @@ public class BazapodatakaSkladisteGlumi implements SkladisteGlumi {
             preparedStatement.close();
         } catch (SQLException ex) {
             broker.rollback();
+            Logger.getLogger(BazapodatakaSkladisteGlumi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteGlumi.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(BazapodatakaSkladisteGlumi.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

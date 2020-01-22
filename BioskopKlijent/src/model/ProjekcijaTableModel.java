@@ -112,6 +112,10 @@ public class ProjekcijaTableModel extends AbstractTableModel {
     public Projekcija vratiProjekciju(int red) {
         return projekcije.get(red);
     }
+
+    public Projekcija nadjiProjekciju(int selektovanRed) {
+        return projekcije.get(selektovanRed);
+    }
     
     
 }

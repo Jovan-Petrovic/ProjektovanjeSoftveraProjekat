@@ -8,6 +8,7 @@ package skladiste.bazapodataka;
 import baza.Broker;
 import domen.Glumac;
 import domen.Reditelj;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,6 +48,10 @@ public class BazapodatakaSkladisteGlumac implements SkladisteGlumac{
             rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(BazaPodatakaSkladisteReditelj.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteGlumac.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BazapodatakaSkladisteGlumac.class.getName()).log(Level.SEVERE, null, ex);
         }
         return glumci;
     }

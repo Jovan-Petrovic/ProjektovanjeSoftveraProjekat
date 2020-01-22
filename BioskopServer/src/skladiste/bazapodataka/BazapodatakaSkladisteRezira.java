@@ -9,6 +9,7 @@ import baza.Broker;
 import domen.Film;
 import domen.Reditelj;
 import domen.Rezira;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,6 +43,10 @@ public class BazapodatakaSkladisteRezira implements SkladisteRezira{
             preparedStatement.close();
         } catch (SQLException ex) {
             broker.rollback();
+            Logger.getLogger(BazapodatakaSkladisteRezira.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteRezira.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(BazapodatakaSkladisteRezira.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

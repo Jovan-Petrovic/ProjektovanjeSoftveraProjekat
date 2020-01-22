@@ -217,11 +217,9 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         if(film != null) {
             so.setOdgovor(film);
             so.setStatus(Status.U_REDU);
-            so.setPoruka("Uspesno sacuvan film sa Id-em: " + film.getId());
         } else {
             so.setOdgovor(film);
             so.setStatus(Status.GRESKA);
-            so.setPoruka("film nije uspesno sacuvan");
         }
         return so;
     }

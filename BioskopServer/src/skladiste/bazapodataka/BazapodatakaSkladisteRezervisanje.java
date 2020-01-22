@@ -11,6 +11,7 @@ import domen.Korisnik;
 import domen.Projekcija;
 import domen.Rezervisanje;
 import domen.Zanr;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -51,6 +52,10 @@ public class BazapodatakaSkladisteRezervisanje implements SkladisteRezervisanje{
             preparedStatement.close();
         } catch (SQLException ex) {
             broker.rollback();
+            Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
         }
         return signal;
@@ -118,6 +123,10 @@ public class BazapodatakaSkladisteRezervisanje implements SkladisteRezervisanje{
             broker.rollback();
             Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
             return false;
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
     }
@@ -139,6 +148,10 @@ public class BazapodatakaSkladisteRezervisanje implements SkladisteRezervisanje{
             broker.rollback();
             Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
             return false;
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BazapodatakaSkladisteRezervisanje.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
     }

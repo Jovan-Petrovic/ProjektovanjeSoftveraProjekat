@@ -7,6 +7,7 @@ package skladiste.bazapodataka;
 
 import baza.Broker;
 import domen.Reditelj;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,6 +47,10 @@ public class BazaPodatakaSkladisteReditelj implements SkladisteReditelj {
             statement.close();
             rs.close();
         } catch (SQLException ex) {
+            Logger.getLogger(BazaPodatakaSkladisteReditelj.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BazaPodatakaSkladisteReditelj.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(BazaPodatakaSkladisteReditelj.class.getName()).log(Level.SEVERE, null, ex);
         }
         return reditelji;

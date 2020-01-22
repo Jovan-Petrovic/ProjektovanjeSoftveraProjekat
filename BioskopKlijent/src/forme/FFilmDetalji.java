@@ -417,7 +417,7 @@ public class FFilmDetalji extends javax.swing.JDialog {
         List<Rezira> reziranja = Kontroler.getInstanca().vratiSvaReziranja();
         List<Reditelj> reditelji = new ArrayList<>();
         for (Rezira rezira : reziranja) {
-            if(rezira.getFilm().getId().equals(film.getId())) {
+            if(rezira.getFilm().getId().equals(this.film.getId())) {
                 Long rediteljID = rezira.getReditelj().getId();
                 List<Reditelj> sviSvireditelji = Kontroler.getInstanca().vratiSveReditelje();
                 for (Reditelj reditelj : sviSvireditelji) {
@@ -437,7 +437,7 @@ public class FFilmDetalji extends javax.swing.JDialog {
         List<Glumi> uloge = Kontroler.getInstanca().vratiSveUloge();
         List<Glumac> glumci = new ArrayList<>();
         for (Glumi glumi : uloge) {
-            if(glumi.getFilm().getId().equals(film.getId())) {
+            if(glumi.getFilm().getId().equals(this.film.getId())) {
                 Long glumacID = glumi.getGlumac().getId();
                 List<Glumac> sviGlumci = Kontroler.getInstanca().vratiSveGlumce();
                 for (Glumac glumac : sviGlumci) {

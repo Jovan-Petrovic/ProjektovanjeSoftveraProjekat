@@ -8,6 +8,7 @@ package skladiste.bazapodataka;
 import baza.Broker;
 import domen.Film;
 import domen.Projekcija;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -47,6 +48,10 @@ public class BazapodatakaSkladisteProjekcija implements SkladisteProjekcija {
             preparedStatement.close();
         } catch (SQLException ex) {
             Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
         }
         return projekcija;
     }
@@ -84,6 +89,10 @@ public class BazapodatakaSkladisteProjekcija implements SkladisteProjekcija {
             rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
         }
         return projekcije;
     }
@@ -102,6 +111,10 @@ public class BazapodatakaSkladisteProjekcija implements SkladisteProjekcija {
             broker.rollback();
             Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
             return false;
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
         }
         return true;
     }

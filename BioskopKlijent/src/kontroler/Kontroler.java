@@ -279,7 +279,6 @@ public class Kontroler {
         kz.setParametar(podaci);
         posaljiZahtev(kz);
         ServerskiOdgovor so = primiOdgovor();
-        JOptionPane.showMessageDialog(null, so.getPoruka());
         return (Film) so.getOdgovor();
     }
 

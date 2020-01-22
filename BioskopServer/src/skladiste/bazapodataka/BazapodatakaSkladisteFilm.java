@@ -12,6 +12,7 @@ import domen.Glumi;
 import domen.Reditelj;
 import domen.Rezira;
 import domen.Zanr;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -54,6 +55,10 @@ public class BazapodatakaSkladisteFilm  implements SkladisteFilm {
         } catch (SQLException ex) {
             broker.rollback();
             Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
         return film;
     }
@@ -82,6 +87,10 @@ public class BazapodatakaSkladisteFilm  implements SkladisteFilm {
             rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
         return filmovi;
     }
@@ -107,6 +116,10 @@ public class BazapodatakaSkladisteFilm  implements SkladisteFilm {
             signal = true;
         } catch (SQLException ex) {
             broker.rollback();
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
         return signal;
@@ -157,6 +170,10 @@ public class BazapodatakaSkladisteFilm  implements SkladisteFilm {
             broker.rollback();
             Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
             return null;
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
         return film;
     }
@@ -207,6 +224,10 @@ public class BazapodatakaSkladisteFilm  implements SkladisteFilm {
             signal = true;
         } catch (SQLException ex) {
             broker.rollback();
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
         }
         return signal;

@@ -182,8 +182,8 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         int selektovanRed = jtblProjekcije.getSelectedRow();
         TableModel tm = jtblProjekcije.getModel();
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) tm;
-        Long id = (Long) ptm.getValueAt(selektovanRed, 0);
-        Projekcija projekcija = ptm.nadjiProjekciju(id);
+        //Long id = (Long) ptm.getValueAt(selektovanRed, 0);
+        Projekcija projekcija = ptm.nadjiProjekciju(selektovanRed);
         JDialog forma = new FProjekcijaDetalji(this, true, projekcija);
         forma.setVisible(true);
         
