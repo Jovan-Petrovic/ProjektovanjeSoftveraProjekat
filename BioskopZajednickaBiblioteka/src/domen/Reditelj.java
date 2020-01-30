@@ -7,7 +7,11 @@ package domen;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +24,9 @@ public class Reditelj implements Serializable, DomenskiObjekat {
     private String drzanljanstvo;
     private int brojFilmova;
 
+    public Reditelj() {
+    }
+    
     public Reditelj(Long id, String ime, String prezime, String drzanljanstvo, int brojFilmova) {
         this.id = id;
         this.ime = ime;
@@ -75,7 +82,7 @@ public class Reditelj implements Serializable, DomenskiObjekat {
 
     @Override
     public String getImeTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "reditelj";
     }
 
     @Override
@@ -100,7 +107,21 @@ public class Reditelj implements Serializable, DomenskiObjekat {
 
     @Override
     public List<DomenskiObjekat> ucitajListu(ResultSet rs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<DomenskiObjekat> reditelji = new ArrayList<>();
+        try {
+            while(rs.next()) {
+                Long id = rs.getLong("id");
+                String ime = rs.getString("ime");
+                String prezime = rs.getString("prezime");
+                String drzanljanstvo = rs.getString("drzanljanstvo");
+                int brojFilmova = rs.getInt("brojFilmova");
+                Reditelj reditelj = new Reditelj(id, ime, prezime, drzanljanstvo, brojFilmova);
+                reditelji.add(reditelj);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Film.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return reditelji;
     }
 
     @Override
@@ -110,6 +131,26 @@ public class Reditelj implements Serializable, DomenskiObjekat {
 
     @Override
     public String vratiUslovZaJoin() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String vratiJoinTabelu2() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String vratiUslovZaJoin2() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String vratiJoinTabelu3() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String vratiUslovZaJoin3() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -7,7 +7,11 @@ package domen;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,6 +20,9 @@ import java.util.List;
 public class Glumi implements Serializable, DomenskiObjekat {
     private Film film;
     private Glumac glumac;
+
+    public Glumi() {
+    }
 
     public Glumi(Film film, Glumac glumac) {
         this.film = film;
@@ -65,16 +72,61 @@ public class Glumi implements Serializable, DomenskiObjekat {
 
     @Override
     public List<DomenskiObjekat> ucitajListu(ResultSet rs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<DomenskiObjekat> uloge = new ArrayList<>();
+        try {
+            while(rs.next()) {
+                Long idFilm = rs.getLong("film.id");
+                String naziv = rs.getString("film.naziv");
+                int trajanje = rs.getInt("film.trajanje");
+                Zanr zanr = Zanr.valueOf(rs.getString("film.zanr"));
+                int godina = rs.getInt("film.godina");
+                String jezik = rs.getString("film.jezik");
+                double ocenaIMDb = rs.getInt("film.ocenaIMDb");
+                Film film = new Film(idFilm, naziv, trajanje, zanr, godina, jezik, ocenaIMDb);
+                
+                Long idGlumac = rs.getLong("glumac.id");
+                String ime = rs.getString("glumac.ime");
+                String prezime = rs.getString("glumac.prezime");
+                String drzanljanstvo = rs.getString("glumac.drzanljanstvo");
+                Glumac glumac = new Glumac(idGlumac, ime, prezime, drzanljanstvo);
+                
+                Glumi glumi = new Glumi(film, glumac);
+                
+                uloge.add(glumi);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Rezira.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return uloge;
     }
 
     @Override
     public String vratiJoinTabelu() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "film";
     }
 
     @Override
     public String vratiUslovZaJoin() {
+        return "glumi.film=film.id";
+    }
+
+    @Override
+    public String vratiJoinTabelu2() {
+        return "glumac";
+    }
+
+    @Override
+    public String vratiUslovZaJoin2() {
+        return "glumi.glumac=glumac.id";
+    }
+
+    @Override
+    public String vratiJoinTabelu3() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String vratiUslovZaJoin3() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

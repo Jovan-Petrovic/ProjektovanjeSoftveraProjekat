@@ -24,7 +24,12 @@ import logika.SOUbaciProjekciju;
 import logika.SOUbaciRezervisanje;
 import logika.SOUbaciRezira;
 import logika.SOVratiFilmove;
+import logika.SOVratiGlumce;
 import logika.SOVratiProjekcije;
+import logika.SOVratiReditelje;
+import logika.SOVratiRezervacije;
+import logika.SOVratiReziranja;
+import logika.SOVratiUloge;
 import logika.SistemskaOperacija;
 import servis.ServisFilm;
 import servis.ServisGlumac;
@@ -81,12 +86,24 @@ public class Kontroler {
         return servisFilm.sacuvaj(film);
     }
     
-    public List<Reditelj> vratiSveReditelje() throws Exception {
-        return servisReditelj.vratiSve();
+//    public List<Reditelj> vratiSveReditelje() throws Exception {
+//        return servisReditelj.vratiSve();
+//    }
+    
+    public List<DomenskiObjekat> vratiSveReditelje() throws Exception {
+        SistemskaOperacija so = new SOVratiReditelje(new Reditelj());
+        so.execute();
+        return ((SOVratiReditelje)so).getLista();
     }
 
-    public List<Glumac> vratiSveGlumce() throws Exception {
-        return servisGlumac.vratiSve();
+//    public List<Glumac> vratiSveGlumce() throws Exception {
+//        return servisGlumac.vratiSve();
+//    }
+    
+    public List<DomenskiObjekat> vratiSveGlumce() throws Exception {
+        SistemskaOperacija so = new SOVratiGlumce(new Glumac());
+        so.execute();
+        return ((SOVratiGlumce)so).getLista();
     }
 
 //    public List<Film> vratiSveFilmove() throws Exception {
@@ -130,12 +147,24 @@ public class Kontroler {
         servisGlumi.sacuvaj(glumi);
     }
 
-    public List<Rezira> vratiSvaReziranja() throws Exception {
-        return servisRezira.vratiSve();
+//    public List<Rezira> vratiSvaReziranja() throws Exception {
+//        return servisRezira.vratiSve();
+//    }
+    
+    public List<DomenskiObjekat> vratiSvaReziranja() throws Exception {
+        SistemskaOperacija so = new SOVratiReziranja(new Rezira());
+        so.execute();
+        return ((SOVratiReziranja)so).getLista();
     }
 
-    public List<Glumi> vratiSveUloge() {
-        return servisGlumi.vratiSve();
+//    public List<Glumi> vratiSveUloge() {
+//        return servisGlumi.vratiSve();
+//    }
+    
+    public List<DomenskiObjekat> vratiSveUloge() throws Exception {
+        SistemskaOperacija so = new SOVratiUloge(new Glumi());
+        so.execute();
+        return ((SOVratiUloge)so).getLista();
     }
 
     public boolean izmeniFilm(Film film) {
@@ -155,8 +184,14 @@ public class Kontroler {
         so.execute();
     }
 
-    public List<Rezervisanje> vratiSvaRezervisanja() throws Exception {
-        return servisRezervisanje.vratiSva();
+//    public List<Rezervisanje> vratiSvaRezervisanja() throws Exception {
+//        return servisRezervisanje.vratiSva();
+//    }
+    
+    public List<DomenskiObjekat> vratiSvaRezervisanja() throws Exception {
+        SistemskaOperacija so = new SOVratiRezervacije(new Rezervisanje());
+        so.execute();
+        return ((SOVratiRezervacije)so).getLista();
     }
 
     public boolean obrisiRezervaciju(Long projekcijaID, Long korisnikID) throws Exception {

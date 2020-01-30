@@ -159,36 +159,64 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
     private ServerskiOdgovor vratiSvaReziranja() {
         ServerskiOdgovor so = new ServerskiOdgovor();
         try {
-            ArrayList<Rezira> reziranja = (ArrayList<Rezira>) Kontroler.getInstanca().vratiSvaReziranja();
+            ArrayList<DomenskiObjekat> reziranja = (ArrayList<DomenskiObjekat>) Kontroler.getInstanca().vratiSvaReziranja();
             so.setOdgovor(reziranja);
             so.setStatus(Status.U_REDU);
         } catch (Exception ex) {
-             so.setStatus(Status.GRESKA);
+            so.setStatus(Status.GRESKA);
             so.setPoruka("Doslo je do greske prilikom citanja reziranja iz baze");
             Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
         }
         return so;
     }
 
+//    private ServerskiOdgovor vratiSveReditelje() {
+//        ServerskiOdgovor so = new ServerskiOdgovor();
+//        try {
+//            ArrayList<Reditelj> reditelji = (ArrayList<Reditelj>) Kontroler.getInstanca().vratiSveReditelje();
+//            so.setOdgovor(reditelji);
+//            so.setStatus(Status.U_REDU);
+//        } catch (Exception ex) {
+//             so.setStatus(Status.GRESKA);
+//            so.setPoruka("Doslo je do greske prilikom citanja reditelja iz baze");
+//            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return so;
+//    }
+    
     private ServerskiOdgovor vratiSveReditelje() {
         ServerskiOdgovor so = new ServerskiOdgovor();
         try {
-            ArrayList<Reditelj> reditelji = (ArrayList<Reditelj>) Kontroler.getInstanca().vratiSveReditelje();
+            ArrayList<DomenskiObjekat> reditelji = (ArrayList<DomenskiObjekat>) Kontroler.getInstanca().vratiSveReditelje();
             so.setOdgovor(reditelji);
             so.setStatus(Status.U_REDU);
         } catch (Exception ex) {
-             so.setStatus(Status.GRESKA);
+            so.setStatus(Status.GRESKA);
             so.setPoruka("Doslo je do greske prilikom citanja reditelja iz baze");
             Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
         }
         return so;
     }
 
+//    private ServerskiOdgovor vratiSveUloge() {
+//        ServerskiOdgovor so = new ServerskiOdgovor();
+//        try {
+//            ArrayList<Glumi> uloge = (ArrayList<Glumi>) Kontroler.getInstanca().vratiSveUloge();
+//            so.setOdgovor(uloge);
+//            so.setStatus(Status.U_REDU);
+//        } catch (Exception ex) {
+//            so.setStatus(Status.GRESKA);
+//            so.setPoruka("Doslo je do greske prilikom citanja uloga iz baze");
+//            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return so;
+//    }
+    
     private ServerskiOdgovor vratiSveUloge() {
         ServerskiOdgovor so = new ServerskiOdgovor();
         try {
-            ArrayList<Glumi> uloge = (ArrayList<Glumi>) Kontroler.getInstanca().vratiSveUloge();
-            so.setOdgovor(uloge);
+            ArrayList<DomenskiObjekat> reziranja = (ArrayList<DomenskiObjekat>) Kontroler.getInstanca().vratiSveUloge();
+            so.setOdgovor(reziranja);
             so.setStatus(Status.U_REDU);
         } catch (Exception ex) {
             so.setStatus(Status.GRESKA);
@@ -198,14 +226,28 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         return so;
     }
 
+//    private ServerskiOdgovor vratiSveGlumce() {
+//        ServerskiOdgovor so = new ServerskiOdgovor();
+//        try {
+//            ArrayList<Glumac> glumci = (ArrayList<Glumac>) Kontroler.getInstanca().vratiSveGlumce();
+//            so.setOdgovor(glumci);
+//            so.setStatus(Status.U_REDU);
+//        } catch (Exception ex) {
+//             so.setStatus(Status.GRESKA);
+//            so.setPoruka("Doslo je do greske prilikom citanja glumaca iz baze");
+//            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return so;
+//    }
+    
     private ServerskiOdgovor vratiSveGlumce() {
         ServerskiOdgovor so = new ServerskiOdgovor();
         try {
-            ArrayList<Glumac> glumci = (ArrayList<Glumac>) Kontroler.getInstanca().vratiSveGlumce();
-            so.setOdgovor(glumci);
+            ArrayList<DomenskiObjekat> reziranja = (ArrayList<DomenskiObjekat>) Kontroler.getInstanca().vratiSveGlumce();
+            so.setOdgovor(reziranja);
             so.setStatus(Status.U_REDU);
         } catch (Exception ex) {
-             so.setStatus(Status.GRESKA);
+            so.setStatus(Status.GRESKA);
             so.setPoruka("Doslo je do greske prilikom citanja glumaca iz baze");
             Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -246,7 +288,7 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
             so.setStatus(Status.U_REDU);
         } catch (Exception ex) {
             so.setStatus(Status.GRESKA);
-            so.setPoruka("Doslo je do greske prilikom citanja filmova iz baze");
+            so.setPoruka("Doslo je do greske prilikom citanja projekcija iz baze");
             Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
         }
         return so;
@@ -321,14 +363,28 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         return so;
     }
 
+//    private ServerskiOdgovor vratiSvaRezervisanja() {
+//        ServerskiOdgovor so = new ServerskiOdgovor();
+//        try {
+//            ArrayList<Rezervisanje> rezervisanja = (ArrayList<Rezervisanje>) Kontroler.getInstanca().vratiSvaRezervisanja();
+//            so.setOdgovor(rezervisanja);
+//            so.setStatus(Status.U_REDU);
+//        } catch (Exception ex) {
+//             so.setStatus(Status.GRESKA);
+//            so.setPoruka("Doslo je do greske prilikom citanja rezervacija iz baze");
+//            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return so;
+//    }
+    
     private ServerskiOdgovor vratiSvaRezervisanja() {
         ServerskiOdgovor so = new ServerskiOdgovor();
         try {
-            ArrayList<Rezervisanje> rezervisanja = (ArrayList<Rezervisanje>) Kontroler.getInstanca().vratiSvaRezervisanja();
-            so.setOdgovor(rezervisanja);
+            ArrayList<DomenskiObjekat> rezervacije = (ArrayList<DomenskiObjekat>) Kontroler.getInstanca().vratiSvaRezervisanja();
+            so.setOdgovor(rezervacije);
             so.setStatus(Status.U_REDU);
         } catch (Exception ex) {
-             so.setStatus(Status.GRESKA);
+            so.setStatus(Status.GRESKA);
             so.setPoruka("Doslo je do greske prilikom citanja rezervacija iz baze");
             Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
         }

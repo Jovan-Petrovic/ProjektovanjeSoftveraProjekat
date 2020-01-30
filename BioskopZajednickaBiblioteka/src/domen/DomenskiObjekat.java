@@ -21,4 +21,9 @@ public interface DomenskiObjekat {
     public List<DomenskiObjekat> ucitajListu(ResultSet rs);
     public String vratiJoinTabelu();
     public String vratiUslovZaJoin();
+    public String vratiJoinTabelu2();
+    public String vratiUslovZaJoin2();
+    public String vratiJoinTabelu3();
+    public String vratiUslovZaJoin3();
+
 }

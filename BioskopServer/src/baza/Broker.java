@@ -117,4 +117,24 @@ public class Broker {
         ResultSet rs = st.executeQuery(upit);
         return odo.ucitajListu(rs);
     }
+    
+     public List<DomenskiObjekat> vratiTriTabele(DomenskiObjekat odo) throws SQLException {
+        String upit = "SELECT * FROM "+odo.getImeTabele()+ " JOIN "
+                +odo.vratiJoinTabelu()+ " ON "+odo.vratiUslovZaJoin()+" JOIN "
+                +odo.vratiJoinTabelu2()+ " ON "+odo.vratiUslovZaJoin2();
+        System.out.println(upit);
+        Statement st = konekcija.createStatement();
+        ResultSet rs = st.executeQuery(upit);
+        return odo.ucitajListu(rs);
+    }
+    
+     public List<DomenskiObjekat> vratiCetiriTabele(DomenskiObjekat odo) throws SQLException {
+        String upit = "SELECT * FROM "+odo.getImeTabele()+ " JOIN "
+                +odo.vratiJoinTabelu()+ " ON "+odo.vratiUslovZaJoin()+" JOIN "
+                +odo.vratiJoinTabelu2()+ " ON "+odo.vratiUslovZaJoin2()+" JOIN "+odo.vratiJoinTabelu3()+" ON "+odo.vratiUslovZaJoin3();
+        System.out.println(upit);
+        Statement st = konekcija.createStatement();
+        ResultSet rs = st.executeQuery(upit);
+        return odo.ucitajListu(rs);
+    }
 }
