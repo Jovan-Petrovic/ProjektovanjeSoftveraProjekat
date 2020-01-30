@@ -5,6 +5,7 @@
  */
 package forme;
 
+import domen.DomenskiObjekat;
 import domen.Film;
 import domen.Zanr;
 import java.util.ArrayList;
@@ -263,7 +264,7 @@ public class FPretragaFilma extends javax.swing.JDialog {
     private void pripremiFormu() throws Exception {
         popuniZanrove();
         
-        List<Film> filmovi = Kontroler.getInstanca().vratiSveFilmove();
+        List<Film> filmovi = (List<Film>)Kontroler.getInstanca().vratiSveFilmove();
         jtblFilmovi.setModel(new FilmTableModel(filmovi));
     }
 

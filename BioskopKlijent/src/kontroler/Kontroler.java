@@ -5,6 +5,7 @@
  */
 package kontroler;
 
+import domen.DomenskiObjekat;
 import domen.Film;
 import domen.Glumac;
 import domen.Glumi;

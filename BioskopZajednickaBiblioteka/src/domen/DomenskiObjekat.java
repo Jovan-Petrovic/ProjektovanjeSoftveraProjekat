@@ -5,6 +5,9 @@
  */
 package domen;
 
+import java.sql.ResultSet;
+import java.util.List;
+
 /**
  *
  * @author Bron Zilar
@@ -15,4 +18,7 @@ public interface DomenskiObjekat {
     public String getVrednostiAtributaZaUbacivanje();
     public boolean isAutoincrement();
     public void setObjekatID(Long id);
+    public List<DomenskiObjekat> ucitajListu(ResultSet rs);
+    public String vratiJoinTabelu();
+    public String vratiUslovZaJoin();
 }

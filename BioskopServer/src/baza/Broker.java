@@ -14,6 +14,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -100,5 +101,20 @@ public class Broker {
         return odo;
     }
     
+    public List<DomenskiObjekat> vratiBezUslova(DomenskiObjekat odo) throws SQLException {
+        String upit = "SELECT * FROM " + odo.getImeTabele();
+        System.out.println(upit);
+        Statement s = konekcija.createStatement();
+        ResultSet rs = s.executeQuery(upit);
+        return odo.ucitajListu(rs);
+    }
     
+    public List<DomenskiObjekat> vratiDveTabele(DomenskiObjekat odo) throws SQLException {
+        String upit = "SELECT * FROM "+odo.getImeTabele()+ " JOIN "
+                +odo.vratiJoinTabelu()+ " ON "+odo.vratiUslovZaJoin();
+        System.out.println(upit);
+        Statement st = konekcija.createStatement();
+        ResultSet rs = st.executeQuery(upit);
+        return odo.ucitajListu(rs);
+    }
 }

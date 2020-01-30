@@ -5,6 +5,7 @@
  */
 package niti;
 
+import domen.DomenskiObjekat;
 import domen.Film;
 import domen.Glumac;
 import domen.Glumi;
@@ -144,7 +145,7 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
     private ServerskiOdgovor vratiSveFilmove() {
         ServerskiOdgovor so = new ServerskiOdgovor();
         try {
-            ArrayList<Film> filmovi = (ArrayList<Film>) Kontroler.getInstanca().vratiSveFilmove();
+            ArrayList<DomenskiObjekat> filmovi = (ArrayList<DomenskiObjekat>) Kontroler.getInstanca().vratiSveFilmove();
             so.setOdgovor(filmovi);
             so.setStatus(Status.U_REDU);
         } catch (Exception ex) {
@@ -240,7 +241,7 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
     private ServerskiOdgovor vratiSveProjekcije() {
         ServerskiOdgovor so = new ServerskiOdgovor();
         try {
-            ArrayList<Projekcija> projekcije = (ArrayList<Projekcija>) Kontroler.getInstanca().vratiSveProjekcije();
+            ArrayList<DomenskiObjekat> projekcije = (ArrayList<DomenskiObjekat>) Kontroler.getInstanca().vratiSveProjekcije();
             so.setOdgovor(projekcije);
             so.setStatus(Status.U_REDU);
         } catch (Exception ex) {

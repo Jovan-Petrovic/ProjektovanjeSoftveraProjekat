@@ -53,45 +53,50 @@ public class BazapodatakaSkladisteGlumi implements SkladisteGlumi {
         }
     }
 
+//    @Override
+//    public List<Glumi> vratiSve() {
+//        List<Glumi> uloge = new ArrayList<>();
+//        try {
+//            broker.otvoriKonekciju();
+//            String upit = "select * from glumi";
+//            Connection koneckija = broker.getKonekcija();
+//            Statement statement = koneckija.createStatement();
+//            ResultSet rs = statement.executeQuery(upit);
+//            while(rs.next()) {
+//                Long idFilm = rs.getLong("film");
+//                List<Film> filmovi = Kontroler.getInstanca().vratiSveFilmove();
+//                Film f = null;
+//                for (Film film : filmovi) {
+//                    if(idFilm.equals(film.getId())) {
+//                        f = film;
+//                        break;
+//                    }
+//                }
+//                Long idGlumac = rs.getLong("glumac");
+//                List<Glumac> glumci = Kontroler.getInstanca().vratiSveGlumce();
+//                Glumac g = null;
+//                for (Glumac glumac : glumci) {
+//                    if(idGlumac.equals(glumac.getId())) {
+//                        g = glumac;
+//                        break;
+//                    }
+//                }
+//                Glumi glumi = new Glumi(f, g);
+//                uloge.add(glumi);
+//            }
+//            statement.close();
+//            rs.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(BazapodatakaSkladisteRezira.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (Exception ex) {
+//            Logger.getLogger(BazapodatakaSkladisteRezira.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return uloge;
+//    }
+
     @Override
     public List<Glumi> vratiSve() {
-        List<Glumi> uloge = new ArrayList<>();
-        try {
-            broker.otvoriKonekciju();
-            String upit = "select * from glumi";
-            Connection koneckija = broker.getKonekcija();
-            Statement statement = koneckija.createStatement();
-            ResultSet rs = statement.executeQuery(upit);
-            while(rs.next()) {
-                Long idFilm = rs.getLong("film");
-                List<Film> filmovi = Kontroler.getInstanca().vratiSveFilmove();
-                Film f = null;
-                for (Film film : filmovi) {
-                    if(idFilm.equals(film.getId())) {
-                        f = film;
-                        break;
-                    }
-                }
-                Long idGlumac = rs.getLong("glumac");
-                List<Glumac> glumci = Kontroler.getInstanca().vratiSveGlumce();
-                Glumac g = null;
-                for (Glumac glumac : glumci) {
-                    if(idGlumac.equals(glumac.getId())) {
-                        g = glumac;
-                        break;
-                    }
-                }
-                Glumi glumi = new Glumi(f, g);
-                uloge.add(glumi);
-            }
-            statement.close();
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(BazapodatakaSkladisteRezira.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(BazapodatakaSkladisteRezira.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return uloge;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

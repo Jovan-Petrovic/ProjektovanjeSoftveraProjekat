@@ -61,7 +61,7 @@ public class BazapodatakaSkladisteProjekcija implements SkladisteProjekcija {
         List<Projekcija> projekcije = new ArrayList<>();
         List<Film> filmovi = null;
         try {
-            filmovi = Kontroler.getInstanca().vratiSveFilmove();
+//            filmovi = Kontroler.getInstanca().vratiSveFilmove();
         } catch (Exception ex) {
             Logger.getLogger(BazapodatakaSkladisteProjekcija.class.getName()).log(Level.SEVERE, null, ex);
         }

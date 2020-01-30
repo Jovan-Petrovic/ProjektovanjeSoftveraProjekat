@@ -6,7 +6,13 @@
 package domen;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,14 +24,15 @@ public class Projekcija implements Serializable, DomenskiObjekat {
     private String sala;
     private Film film;
 
+    public Projekcija() {
+    }
+    
     public Projekcija(Long id, Date datum, String sala, Film film) {
         this.id = id;
         this.datum = datum;
         this.sala = sala;
         this.film = film;
     }
-
-    
 
     public Film getFilm() {
         return film;
@@ -82,6 +89,43 @@ public class Projekcija implements Serializable, DomenskiObjekat {
     @Override
     public void setObjekatID(Long id) {
         setId(id);
+    }
+
+    @Override
+    public List<DomenskiObjekat> ucitajListu(ResultSet rs) {
+        List<DomenskiObjekat> projekcije = new ArrayList<>();
+        try {
+            while(rs.next()) {
+                Long idFilm = rs.getLong("film.id");
+                String naziv = rs.getString("naziv");
+                int trajanje = rs.getInt("trajanje");
+                Zanr zanr = Zanr.valueOf(rs.getString("zanr"));
+                int godina = rs.getInt("godina");
+                String jezik = rs.getString("jezik");
+                double ocenaIMDb = rs.getInt("ocenaIMDb");
+                Film film = new Film(idFilm, naziv, trajanje, zanr, godina, jezik, ocenaIMDb);
+                
+                Long idProjekcija = rs.getLong("projekcija.id");
+                Date datum = rs.getDate("datum");
+                String sala = rs.getString("sala");
+                Projekcija projekcija = new Projekcija(idProjekcija, datum, sala, film);
+                
+                projekcije.add(projekcija);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Projekcija.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return projekcije;
+    }
+
+    @Override
+    public String vratiJoinTabelu() {
+        return "film";
+    }
+
+    @Override
+    public String vratiUslovZaJoin() {
+        return "projekcija.filmID = film.id";
     }
 
     

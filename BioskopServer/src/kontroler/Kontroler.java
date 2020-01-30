@@ -5,6 +5,7 @@
  */
 package kontroler;
 
+import domen.DomenskiObjekat;
 import domen.Film;
 import domen.Glumac;
 import domen.Glumi;
@@ -13,6 +14,7 @@ import domen.Projekcija;
 import domen.Reditelj;
 import domen.Rezervisanje;
 import domen.Rezira;
+import domen.Zanr;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,8 @@ import logika.SOUbaciGlumi;
 import logika.SOUbaciProjekciju;
 import logika.SOUbaciRezervisanje;
 import logika.SOUbaciRezira;
+import logika.SOVratiFilmove;
+import logika.SOVratiProjekcije;
 import logika.SistemskaOperacija;
 import servis.ServisFilm;
 import servis.ServisGlumac;
@@ -85,8 +89,14 @@ public class Kontroler {
         return servisGlumac.vratiSve();
     }
 
-    public List<Film> vratiSveFilmove() throws Exception {
-        return servisFilm.vratiSve();
+//    public List<Film> vratiSveFilmove() throws Exception {
+//        return servisFilm.vratiSve();
+//    }
+    
+    public List<DomenskiObjekat> vratiSveFilmove() throws Exception {
+        SistemskaOperacija so = new SOVratiFilmove(new Film());
+        so.execute();
+        return ((SOVratiFilmove)so).getLista();
     }
 
 //    public Projekcija sacuvajProjekciju(Projekcija projekcija) throws Exception {
@@ -98,8 +108,14 @@ public class Kontroler {
         so.execute();
     }
 
-    public List<Projekcija> vratiSveProjekcije() throws Exception {
-        return servisProjekcija.vratiSve();
+//    public List<Projekcija> vratiSveProjekcije() throws Exception {
+//        return servisProjekcija.vratiSve();
+//    }
+    
+    public List<DomenskiObjekat> vratiSveProjekcije() throws Exception {
+        SistemskaOperacija so = new SOVratiProjekcije(new Projekcija());
+        so.execute();
+        return ((SOVratiProjekcije)so).getLista();
     }
 
     public boolean obrisiProjekciju(Long id) throws Exception {
