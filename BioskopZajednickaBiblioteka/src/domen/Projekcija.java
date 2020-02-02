@@ -8,6 +8,7 @@ package domen;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,20 +21,20 @@ import java.util.logging.Logger;
  */
 public class Projekcija implements Serializable, DomenskiObjekat {
     private Long id;
-    private Date datum;
+    private Timestamp datumVreme;
     private String sala;
     private Film film;
 
     public Projekcija() {
     }
-    
-    public Projekcija(Long id, Date datum, String sala, Film film) {
+
+    public Projekcija(Long id, Timestamp datumVreme, String sala, Film film) {
         this.id = id;
-        this.datum = datum;
+        this.datumVreme = datumVreme;
         this.sala = sala;
         this.film = film;
     }
-
+    
     public Film getFilm() {
         return film;
     }
@@ -50,20 +51,20 @@ public class Projekcija implements Serializable, DomenskiObjekat {
         this.id = id;
     }
 
-    public Date getDatum() {
-        return datum;
-    }
-
-    public void setDatum(Date datum) {
-        this.datum = datum;
-    }
-
     public String getSala() {
         return sala;
     }
 
     public void setSala(String sala) {
         this.sala = sala;
+    }
+    
+    public Timestamp getDatumVreme() {
+        return datumVreme;
+    }
+
+    public void setDatumVreme(Timestamp datumVreme) {
+        this.datumVreme = datumVreme;
     }
 
     @Override
@@ -78,7 +79,7 @@ public class Projekcija implements Serializable, DomenskiObjekat {
 
     @Override
     public String getVrednostiAtributaZaUbacivanje() {
-        return "'"+new java.sql.Date(datum.getTime())+"', '"+sala+"', "+film.getId();
+        return "'"+new java.sql.Timestamp(datumVreme.getTime())+"', '"+sala+"', "+film.getId();
     }
 
     @Override
@@ -106,9 +107,9 @@ public class Projekcija implements Serializable, DomenskiObjekat {
                 Film film = new Film(idFilm, naziv, trajanje, zanr, godina, jezik, ocenaIMDb);
                 
                 Long idProjekcija = rs.getLong("projekcija.id");
-                Date datum = rs.getDate("datum");
+                Timestamp datumVreme = rs.getTimestamp("datum");
                 String sala = rs.getString("sala");
-                Projekcija projekcija = new Projekcija(idProjekcija, datum, sala, film);
+                Projekcija projekcija = new Projekcija(idProjekcija, datumVreme, sala, film);
                 
                 projekcije.add(projekcija);
             }
@@ -148,7 +149,4 @@ public class Projekcija implements Serializable, DomenskiObjekat {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-    
-    
 }

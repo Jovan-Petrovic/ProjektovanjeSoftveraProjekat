@@ -8,6 +8,7 @@ package forme;
 import domen.Film;
 import domen.Projekcija;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -251,15 +252,18 @@ public class FProjekcija extends javax.swing.JDialog {
 
     private void jbtnDodajProjekcijuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDodajProjekcijuActionPerformed
         Film f = this.film;
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy.");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
         Date datum = null;
+        Timestamp datumVreme = null;
         try {
+            //datumVreme = sdf.parse(jtxtDatum.getText().trim());
             datum = sdf.parse(jtxtDatum.getText().trim());
+            datumVreme = new Timestamp(datum.getTime());
         } catch (ParseException ex) {
             Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);
         }
         String sala = jtxtSala.getText().trim();
-        Projekcija p = new Projekcija(-1l, datum, sala, film);
+        Projekcija p = new Projekcija(-1l, datumVreme, sala, film);
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) jtblProjekcije.getModel();
         ptm.dodajProjekciju(p);
     }//GEN-LAST:event_jbtnDodajProjekcijuActionPerformed
@@ -307,8 +311,9 @@ public class FProjekcija extends javax.swing.JDialog {
 
     private void sacuvajProjekciju() throws Exception {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy.");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
             Date datum = sdf.parse(jtxtDatum.getText().trim());
+            Timestamp datumVreme = new Timestamp(datum.getTime());
             String sala = jtxtSala.getText().trim();
             List<Film> filmovi = Kontroler.getInstanca().vratiSveFilmove();
             Film f = null;
@@ -317,7 +322,7 @@ public class FProjekcija extends javax.swing.JDialog {
                     f = film;
                 }
             }
-            Projekcija projekcija = new Projekcija(null, datum, sala, f);
+            Projekcija projekcija = new Projekcija(null, datumVreme, sala, f);
             projekcija = Kontroler.getInstanca().sacuvajProjekciju(projekcija);
             JOptionPane.showMessageDialog(this, "Projekcija je sacuvana sa ID-em: " + projekcija.getId());
         } catch (ParseException ex) {

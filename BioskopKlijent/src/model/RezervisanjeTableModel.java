@@ -47,7 +47,7 @@ public class RezervisanjeTableModel extends AbstractTableModel {
             case 1:
                 return rezervisanje.getProjekcija().getFilm().getNaziv();
             case 2:
-                return rezervisanje.getProjekcija().getDatum();
+                return rezervisanje.getProjekcija().getDatumVreme();
             case 3:
                 return rezervisanje.getProjekcija().getSala();
             default:

@@ -97,7 +97,7 @@ public class Rezervisanje implements Serializable, DomenskiObjekat {
                 Film film = new Film(filmID, filmNaziv, filmTrajanje, zanrFilma, godinaFilma, jezikFilma, ocenaIMDb);
                 
                 Long projekcijaId = rs.getLong("projekcija.id");
-                java.util.Date datumProjekcije = rs.getDate("projekcija.datum");
+                java.sql.Timestamp datumProjekcije = rs.getTimestamp("projekcija.datum");
                 String salaProjekcije = rs.getString("projekcija.sala");
                 Projekcija projekcija = new Projekcija(projekcijaId, datumProjekcije, salaProjekcije, film);
                 

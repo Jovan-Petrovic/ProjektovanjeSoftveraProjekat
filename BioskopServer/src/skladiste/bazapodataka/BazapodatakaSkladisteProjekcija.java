@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,7 +37,7 @@ public class BazapodatakaSkladisteProjekcija implements SkladisteProjekcija {
             broker.otvoriKonekciju();
             String upit = "insert into projekcija (datum, sala, filmID) values (?, ?, ?)";
             PreparedStatement preparedStatement = broker.getKonekcija().prepareStatement(upit, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setDate(1, new Date(projekcija.getDatum().getTime()));
+            preparedStatement.setDate(1, new Date(projekcija.getDatumVreme().getTime()));
             preparedStatement.setString(2, projekcija.getSala());
             preparedStatement.setLong(3, projekcija.getFilm().getId());
             preparedStatement.executeUpdate();
@@ -73,7 +74,7 @@ public class BazapodatakaSkladisteProjekcija implements SkladisteProjekcija {
             ResultSet rs = statement.executeQuery(upit);
             while(rs.next()) {
                 Long id = rs.getLong("id");
-                Date datum = rs.getDate("datum");
+                Timestamp datumVreme = rs.getTimestamp("datum");
                 String sala = rs.getString("sala");
                 Long filmID = rs.getLong("filmID");
                 Film f = null;
@@ -82,7 +83,7 @@ public class BazapodatakaSkladisteProjekcija implements SkladisteProjekcija {
                         f = film;
                     }
                 }
-                Projekcija projekcija = new Projekcija(id, datum, sala, f);
+                Projekcija projekcija = new Projekcija(id, datumVreme, sala, f);
                 projekcije.add(projekcija);
             }
             statement.close();

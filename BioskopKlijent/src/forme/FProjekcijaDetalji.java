@@ -187,7 +187,7 @@ public class FProjekcijaDetalji extends javax.swing.JDialog {
     private void pripremiFormu() {
         jtxtID.setText(projekcija.getId().toString());
         jtxtFilm.setText(projekcija.getFilm().getNaziv());
-        jtxtDatum.setText(projekcija.getDatum().toString());
+        jtxtDatum.setText(projekcija.getDatumVreme().toString());
         jtxtSala.setText(projekcija.getSala()+"");
     }
 }

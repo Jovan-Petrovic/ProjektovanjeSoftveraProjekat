@@ -82,9 +82,9 @@ public class BazapodatakaSkladisteRezervisanje implements SkladisteRezervisanje{
                 Film film = new Film(filmID, filmNaziv, filmTrajanje, zanrFilma, godinaFilma, jezikFilma, ocenaIMDb);
                 
                 Long projekcijaId = rs.getLong("p.id");
-                java.util.Date datumProjekcije = rs.getDate("p.datum");
+                java.sql.Timestamp datumVremeProjekcije = rs.getTimestamp("p.datum");
                 String salaProjekcije = rs.getString("p.sala");
-                Projekcija projekcija = new Projekcija(projekcijaId, datumProjekcije, salaProjekcije, film);
+                Projekcija projekcija = new Projekcija(projekcijaId, datumVremeProjekcije, salaProjekcije, film);
                 
                 Long korisnikID = rs.getLong("k.id");
                 String korisnickoIme = rs.getString("k.korisnickoIme");
@@ -94,7 +94,8 @@ public class BazapodatakaSkladisteRezervisanje implements SkladisteRezervisanje{
                 String email = rs.getString("k.email");
                 Korisnik korisnik = new Korisnik(korisnikID, korisnickoIme, sifra, ime, prezime, email);
                 
-                Rezervisanje rezervisanje = new Rezervisanje(datumProjekcije, korisnik, projekcija);
+                Date datumRezervisanja = rs.getDate("r.datumRezervacije");
+                Rezervisanje rezervisanje = new Rezervisanje(datumRezervisanja, korisnik, projekcija);
                 
                 rezervisanja.add(rezervisanje);
             }

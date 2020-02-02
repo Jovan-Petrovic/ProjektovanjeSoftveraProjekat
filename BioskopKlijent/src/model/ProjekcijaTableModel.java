@@ -48,7 +48,7 @@ public class ProjekcijaTableModel extends AbstractTableModel {
         Projekcija projekcija = projekcije.get(red);
         switch(kolona) {
             case 0:
-                return projekcija.getDatum();
+                return projekcija.getDatumVreme();
             case 1:
                 return projekcija.getSala();
             case 2:
