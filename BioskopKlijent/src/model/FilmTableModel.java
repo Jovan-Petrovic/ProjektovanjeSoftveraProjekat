@@ -102,5 +102,11 @@ public class FilmTableModel extends AbstractTableModel {
         }
         return null;
     }
+
+    public Film vratiFilm(int selektovanRed) {
+        return filmovi.get(selektovanRed);
+    }
+    
+    
    
 }

@@ -19,8 +19,8 @@ import javax.swing.table.AbstractTableModel;
 public class ProjekcijaTableModel extends AbstractTableModel {
 
     private final List<Projekcija> projekcije;
-    private final String[] imenaKolona = new String[]{"ID","DATUM","SALA","FILMID","NAZIV_FILMA"};
-    private final Class[] klaseKolona = new Class[]{Long.class, Date.class, String.class, Long.class, String.class};
+    private final String[] imenaKolona = new String[]{"DATUM","SALA","FILMID","NAZIV_FILMA"};
+    private final Class[] klaseKolona = new Class[]{Date.class, String.class, Long.class, String.class};
 
     public ProjekcijaTableModel(List<Projekcija> projekcije) {
         this.projekcije = projekcije;
@@ -48,14 +48,12 @@ public class ProjekcijaTableModel extends AbstractTableModel {
         Projekcija projekcija = projekcije.get(red);
         switch(kolona) {
             case 0:
-                return projekcija.getId();
-            case 1:
                 return projekcija.getDatum();
-            case 2:
+            case 1:
                 return projekcija.getSala();
-            case 3:
+            case 2:
                 return projekcija.getFilm().getId();
-            case 4:
+            case 3:
                 return projekcija.getFilm().getNaziv();
             default:
                 return "N/A";

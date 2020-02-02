@@ -233,6 +233,76 @@ public class BazapodatakaSkladisteFilm  implements SkladisteFilm {
         return signal;
     }
 
+    @Override
+    public boolean izmeniFilmReziraGlumi(Map<String, Object> podaci) {
+            boolean signal = false;
+            Film film = (Film) podaci.get("film");
+            List<Reditelj> reditelji = (List<Reditelj>) podaci.get("reditelji");
+            List<Glumac> glumci = (List<Glumac>) podaci.get("glumci");
+        try {
+            broker.otvoriKonekciju();
+            String upit = "update film set naziv = ?, trajanje = ?, zanr = ?, godina = ?, jezik = ?, ocenaIMDb = ? where id = ?";
+            Connection konekcija = broker.getKonekcija();
+            PreparedStatement ps = konekcija.prepareStatement(upit);
+            ps.setString(1, film.getNaziv());
+            ps.setInt(2, film.getTrajanje());
+            ps.setString(3, film.getZanr().toString());
+            ps.setInt(4, film.getGodina());
+            ps.setString(5, film.getJezik());
+            ps.setDouble(6, film.getOcenaIMDb());
+            ps.setLong(7, film.getId());
+            ps.executeUpdate();
+            ps.close();
+
+            String upitUbaci = "insert into rezira values(?,?)";
+            String upitObrisi = "delete from rezira where film = ? and reditelj = ?";
+            PreparedStatement ps1 = konekcija.prepareStatement(upitUbaci);
+            PreparedStatement ps2 = konekcija.prepareStatement(upitObrisi);
+            
+            for (Reditelj reditelj : reditelji) {
+                if(reditelj.getStatus() != null && reditelj.getStatus().equals("dodaj")) {
+                    ps1.setLong(1, film.getId());
+                    ps1.setLong(2, reditelj.getId());
+                    ps1.executeUpdate();
+                }
+                if(reditelj.getStatus() != null && reditelj.getStatus().equals("obrisi")) {
+                    ps2.setLong(1, film.getId());
+                    ps2.setLong(2, reditelj.getId());
+                    ps2.executeUpdate();
+                }
+            }
+            
+            upitUbaci = "insert into glumi values(?,?)";
+            upitObrisi = "delete from glumi where film = ? and reditelj = ?";           
+            ps1 = konekcija.prepareStatement(upitUbaci);
+            ps2 = konekcija.prepareStatement(upitObrisi);
+            for (Glumac glumac : glumci) {
+                if(glumac.getStatus() != null && glumac.getStatus().equals("dodaj")) {
+                    ps1.setLong(1, film.getId());
+                    ps1.setLong(2, glumac.getId());
+                    ps1.executeUpdate();
+                }
+                if(glumac.getStatus() != null && glumac.getStatus().equals("obrisi")) {
+                    ps2.setLong(1, film.getId());
+                    ps2.setLong(2, glumac.getId());
+                    ps2.executeUpdate();
+                }
+            }
+            ps1.close();
+            ps2.close();
+            broker.commit();
+            konekcija.close();
+            signal = true;
+        } catch (IOException ex) {
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(BazapodatakaSkladisteFilm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return signal;
+    }
+
     
     
 }

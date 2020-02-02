@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +24,7 @@ public class Reditelj implements Serializable, DomenskiObjekat {
     private String prezime;
     private String drzanljanstvo;
     private int brojFilmova;
+    private String status;
 
     public Reditelj() {
     }
@@ -33,6 +35,15 @@ public class Reditelj implements Serializable, DomenskiObjekat {
         this.prezime = prezime;
         this.drzanljanstvo = drzanljanstvo;
         this.brojFilmova = brojFilmova;
+    }
+
+    public Reditelj(Long id, String ime, String prezime, String drzanljanstvo, int brojFilmova, String status) {
+        this.id = id;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.drzanljanstvo = drzanljanstvo;
+        this.brojFilmova = brojFilmova;
+        this.status = status;
     }
 
     public String getDrzanljanstvo() {
@@ -75,11 +86,37 @@ public class Reditelj implements Serializable, DomenskiObjekat {
         this.brojFilmova = brojFilmova;
     }
     
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
     @Override
     public String toString() {
         return getIme() + " " + getPrezime();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Reditelj other = (Reditelj) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    
     @Override
     public String getImeTabele() {
         return "reditelj";

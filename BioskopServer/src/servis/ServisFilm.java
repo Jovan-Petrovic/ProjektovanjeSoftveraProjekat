@@ -24,5 +24,7 @@ public interface ServisFilm {
     public Film sacuvajFilmReziraglumi(Map<String, Object> podaci);
 
     public boolean izmeniFilmRediteljeGlumce(Map<String, Object> podaci);
+
+    public boolean izmeniFilmReziraGlumi(Map<String, Object> mapa1);
    
 }

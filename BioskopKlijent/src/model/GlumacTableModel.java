@@ -6,6 +6,7 @@
 package model;
 
 import domen.Glumac;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -18,11 +19,11 @@ public class GlumacTableModel extends AbstractTableModel {
     private final List<Glumac> glumci;
     private final String[] imenaKolona = new String[]{"ID","IME","PREZIME","DRZANLJANSTVO"};
     private final Class[] klaseKolona = new Class[]{Long.class, String.class, String.class, String.class};
-    private boolean izmena;
+    private final List<Glumac> listaObrisanih;
 
     public GlumacTableModel(List<Glumac> glumci) {
         this.glumci = glumci;
-        izmena = false;
+        this.listaObrisanih = new ArrayList<>();
     }
 
     @Override
@@ -86,18 +87,6 @@ public class GlumacTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
-    public void setIzmena(boolean izmena) {
-        this.izmena = izmena;
-    }
-
-    @Override
-    public boolean isCellEditable(int red, int kolona) {
-        if(izmena) {
-            return kolona == 1 || kolona == 2 || kolona == 3;
-        }
-        return false;
-    }
-
     @Override
     public void setValueAt(Object vrednost, int red, int kolona) {
         Glumac glumac = glumci.get(red);
@@ -118,6 +107,35 @@ public class GlumacTableModel extends AbstractTableModel {
         return glumci;
     }
 
-    
+    public void obrisiGlumca(int selektovanRed) {
+        glumci.remove(selektovanRed);
+        fireTableDataChanged();
+    }
+
+    public Glumac vratiGlumca(int selektovanRed) {
+        return glumci.get(selektovanRed);
+    }
+
+    public void obrisiGlumcaZaIzmenu(Glumac g) {
+        g.setStatus("obrisi");
+        listaObrisanih.add(g);
+        glumci.remove(g);
+        fireTableDataChanged();
+    }
+
+    public void dodajGlumcaZaIzmenu(Glumac glumac) {
+        if(!glumci.contains(glumac)) {
+            glumac.setStatus("dodaj");
+            glumci.add(glumac);
+        }
+        fireTableDataChanged();
+    }
+
+    public List<Glumac> vratiSveGlumce() {
+        List<Glumac> lista = glumci;
+        lista.addAll(listaObrisanih);
+        return lista;
+    }
+  
     
 }

@@ -232,6 +232,10 @@ public class Kontroler {
         return servisFilm.izmeniFilmRediteljeGlumce(podaci);
     }
 
+    public boolean izmeniFilmReziraGlumi(Map<String, Object> mapa1) {
+        return servisFilm.izmeniFilmReziraGlumi(mapa1);
+    }
+
     
 
 }

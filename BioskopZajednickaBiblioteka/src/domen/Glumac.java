@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,17 +23,24 @@ public class Glumac implements Serializable, DomenskiObjekat {
     private String ime;
     private String prezime;
     private String drzanljanstvo;
+    private String status;
 
     public Glumac() {
     }
-    
-    
 
     public Glumac(Long id, String ime, String prezime, String drzanljanstvo) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
         this.drzanljanstvo = drzanljanstvo;
+    }
+
+    public Glumac(Long id, String ime, String prezime, String drzanljanstvo, String status) {
+        this.id = id;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.drzanljanstvo = drzanljanstvo;
+        this.status = status;
     }
 
     public String getDrzanljanstvo() {
@@ -66,10 +74,36 @@ public class Glumac implements Serializable, DomenskiObjekat {
     public void setPrezime(String prezime) {
         this.prezime = prezime;
     }
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     @Override
     public String toString() {
         return getIme() + " " + getPrezime();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Glumac other = (Glumac) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -144,5 +178,5 @@ public class Glumac implements Serializable, DomenskiObjekat {
     public String vratiUslovZaJoin3() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -100,6 +100,10 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
                         Map<String,Object> frg = (Map<String,Object>) kz.getParametar();
                         so = izmeniFilmRediteljeGlumce(frg);
                         break;
+                    case Operacije.IZMENI_FILM_REZIRA_GLUMI:
+                        Map<String,Object> mapa1 = (Map<String,Object>) kz.getParametar();
+                        so = izmeniFilmReziraGlumi(mapa1);
+                        break;
                 }
                 posaljiOdgovor(so);
             } catch (IOException ex) {
@@ -420,6 +424,19 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
     private ServerskiOdgovor izmeniFilmRediteljeGlumce(Map<String, Object> podaci) {
         ServerskiOdgovor so = new ServerskiOdgovor();
         boolean odgovor = Kontroler.getInstanca().izmeniFilmRediteljeGlumce(podaci);
+        if(odgovor) {
+            so.setOdgovor(odgovor);
+            so.setStatus(Status.U_REDU);
+        } else {
+            so.setOdgovor(odgovor);
+            so.setStatus(Status.GRESKA);
+        }
+        return so;
+    }
+
+    private ServerskiOdgovor izmeniFilmReziraGlumi(Map<String, Object> mapa1) {
+        ServerskiOdgovor so = new ServerskiOdgovor();
+        boolean odgovor = Kontroler.getInstanca().izmeniFilmReziraGlumi(mapa1);
         if(odgovor) {
             so.setOdgovor(odgovor);
             so.setStatus(Status.U_REDU);

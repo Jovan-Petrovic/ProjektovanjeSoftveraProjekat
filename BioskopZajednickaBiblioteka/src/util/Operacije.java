@@ -28,5 +28,6 @@ public class Operacije implements Serializable {
     public static final int OTAKZI_REZERVACIJU = 13;
     public static final int IZMENI_FILM = 14;
     public static final int IZMENI_FILM_REDITELJE_GLUMCE = 15;
+    public static final int IZMENI_FILM_REZIRA_GLUMI = 16;
  
 }

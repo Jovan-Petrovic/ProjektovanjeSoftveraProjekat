@@ -6,6 +6,7 @@
 package model;
 
 import domen.Reditelj;
+import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -20,13 +21,20 @@ public class RediteljTableModel extends AbstractTableModel {
     private final List<Reditelj> reditelji;
     private final String[] imenaKolona = new String[]{"ID","IME","PREZIME","DRZANLJANSTVO","BROJ FILMOVA"};
     private final Class[] klaseKolona = new Class[]{Long.class, String.class, String.class, String.class, Integer.class};
-    private boolean izmena;
+    private final List<Reditelj> listaObrisanih;
 
     public RediteljTableModel(List<Reditelj> reditelji) {
         this.reditelji = reditelji;
-        izmena = false;
+        this.listaObrisanih = new ArrayList<>();
     }
 
+    public RediteljTableModel() {
+        this.reditelji = new ArrayList<>();
+        this.listaObrisanih = new ArrayList<>();
+    }
+
+    
+    
     @Override
     public int getRowCount() {
         if(reditelji == null) {
@@ -94,18 +102,6 @@ public class RediteljTableModel extends AbstractTableModel {
         return reditelji;
     }
 
-    public void setIzmena(boolean izmena) {
-        this.izmena = izmena;
-    }
-
-    @Override
-    public boolean isCellEditable(int red, int kolona) {
-        if(izmena) {
-            return kolona == 1 || kolona == 2 || kolona == 3 || kolona == 4;
-        }
-        return false;
-    }
-
     @Override
     public void setValueAt(Object vrednost, int red, int kolona) {
         Reditelj reditelj = reditelji.get(red);
@@ -123,6 +119,36 @@ public class RediteljTableModel extends AbstractTableModel {
                 reditelj.setBrojFilmova((int) vrednost);
                 break;
         }
+    }
+
+    public void obrisiReditelja(int selektovanRed) {
+        reditelji.remove(selektovanRed);
+        fireTableDataChanged();
+    }
+
+    public void dodajRediteljaZaIzmenu(Reditelj reditelj) {
+        if(!reditelji.contains(reditelj)) {
+            reditelj.setStatus("dodaj");
+            reditelji.add(reditelj);
+        }
+        fireTableDataChanged();
+    }
+
+    public Reditelj vratiReditelja(int selektovanRed) {
+        return reditelji.get(selektovanRed);
+    }
+
+    public void obrisiRediteljaZaIzmenu(Reditelj r) {
+        r.setStatus("obrisi");
+        listaObrisanih.add(r);
+        reditelji.remove(r);
+        fireTableDataChanged();
+    }
+
+    public List<Reditelj> vratiSveReditelje() {
+        List<Reditelj> lista = reditelji;
+        lista.addAll(listaObrisanih);
+        return lista;
     }
  
 }
