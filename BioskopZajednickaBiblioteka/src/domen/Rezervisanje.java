@@ -148,7 +148,10 @@ public class Rezervisanje implements Serializable, DomenskiObjekat {
     public String vratiUslovZaJoin3() {
         return "projekcija.filmID=film.id";
     }
-    
-    
-    
+
+    @Override
+    public String vratiUslovZaBrisanje() {
+        return "projekcija = " + projekcija.getId() + " AND korisnik = " + korisnik.getId();
+    }
+
 }

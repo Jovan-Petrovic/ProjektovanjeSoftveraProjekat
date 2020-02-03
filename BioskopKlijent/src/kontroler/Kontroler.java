@@ -223,7 +223,7 @@ public class Kontroler {
         kz.setParametar(p);
         posaljiZahtev(kz);
         ServerskiOdgovor so = primiOdgovor();
-        JOptionPane.showMessageDialog(null, so.getPoruka());
+//        JOptionPane.showMessageDialog(null, so.getPoruka());
         if(so.getStatus().equals(Status.GRESKA)) {
             return false;
         }
@@ -325,6 +325,18 @@ public class Kontroler {
         KlijentskiZahtev kz = new KlijentskiZahtev();
         kz.setOperacija(Operacije.IZMENI_FILM_REZIRA_GLUMI);
         kz.setParametar(podaci);
+        posaljiZahtev(kz);
+        ServerskiOdgovor so = primiOdgovor();
+        if(so.getStatus().equals(Status.GRESKA)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean obrisiRezervaciju(Rezervisanje r) throws IOException, ClassNotFoundException {
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacije.OTAKZI_REZERVACIJU);
+        kz.setParametar(r);
         posaljiZahtev(kz);
         ServerskiOdgovor so = primiOdgovor();
         if(so.getStatus().equals(Status.GRESKA)) {

@@ -25,5 +25,6 @@ public interface DomenskiObjekat {
     public String vratiUslovZaJoin2();
     public String vratiJoinTabelu3();
     public String vratiUslovZaJoin3();
+    public String vratiUslovZaBrisanje();
 
 }

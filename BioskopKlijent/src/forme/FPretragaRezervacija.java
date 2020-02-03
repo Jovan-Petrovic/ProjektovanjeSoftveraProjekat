@@ -9,6 +9,7 @@ import domen.Film;
 import domen.Korisnik;
 import domen.Projekcija;
 import domen.Rezervisanje;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import kontroler.Kontroler;
+import model.ProjekcijaTableModel;
 import model.RezervisanjeTableModel;
 
 /**
@@ -191,34 +193,46 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
     }
 
     private void otkaziRezervaciju() {
-        int selektovanRed = jtblRezervacije.getSelectedRow();
-        Long projekcijaID = (Long) jtblRezervacije.getValueAt(selektovanRed, 0);
-        List<Projekcija> projekcije = null;
+//        int selektovanRed = jtblRezervacije.getSelectedRow();
+//        Long projekcijaID = (Long) jtblRezervacije.getValueAt(selektovanRed, 0);
+//        List<Projekcija> projekcije = null;
+//        try {
+//            projekcije = Kontroler.getInstanca().vratiSveProjekcije();
+//        } catch (Exception ex) {
+//            Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Projekcija p = null;
+//        for (Projekcija projekcija : projekcije) {
+//            if(projekcija.getId().equals(projekcijaID)) {
+//                p = projekcija;
+//            }
+//        }
+//        boolean signal = false;
+//        Map<String,Long> podaci = new HashMap<>();
+//        podaci.put("projekcijaID", projekcijaID);
+//        podaci.put("korisnikID", k.getId());
+//        try {
+//            //signal = Kontroler.getInstanca().obrisiRezervaciju(projekcijaID, k.getId());
+//            signal = Kontroler.getInstanca().obrisiRezervaciju(podaci);
+//        } catch (Exception ex) {
+//            Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        if(signal) {
+//            JOptionPane.showMessageDialog(this, "Rezervacija filma " + p.getFilm().getNaziv() + " datuma " + p.getDatumVreme()+ " je uspesno obrisana");
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Doslo je do greske. Rezervacija filma " + p.getFilm().getNaziv() + " datuma " + p.getDatumVreme()+ " nije uspesno obrisana");
+//        }
         try {
-            projekcije = Kontroler.getInstanca().vratiSveProjekcije();
-        } catch (Exception ex) {
-            Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Projekcija p = null;
-        for (Projekcija projekcija : projekcije) {
-            if(projekcija.getId().equals(projekcijaID)) {
-                p = projekcija;
+            int selektovanRed = jtblRezervacije.getSelectedRow();
+            RezervisanjeTableModel rtm = (RezervisanjeTableModel) jtblRezervacije.getModel();
+            Rezervisanje r = rtm.vratiRezervisanje(selektovanRed);
+            if(Kontroler.getInstanca().obrisiRezervaciju(r)) {
+                JOptionPane.showMessageDialog(this, "Rezervacija filma "+r.getProjekcija().getFilm().getNaziv()+" je uspesno obrisana");
+            } else {
+                JOptionPane.showMessageDialog(this, "Doslo je do greske. Rezervacija filma "+r.getProjekcija().getFilm().getNaziv()+" nije uspesno obrisana");
             }
-        }
-        boolean signal = false;
-        Map<String,Long> podaci = new HashMap<>();
-        podaci.put("projekcijaID", projekcijaID);
-        podaci.put("korisnikID", k.getId());
-        try {
-            //signal = Kontroler.getInstanca().obrisiRezervaciju(projekcijaID, k.getId());
-            signal = Kontroler.getInstanca().obrisiRezervaciju(podaci);
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(signal) {
-            JOptionPane.showMessageDialog(this, "Rezervacija filma " + p.getFilm().getNaziv() + " datuma " + p.getDatumVreme()+ " je uspesno obrisana");
-        } else {
-            JOptionPane.showMessageDialog(this, "Doslo je do greske. Rezervacija filma " + p.getFilm().getNaziv() + " datuma " + p.getDatumVreme()+ " nije uspesno obrisana");
         }
     }
 }

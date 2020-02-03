@@ -89,8 +89,10 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
                         so = vratiSvaRezervisanja();
                         break;
                     case Operacije.OTAKZI_REZERVACIJU:
-                        Map<String,Long> mapa = (Map<String,Long>) kz.getParametar();
-                        so = otkaziRezervaciju(mapa);
+//                        Map<String,Long> mapa = (Map<String,Long>) kz.getParametar();
+                        Rezervisanje r = (Rezervisanje) kz.getParametar();
+//                        so = otkaziRezervaciju(mapa);
+                        so = otkaziRezervaciju(r);
                         break;
                     case Operacije.IZMENI_FILM:
                         Film film = (Film) kz.getParametar();
@@ -298,18 +300,43 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         return so;
     }
 
-    private ServerskiOdgovor obrisiProjekciju(Projekcija p) throws Exception {
+//    private ServerskiOdgovor obrisiProjekciju(Projekcija p) throws Exception {
+//        ServerskiOdgovor so = new ServerskiOdgovor();
+//        boolean odgovor = Kontroler.getInstanca().obrisiProjekciju(p.getId());
+//        if(odgovor) {
+//            so.setOdgovor(true);
+//            so.setPoruka("Uspesno obrisana projekcija");
+//            so.setStatus(Status.U_REDU);
+//        } else {
+//            so.setOdgovor(false);
+//            so.setPoruka("projekcija nije uspesno obrisana");
+//            so.setStatus(Status.GRESKA);
+//        }
+//        return so;
+//    }
+    
+    private ServerskiOdgovor obrisiProjekciju(Projekcija p) {
         ServerskiOdgovor so = new ServerskiOdgovor();
-        boolean odgovor = Kontroler.getInstanca().obrisiProjekciju(p.getId());
-        if(odgovor) {
+        try {
+            Kontroler.getInstanca().obrisiProjekciju(p);
             so.setOdgovor(true);
             so.setPoruka("Uspesno obrisana projekcija");
             so.setStatus(Status.U_REDU);
-        } else {
+        } catch (Exception ex) {
             so.setOdgovor(false);
             so.setPoruka("projekcija nije uspesno obrisana");
             so.setStatus(Status.GRESKA);
+            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        if(odgovor) {
+//            so.setOdgovor(true);
+//            so.setPoruka("Uspesno obrisana projekcija");
+//            so.setStatus(Status.U_REDU);
+//        } else {
+//            so.setOdgovor(false);
+//            so.setPoruka("projekcija nije uspesno obrisana");
+//            so.setStatus(Status.GRESKA);
+//        }
         return so;
     }
 
@@ -443,6 +470,20 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         } else {
             so.setOdgovor(odgovor);
             so.setStatus(Status.GRESKA);
+        }
+        return so;
+    }
+
+    private ServerskiOdgovor otkaziRezervaciju(Rezervisanje r) {
+        ServerskiOdgovor so = new ServerskiOdgovor();
+        try {
+            Kontroler.getInstanca().otkaziRezervaciju(r);
+            so.setOdgovor(true);
+            so.setStatus(Status.U_REDU);
+        } catch (Exception ex) {
+            so.setOdgovor(false);
+            so.setStatus(Status.GRESKA);
+            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
         }
         return so;
     }

@@ -189,4 +189,16 @@ public class Broker {
             throw new Exception(ex.getLocalizedMessage()+"Greska prilikom kreiranja "+odo.getImeTabele()+" u bazi!\n");
         }
     }
+    
+    public void obrisi(DomenskiObjekat odo) throws Exception {
+        try {
+            String upit = "DELETE FROM " + odo.getImeTabele() + " WHERE " + odo.vratiUslovZaBrisanje();
+            System.out.println(upit);
+            Statement s = konekcija.createStatement();
+            s.executeUpdate(upit);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new Exception("Greska prilikom brisanja projekcije u bazi");
+        }
+    }
 }

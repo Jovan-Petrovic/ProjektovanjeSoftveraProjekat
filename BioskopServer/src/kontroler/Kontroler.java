@@ -18,6 +18,8 @@ import domen.Zanr;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import logika.SOObrisiProjekciju;
+import logika.SOObrisiRezervaciju;
 import logika.SOUbaciFilm;
 import logika.SOUbaciGlumi;
 import logika.SOUbaciProjekciju;
@@ -135,8 +137,13 @@ public class Kontroler {
         return ((SOVratiProjekcije)so).getLista();
     }
 
-    public boolean obrisiProjekciju(Long id) throws Exception {
-        return servisProjekcija.obrisi(id);
+//    public boolean obrisiProjekciju(Long id) throws Exception {
+//        return servisProjekcija.obrisi(id);
+//    }
+    
+    public void obrisiProjekciju(Projekcija p) throws Exception {
+        SistemskaOperacija so = new SOObrisiProjekciju(p);
+        so.execute();
     }
 
     public void sacuvajRezira(Rezira rezira) throws Exception {
@@ -194,8 +201,13 @@ public class Kontroler {
         return ((SOVratiRezervacije)so).getLista();
     }
 
-    public boolean obrisiRezervaciju(Long projekcijaID, Long korisnikID) throws Exception {
-        return servisRezervisanje.obrisi(projekcijaID, korisnikID);
+//    public boolean obrisiRezervaciju(Long projekcijaID, Long korisnikID) throws Exception {
+//        return servisRezervisanje.obrisi(projekcijaID, korisnikID);
+//    }
+    
+    public void otkaziRezervaciju(Rezervisanje r) throws Exception {
+        SistemskaOperacija so = new SOObrisiRezervaciju(r);
+        so.execute();
     }
 
 //    public Film sacuvajFilmReziraGlumi(Map<String, Object> podaci) {
@@ -234,6 +246,10 @@ public class Kontroler {
     public boolean izmeniFilmReziraGlumi(Map<String, Object> mapa1) {
         return servisFilm.izmeniFilmReziraGlumi(mapa1);
     }
+
+    
+
+    
 
     
 
