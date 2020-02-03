@@ -336,17 +336,32 @@ public class FFilm extends javax.swing.JDialog {
             String jezik = jtxtJezik.getText().trim();
             double ocenaIMDb = Double.parseDouble(jtxtOcenaIMDb.getText().trim());           
             Film film = new Film(null, naziv, trajanje, zanr, godina, jezik, ocenaIMDb);
-            podaci.put("film", film);   
+            podaci.put("film", film);
             
-            for (Rezira rezira : reditelji) {
-                rezira.setFilm(f);                
-            }
-            podaci.put("rezira", reditelji);
+            RediteljTableModel rtm = (RediteljTableModel) jtblReditelji.getModel();
+            ArrayList<Reditelj> listaReditelja = (ArrayList<Reditelj>) rtm.getReditelji();
+            ArrayList<Rezira> reziranja = new ArrayList<>();
             
-            for (Glumi glumi : glumci) {
-                glumi.setFilm(f);
+            for (Reditelj reditelj : listaReditelja) {
+                reziranja.add(new Rezira(film, reditelj));
             }
-            podaci.put("glumi", glumci);
+            
+//            for (Rezira rezira : reditelji) {
+//                rezira.setFilm(f);                
+//            }
+            podaci.put("rezira", reziranja);
+            
+//            for (Glumi glumi : glumci) {
+//                glumi.setFilm(f);
+//            }
+            GlumacTableModel gtm = (GlumacTableModel) jtblGlumci.getModel();
+            ArrayList<Glumac> glumci = (ArrayList<Glumac>) gtm.getGlumci();
+            ArrayList<Glumi> uloge = new ArrayList<>();
+            for (Glumac glumac : glumci) {
+                uloge.add(new Glumi(film, glumac));
+            }
+
+            podaci.put("glumi", uloge);
             
             film = Kontroler.getInstanca().sacuvajFilmReziraGlumi(podaci);
             if(film != null) {
@@ -369,7 +384,7 @@ public class FFilm extends javax.swing.JDialog {
         //double ocena = Double.parseDouble(jtxtOcenaReditelja.getText().trim());
         //String napomena = jtxtNapomenaZaReditelja.getText().trim();
         Rezira rezira = new Rezira(null, reditelj);
-        reditelji.add(rezira);
+        //reditelji.add(rezira);
     }//GEN-LAST:event_jbtnDodajRediteljaActionPerformed
 
     private void jbtnObrisiRediteljaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnObrisiRediteljaActionPerformed
@@ -388,7 +403,7 @@ public class FFilm extends javax.swing.JDialog {
         //double ocena = Double.parseDouble(jtxtOcenaGlumca.getText().trim());
         //String napomena = jtxtNapomenaZaGlumca.getText().trim();
         Glumi glumi = new Glumi(null, glumac);
-        glumci.add(glumi);
+        //glumci.add(glumi);
     }//GEN-LAST:event_jbtnDodajGlumcaActionPerformed
 
     private void jbtnObrisiGlumcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnObrisiGlumcaActionPerformed

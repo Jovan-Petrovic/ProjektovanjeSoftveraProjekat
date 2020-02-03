@@ -204,23 +204,22 @@ public class Kontroler {
     
     public Film sacuvajFilmReziraGlumi(Map<String, Object> podaci) throws Exception {
         Film film = (Film) podaci.get("film");
-        ArrayList<Rezira> reziranja = (ArrayList<Rezira>) podaci.get("rezira");
-        ArrayList<Glumi> glumljenja = (ArrayList<Glumi>) podaci.get("glumi");
-        SistemskaOperacija so = new SOUbaciFilm(film);
+//        ArrayList<Rezira> reziranja = (ArrayList<Rezira>) podaci.get("rezira");
+//        ArrayList<Glumi> uloge = (ArrayList<Glumi>) podaci.get("glumi");
+        SistemskaOperacija so = new SOUbaciFilm(film, podaci);
         so.execute();
         
-        for (Rezira rezira : reziranja) {
-            rezira.setFilm(film);
-            SistemskaOperacija so1 = new SOUbaciRezira(rezira);
-            so1.execute();
-        }
-        
-        for (Glumi glumi : glumljenja) {
-            glumi.setFilm(film);
-            SistemskaOperacija so2 = new SOUbaciGlumi(glumi);
-            so2.execute();
-        }
-        
+//        for (Rezira rezira : reziranja) {
+//            rezira.setFilm(film);
+//            SistemskaOperacija so1 = new SOUbaciRezira(rezira);
+//            so1.execute();
+//        }
+//        
+//        for (Glumi glumi : uloge) {
+//            glumi.setFilm(film);
+//            SistemskaOperacija so2 = new SOUbaciGlumi(glumi);
+//            so2.execute();
+//        }
         return film;
     }
 
