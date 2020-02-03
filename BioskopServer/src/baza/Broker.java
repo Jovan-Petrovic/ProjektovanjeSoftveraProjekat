@@ -7,7 +7,9 @@ package baza;
 
 import domen.DomenskiObjekat;
 import domen.Film;
+import domen.Glumac;
 import domen.Glumi;
+import domen.Reditelj;
 import domen.Rezira;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -199,6 +201,59 @@ public class Broker {
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new Exception("Greska prilikom brisanja projekcije u bazi");
+        }
+    }
+
+    public void izmeniSlozenSlucaj(DomenskiObjekat odo, Map<String, Object> podaci) throws Exception {
+        try {
+            Film film = (Film) odo;
+            String upit = "UPDATE "+odo.getImeTabele()+" SET "+odo.vratiVrednostiZaOperacijuUpdate()+" WHERE "+odo.vratiUslovZaOperacijuUpdate();
+            System.out.println(upit);
+            Statement s = konekcija.createStatement();
+            s.executeUpdate(upit);
+            
+            ArrayList<DomenskiObjekat> lista1 = (ArrayList<DomenskiObjekat>) podaci.get("reditelji");
+            for (DomenskiObjekat domenskiObjekat : lista1) {
+                boolean status = false;
+                Reditelj r = (Reditelj) domenskiObjekat;
+                odo = new Rezira(film, r);
+                if(r.getStatus() != null && r.getStatus().equals("dodaj")) {
+                    upit = "insert into "+odo.getImeTabele()+" ("+odo.getImenaAtributaZaUbacivanje()+") values ("+odo.getVrednostiAtributaZaUbacivanje()+")";
+                    status = true;
+                }
+                if(r.getStatus() != null && r.getStatus().equals("obrisi")) {
+                    upit = "DELETE FROM " + odo.getImeTabele() + " WHERE " + odo.vratiUslovZaBrisanje();
+                    status = true;
+                }
+                if(status) {
+                    System.out.println(upit);
+                    s = konekcija.createStatement();
+                    s.executeUpdate(upit);
+                }
+            }
+            ArrayList<DomenskiObjekat> lista2 = (ArrayList<DomenskiObjekat>) podaci.get("glumci");
+            for (DomenskiObjekat domenskiObjekat : lista2) {
+                boolean status = false;
+                Glumac g = (Glumac) domenskiObjekat;
+                odo = new Glumi(film, g);
+                if(g.getStatus() != null && g.getStatus().equals("dodaj")) {
+                    upit = "insert into "+odo.getImeTabele()+" ("+odo.getImenaAtributaZaUbacivanje()+") values ("+odo.getVrednostiAtributaZaUbacivanje()+")";
+                    status = true;
+                } 
+                if(g.getStatus() != null && g.getStatus().equals("obrisi")) {
+                    upit = "DELETE FROM " + odo.getImeTabele() + " WHERE " + odo.vratiUslovZaBrisanje();
+                    status = true;
+                }
+                if(status) {
+                    System.out.println(upit);
+                    s = konekcija.createStatement();
+                    s.executeUpdate(upit);  
+                }
+            }
+            s.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new Exception(ex.getLocalizedMessage()+"Greska prilikom izmene "+odo.getImeTabele()+" u bazi!\n");
         }
     }
 }

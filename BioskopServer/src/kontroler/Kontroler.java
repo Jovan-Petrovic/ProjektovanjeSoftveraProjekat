@@ -18,6 +18,9 @@ import domen.Zanr;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import logika.SOIzmeniFilm;
 import logika.SOObrisiProjekciju;
 import logika.SOObrisiRezervaciju;
 import logika.SOUbaciFilm;
@@ -243,14 +246,19 @@ public class Kontroler {
         return servisFilm.izmeniFilmRediteljeGlumce(podaci);
     }
 
-    public boolean izmeniFilmReziraGlumi(Map<String, Object> mapa1) {
-        return servisFilm.izmeniFilmReziraGlumi(mapa1);
+//    public boolean izmeniFilmReziraGlumi(Map<String, Object> mapa1) {
+//        return servisFilm.izmeniFilmReziraGlumi(mapa1);
+//    }
+
+    public boolean izmeniFilmReziraGlumi(Map<String, Object> podaci) {
+        SistemskaOperacija so = new SOIzmeniFilm(podaci);
+        try {
+            so.execute();
+            return true;
+        } catch (Exception ex) {
+            Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
-
-    
-
-    
-
-    
 
 }

@@ -154,4 +154,14 @@ public class Projekcija implements Serializable, DomenskiObjekat {
         return "id = " + id;
     }
 
+    @Override
+    public String vratiVrednostiZaOperacijuUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String vratiUslovZaOperacijuUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

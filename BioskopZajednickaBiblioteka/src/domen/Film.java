@@ -180,6 +180,16 @@ public class Film implements Serializable, DomenskiObjekat {
     public String vratiUslovZaBrisanje() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String vratiVrednostiZaOperacijuUpdate() {
+        return "naziv = " + "'" + naziv + "'" + ", trajanje = " + trajanje + ", zanr = " + "'" + zanr.toString() + "'" + ", godina = " + godina + ", jezik = " + "'" + jezik + "'" + ", ocenaIMDb = " + ocenaIMDb;
+    }
+
+    @Override
+    public String vratiUslovZaOperacijuUpdate() {
+        return "id = " + id;
+    }
     
     
 }

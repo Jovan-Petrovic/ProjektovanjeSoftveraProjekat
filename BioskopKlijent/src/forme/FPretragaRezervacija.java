@@ -233,6 +233,8 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
             }
         } catch (IOException ex) {
             Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

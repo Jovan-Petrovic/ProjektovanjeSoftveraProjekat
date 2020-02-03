@@ -134,6 +134,16 @@ public class Rezira implements Serializable, DomenskiObjekat {
 
     @Override
     public String vratiUslovZaBrisanje() {
+        return " film = " + film.getId() + " AND reditelj = " + reditelj.getId();
+    }
+
+    @Override
+    public String vratiVrednostiZaOperacijuUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String vratiUslovZaOperacijuUpdate() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

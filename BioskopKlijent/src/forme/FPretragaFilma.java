@@ -242,6 +242,10 @@ public class FPretragaFilma extends javax.swing.JDialog {
 
     private void jbtnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIzmeniActionPerformed
         int selektovanRed = jtblFilmovi.getSelectedRow();
+        if(selektovanRed == -1) {
+            JOptionPane.showMessageDialog(this, "Morate selektovati red");
+            return;
+        }
         TableModel tm = jtblFilmovi.getModel();
         FilmTableModel ftm = (FilmTableModel) tm;
 //        Long id = (Long) ftm.getValueAt(selektovanRed, 0);

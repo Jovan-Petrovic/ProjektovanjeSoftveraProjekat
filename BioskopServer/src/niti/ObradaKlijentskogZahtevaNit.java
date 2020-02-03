@@ -461,6 +461,19 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         return so;
     }
 
+//    private ServerskiOdgovor izmeniFilmReziraGlumi(Map<String, Object> mapa1) {
+//        ServerskiOdgovor so = new ServerskiOdgovor();
+//        boolean odgovor = Kontroler.getInstanca().izmeniFilmReziraGlumi(mapa1);
+//        if(odgovor) {
+//            so.setOdgovor(odgovor);
+//            so.setStatus(Status.U_REDU);
+//        } else {
+//            so.setOdgovor(odgovor);
+//            so.setStatus(Status.GRESKA);
+//        }
+//        return so;
+//    }
+    
     private ServerskiOdgovor izmeniFilmReziraGlumi(Map<String, Object> mapa1) {
         ServerskiOdgovor so = new ServerskiOdgovor();
         boolean odgovor = Kontroler.getInstanca().izmeniFilmReziraGlumi(mapa1);

@@ -154,4 +154,14 @@ public class Rezervisanje implements Serializable, DomenskiObjekat {
         return "projekcija = " + projekcija.getId() + " AND korisnik = " + korisnik.getId();
     }
 
+    @Override
+    public String vratiVrednostiZaOperacijuUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String vratiUslovZaOperacijuUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
