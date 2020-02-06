@@ -118,12 +118,10 @@
                               <Component id="jScrollPane2" alignment="1" min="-2" pref="511" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jbtnIzadji" min="-2" pref="89" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jbtnIzadji" min="-2" pref="112" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jbtnSacuvajPromene" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                          <Component id="jbtnSacuvaj" min="-2" pref="99" max="-2" attributes="0"/>
+                          <Component id="jbtnSacuvajPromene" min="-2" pref="101" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -178,16 +176,12 @@
                       <Group type="102" attributes="0">
                           <Component id="jScrollPane1" min="-2" pref="130" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jbtnSacuvaj" min="-2" max="-2" attributes="0"/>
-                              <Component id="jbtnIzadji" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jbtnIzadji" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jbtnSacuvajPromene" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="jScrollPane2" min="-2" pref="130" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jbtnSacuvajPromene" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane2" min="-2" pref="130" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="32767" attributes="0"/>
               </Group>
@@ -325,14 +319,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnIzadjiActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jbtnSacuvaj">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Sacuvaj"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnSacuvajActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JComboBox" name="jcmbReditelji">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -397,7 +383,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jbtnSacuvajPromene">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sacuvaj promene"/>
+            <Property name="text" type="java.lang.String" value="Sacuvaj"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnSacuvajPromeneActionPerformed"/>

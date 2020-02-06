@@ -206,5 +206,10 @@ public class Korisnik implements Serializable, DomenskiObjekat {
         }
         return k;
     }
+
+    @Override
+    public String vratiUslovZaCitanjeListe() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
       
 }

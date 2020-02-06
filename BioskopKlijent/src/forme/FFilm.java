@@ -61,14 +61,12 @@ public class FFilm extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jlabID = new javax.swing.JLabel();
         jlabNaziv = new javax.swing.JLabel();
         jlabTrajanje = new javax.swing.JLabel();
         jlabZanr = new javax.swing.JLabel();
         jlabGodina = new javax.swing.JLabel();
         jlabJezik = new javax.swing.JLabel();
         jlabOcenaIMDb = new javax.swing.JLabel();
-        jtxtID = new javax.swing.JTextField();
         jtxtNaziv = new javax.swing.JTextField();
         jtxtTrajanje = new javax.swing.JTextField();
         jcomboZanr = new javax.swing.JComboBox<>();
@@ -87,16 +85,14 @@ public class FFilm extends javax.swing.JDialog {
         jbtnObrisiReditelja = new javax.swing.JButton();
         jbtnDodajGlumca = new javax.swing.JButton();
         jbtnObrisiGlumca = new javax.swing.JButton();
-        jbtnIzadji = new javax.swing.JButton();
         jbtnSacuvaj = new javax.swing.JButton();
+        jbtnIzadji = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Novi film"));
-
-        jlabID.setText("ID:");
 
         jlabNaziv.setText("Naziv:");
 
@@ -109,8 +105,6 @@ public class FFilm extends javax.swing.JDialog {
         jlabJezik.setText("Jezik:");
 
         jlabOcenaIMDb.setText("OcenaIMDb:");
-
-        jtxtID.setEnabled(false);
 
         jcomboZanr.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -176,6 +170,20 @@ public class FFilm extends javax.swing.JDialog {
             }
         });
 
+        jbtnSacuvaj.setText("Sacuvaj");
+        jbtnSacuvaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSacuvajActionPerformed(evt);
+            }
+        });
+
+        jbtnIzadji.setText("Izadji");
+        jbtnIzadji.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnIzadjiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -184,11 +192,7 @@ public class FFilm extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jlabReditelji, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -197,8 +201,7 @@ public class FFilm extends javax.swing.JDialog {
                                     .addComponent(jlabZanr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jlabGodina, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jlabJezik, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jlabOcenaIMDb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jlabID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jlabOcenaIMDb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(30, 30, 30)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jcomboReditelji, 0, 344, Short.MAX_VALUE)
@@ -207,33 +210,37 @@ public class FFilm extends javax.swing.JDialog {
                                     .addComponent(jtxtGodina)
                                     .addComponent(jcomboZanr, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jtxtTrajanje)
-                                    .addComponent(jtxtNaziv)
-                                    .addComponent(jtxtID)))
+                                    .addComponent(jtxtNaziv)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jbtnDodajReditelja, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(jbtnObrisiReditelja)))
+                                .addGap(27, 27, 27)
+                                .addComponent(jbtnObrisiReditelja))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jbtnDodajGlumca, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(jbtnObrisiGlumca))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jlabGlumci, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jcomboGlumci, 0, 340, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jcomboGlumci, 0, 348, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jbtnDodajGlumca, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(jbtnObrisiGlumca)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbtnIzadji, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtnSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlabID)
-                    .addComponent(jtxtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlabNaziv)
                     .addComponent(jtxtNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -244,7 +251,7 @@ public class FFilm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlabZanr)
                     .addComponent(jcomboZanr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jlabGodina)
                     .addComponent(jtxtGodina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -252,11 +259,11 @@ public class FFilm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlabJezik)
                     .addComponent(jtxtJezik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlabOcenaIMDb)
                     .addComponent(jtxtOcenaIMDb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlabReditelji)
                     .addComponent(jcomboReditelji, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -268,26 +275,16 @@ public class FFilm extends javax.swing.JDialog {
                     .addComponent(jbtnObrisiReditelja)
                     .addComponent(jbtnDodajGlumca)
                     .addComponent(jbtnObrisiGlumca))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbtnSacuvaj)
+                    .addComponent(jbtnIzadji))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        jbtnIzadji.setText("Izadji");
-        jbtnIzadji.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnIzadjiActionPerformed(evt);
-            }
-        });
-
-        jbtnSacuvaj.setText("Sacuvaj");
-        jbtnSacuvaj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSacuvajActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -295,12 +292,7 @@ public class FFilm extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbtnIzadji, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -308,11 +300,7 @@ public class FFilm extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnIzadji)
-                    .addComponent(jbtnSacuvaj))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -327,14 +315,48 @@ public class FFilm extends javax.swing.JDialog {
 //            sacuvajFilm();
 //            sacuvajRezira();
 //            sacuvajGlumi();
+            if(jtxtNaziv.getText().isEmpty() || jtxtTrajanje.getText().isEmpty() || jtxtGodina.getText().isEmpty() || jtxtJezik.getText().isEmpty() || jtxtOcenaIMDb.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Sva polja moraju biti popunjena");
+                return;
+            }
             Map<String,Object> podaci = new HashMap<>();
             
             String naziv = jtxtNaziv.getText().trim();
-            int trajanje = Integer.parseInt(jtxtTrajanje.getText().trim());
+            int trajanje = 0;
+            try {
+            trajanje = Integer.parseInt(jtxtTrajanje.getText().trim());
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(this, "Trajanje filma mora biti biti ceo broj!");
+                return;
+            }
+            if(trajanje<=0) {
+                JOptionPane.showMessageDialog(this, "Trajanje filma morabiti pozitivan broj!");
+                return;
+            }
             Zanr zanr = (Zanr) jcomboZanr.getSelectedItem();
-            int godina = Integer.parseInt(jtxtGodina.getText().trim());
+            int godina = 0;
+            try {
+                godina = Integer.parseInt(jtxtGodina.getText().trim());
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(this, "Godina filma mora biti biti ceo broj!");
+                return;
+            }
+            if(godina < 1888 || godina > 2020) {
+                JOptionPane.showMessageDialog(this, "Godina kada je snimljen film mora biti u intervalu 1888-2020!");
+                return;
+            }
             String jezik = jtxtJezik.getText().trim();
-            double ocenaIMDb = Double.parseDouble(jtxtOcenaIMDb.getText().trim());           
+            double ocenaIMDb = 0;
+            try {
+                ocenaIMDb = Double.parseDouble(jtxtOcenaIMDb.getText().trim());
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(this, "Ocena mora biti ceo ili decimalni broj u intervalu 1-10!");
+                return;
+            }
+            if(ocenaIMDb < 1 || ocenaIMDb > 10) {
+                JOptionPane.showMessageDialog(this, "Ocena filma mora biti u intervalu 1-10!");
+                return;
+            }
             Film film = new Film(null, naziv, trajanje, zanr, godina, jezik, ocenaIMDb);
             podaci.put("film", film);
             
@@ -431,7 +453,6 @@ public class FFilm extends javax.swing.JDialog {
     private javax.swing.JComboBox<Object> jcomboZanr;
     private javax.swing.JLabel jlabGlumci;
     private javax.swing.JLabel jlabGodina;
-    private javax.swing.JLabel jlabID;
     private javax.swing.JLabel jlabJezik;
     private javax.swing.JLabel jlabNaziv;
     private javax.swing.JLabel jlabOcenaIMDb;
@@ -441,7 +462,6 @@ public class FFilm extends javax.swing.JDialog {
     private javax.swing.JTable jtblGlumci;
     private javax.swing.JTable jtblReditelji;
     private javax.swing.JTextField jtxtGodina;
-    private javax.swing.JTextField jtxtID;
     private javax.swing.JTextField jtxtJezik;
     private javax.swing.JTextField jtxtNaziv;
     private javax.swing.JTextField jtxtOcenaIMDb;

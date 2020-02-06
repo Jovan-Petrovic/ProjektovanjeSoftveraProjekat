@@ -7,6 +7,9 @@ package model;
 
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 import domen.Projekcija;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,8 +22,8 @@ import javax.swing.table.AbstractTableModel;
 public class ProjekcijaTableModel extends AbstractTableModel {
 
     private final List<Projekcija> projekcije;
-    private final String[] imenaKolona = new String[]{"DATUM","SALA","FILMID","NAZIV_FILMA"};
-    private final Class[] klaseKolona = new Class[]{Date.class, String.class, Long.class, String.class};
+    private final String[] imenaKolona = new String[]{"DATUM I VREME","SALA","FILMID","NAZIV_FILMA"};
+    private final Class[] klaseKolona = new Class[]{String.class, String.class, Long.class, String.class}; 
 
     public ProjekcijaTableModel(List<Projekcija> projekcije) {
         this.projekcije = projekcije;
@@ -48,7 +51,9 @@ public class ProjekcijaTableModel extends AbstractTableModel {
         Projekcija projekcija = projekcije.get(red);
         switch(kolona) {
             case 0:
-                return projekcija.getDatumVreme();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+                String datumVreme = sdf.format(projekcija.getDatumVreme());
+                return datumVreme;
             case 1:
                 return projekcija.getSala();
             case 2:

@@ -31,6 +31,7 @@ import logika.SOUbaciProjekciju;
 import logika.SOUbaciRezervisanje;
 import logika.SOUbaciRezira;
 import logika.SOVratiFilmove;
+import logika.SOVratiFiltriraneFilmove;
 import logika.SOVratiGlumce;
 import logika.SOVratiProjekcije;
 import logika.SOVratiReditelje;
@@ -287,6 +288,12 @@ public class Kontroler {
             odgovor.setStatus(Status.GRESKA);
         }
         return odgovor;
+    }
+
+    public List<DomenskiObjekat> vratiFiltriraneFilmove(Film film) throws Exception {
+        SistemskaOperacija so = new SOVratiFiltriraneFilmove(film);
+        so.execute();
+        return ((SOVratiFiltriraneFilmove)so).getLista();
     }
 
 }

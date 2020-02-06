@@ -18,7 +18,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class FilmTableModel extends AbstractTableModel {
     
-    private final List<Film> filmovi;
+    private List<Film> filmovi;
     private final String[] imenaKolona = new String[]{"ID","NAZIV","TRAJANJE","ZANR","GODINA","JEZIK","ocenaIMDb"};
     private final Class[] klaseKolona = new Class[]{Long.class, String.class, Integer.class, String.class,Integer.class,String.class,Double.class};
 
@@ -75,7 +75,7 @@ public class FilmTableModel extends AbstractTableModel {
         return klaseKolona[kolona];
     }
 
-    public void pretraziFilmove(Zanr zanr, String naziv) {       
+    public void pretraziFilmove(Zanr zanr, String naziv) {
         List<Film> zaUklanjanje = new ArrayList<>();
         if(naziv.isEmpty()) {
             for (Film film : filmovi) {
@@ -105,6 +105,14 @@ public class FilmTableModel extends AbstractTableModel {
 
     public Film vratiFilm(int selektovanRed) {
         return filmovi.get(selektovanRed);
+    }
+
+    public List<Film> getFilmovi() {
+        return filmovi;
+    }
+
+    public void setFilmovi(List<Film> filmovi) {
+        this.filmovi = filmovi;
     }
     
     

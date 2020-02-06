@@ -30,5 +30,6 @@ public interface DomenskiObjekat {
     public String vratiUslovZaOperacijuUpdate();
     public String vratiUslovZaCitanje();
     public DomenskiObjekat ucitajDomenskiObjekat(ResultSet rs);
+    public String vratiUslovZaCitanjeListe();
 
 }

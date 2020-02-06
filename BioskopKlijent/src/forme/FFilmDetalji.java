@@ -111,7 +111,6 @@ public class FFilmDetalji extends javax.swing.JDialog {
         jtblGlumci = new javax.swing.JTable();
         jtxtZanr = new javax.swing.JTextField();
         jbtnIzadji = new javax.swing.JButton();
-        jbtnSacuvaj = new javax.swing.JButton();
         jcmbReditelji = new javax.swing.JComboBox();
         jcmbGlumci = new javax.swing.JComboBox();
         jbtnDodajReditelja = new javax.swing.JButton();
@@ -189,13 +188,6 @@ public class FFilmDetalji extends javax.swing.JDialog {
             }
         });
 
-        jbtnSacuvaj.setText("Sacuvaj");
-        jbtnSacuvaj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSacuvajActionPerformed(evt);
-            }
-        });
-
         jcmbReditelji.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jcmbGlumci.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -228,7 +220,7 @@ public class FFilmDetalji extends javax.swing.JDialog {
             }
         });
 
-        jbtnSacuvajPromene.setText("Sacuvaj promene");
+        jbtnSacuvajPromene.setText("Sacuvaj");
         jbtnSacuvajPromene.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnSacuvajPromeneActionPerformed(evt);
@@ -289,11 +281,9 @@ public class FFilmDetalji extends javax.swing.JDialog {
                             .addComponent(jlabGlumci, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jbtnIzadji, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtnIzadji, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnSacuvajPromene)
-                        .addGap(41, 41, 41)
-                        .addComponent(jbtnSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbtnSacuvajPromene, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -338,13 +328,10 @@ public class FFilmDetalji extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jbtnSacuvaj)
-                            .addComponent(jbtnIzadji)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbtnSacuvajPromene)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbtnIzadji)
+                            .addComponent(jbtnSacuvajPromene)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE))
         );
 
@@ -371,61 +358,6 @@ public class FFilmDetalji extends javax.swing.JDialog {
     private void jbtnIzadjiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIzadjiActionPerformed
         dispose();
     }//GEN-LAST:event_jbtnIzadjiActionPerformed
-
-    private void jbtnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSacuvajActionPerformed
-        Long id = Long.parseLong(jtxtID.getText().trim());
-        String naziv = jtxtNaziv.getText().trim();
-        int trajanje = Integer.parseInt(jtxtTrajanje.getText().trim());
-        String z = jtxtZanr.getText().trim();
-        ArrayList<String> zanrovi = new ArrayList<String>() {
-            {
-                add("KOMEDIJA");
-                add("AKCIJA");
-                add("TRILER");
-                add("DRAMA");
-                add("NAUCNA_FANTASTIKA");
-                add("DOKUMENTARNI");
-                add("MISTERIJA");
-                add("HOROR");
-                
-            }
-        };
-        Zanr zanr = null;
-        if(zanrovi.contains(z)) {
-            zanr = Zanr.valueOf(jtxtZanr.getText().trim());
-        } else {
-            JOptionPane.showMessageDialog(this, "Morate uneti jedan od sledecih zanrova: KOMEDIJA, AKCIJA, TRILER, DRAMA, NAUCNA_FANTASTIKA, DOKUMENTARNI, MISTERIJA, HOROR");
-            return;
-        }
-        int godina = Integer.parseInt(jtxtGodina.getText().trim());
-        String jezik = jtxtJezik.getText().trim();
-        double ocenaIMDb = Double.parseDouble(jtxtOcenaIMDb.getText().trim());
-        
-        Film film = new Film(id, naziv, trajanje, zanr, godina, jezik, ocenaIMDb);
-        
-        RediteljTableModel rtm = (RediteljTableModel) jtblReditelji.getModel();
-        List<Reditelj> reditelji = rtm.getReditelji();
-        GlumacTableModel gtm = (GlumacTableModel) jtblGlumci.getModel();
-        List<Glumac> glumci = gtm.getGlumci();
-        Map<String,Object> podaci = new HashMap<>();
-        podaci.put("film", film);
-        podaci.put("reditelji", reditelji);
-        podaci.put("glumci", glumci);
-        boolean status = false;
-        try {
-            //status = Kontroler.getInstanca().izmeniFilm(film);
-            status = Kontroler.getInstanca().izmeniFilmRediteljeGlumce(podaci);
-        } catch (IOException ex) {
-            Logger.getLogger(FFilmDetalji.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FFilmDetalji.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if(status) {
-            JOptionPane.showMessageDialog(this, "Uspesno izmenjen film: " + film);
-        } else {
-            JOptionPane.showMessageDialog(this, "Doslo je do greske. Film nije uspesno izmenjen: " + film);
-        }
-    }//GEN-LAST:event_jbtnSacuvajActionPerformed
 
     private void jbtnObrisiRediteljaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnObrisiRediteljaActionPerformed
         int selektovanRed = jtblReditelji.getSelectedRow();
@@ -526,7 +458,6 @@ public class FFilmDetalji extends javax.swing.JDialog {
     private javax.swing.JButton jbtnIzadji;
     private javax.swing.JButton jbtnObrisiGlumca;
     private javax.swing.JButton jbtnObrisiReditelja;
-    private javax.swing.JButton jbtnSacuvaj;
     private javax.swing.JButton jbtnSacuvajPromene;
     private javax.swing.JComboBox jcmbGlumci;
     private javax.swing.JComboBox jcmbReditelji;
@@ -558,7 +489,7 @@ public class FFilmDetalji extends javax.swing.JDialog {
         jtxtGodina.setText(film.getGodina()+"");
         jtxtJezik.setText(film.getJezik());
         jtxtOcenaIMDb.setText(film.getOcenaIMDb()+"");
-        jbtnSacuvaj.setVisible(false);
+        jbtnSacuvajPromene.setVisible(false);
         jcmbReditelji.setVisible(false);
         jcmbGlumci.setVisible(false);
         jbtnDodajReditelja.setVisible(false);

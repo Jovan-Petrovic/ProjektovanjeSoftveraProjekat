@@ -156,6 +156,11 @@ public class Rezira implements Serializable, DomenskiObjekat {
     public DomenskiObjekat ucitajDomenskiObjekat(ResultSet rs) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String vratiUslovZaCitanjeListe() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

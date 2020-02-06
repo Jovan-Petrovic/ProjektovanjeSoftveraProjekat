@@ -109,6 +109,11 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
                     case Operacije.PRIJAVA:
                         Korisnik k = (Korisnik) kz.getParametar();
                         so = prijava(k);
+                        break;
+                    case Operacije.VRATI_FILTRIRANE_FILMOVE:
+                        Film f = (Film) kz.getParametar();
+                        so = vratiFiltriraneFilmove(f);
+                        break;
                 }
                 posaljiOdgovor(so);
             } catch (IOException ex) {
@@ -509,6 +514,20 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         try {
             so = Kontroler.getInstanca().prijava(k);
         } catch (Exception ex) {
+            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return so;
+    }
+
+    private ServerskiOdgovor vratiFiltriraneFilmove(Film film) throws Exception {
+        ServerskiOdgovor so = new ServerskiOdgovor();
+        try {
+            ArrayList<DomenskiObjekat> filmovi = (ArrayList<DomenskiObjekat>) Kontroler.getInstanca().vratiFiltriraneFilmove(film);
+            so.setOdgovor(filmovi);
+            so.setStatus(Status.U_REDU);
+        } catch (Exception ex) {
+            so.setStatus(Status.GRESKA);
+            so.setPoruka("Doslo je do greske prilikom citanja filmova iz baze");
             Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
         }
         return so;

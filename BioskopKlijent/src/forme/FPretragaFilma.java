@@ -8,6 +8,7 @@ package forme;
 import domen.DomenskiObjekat;
 import domen.Film;
 import domen.Zanr;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -199,12 +200,25 @@ public class FPretragaFilma extends javax.swing.JDialog {
     private void jbtnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPretraziActionPerformed
         Zanr zanr = (Zanr) jcomboPretraziPoZanru.getSelectedItem();
         String naziv = jtxtPretraziPoImenu.getText().trim();
-        TableModel tm = jtblFilmovi.getModel();
-        FilmTableModel ftm = (FilmTableModel) tm;
-        ftm.pretraziFilmove(zanr, naziv);
-        if(jtblFilmovi.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje filmove po zadatoj vrednosti!");
+        
+//        TableModel tm = jtblFilmovi.getModel();
+//        FilmTableModel ftm = (FilmTableModel) tm;
+//        ftm.pretraziFilmove(zanr, naziv);
+        try {
+            Film film = new Film(-1l, naziv, -1, zanr, -1, "", -1d);
+            ArrayList<Film> filtriraniFilmovi = Kontroler.getInstanca().vratiFiltriraneFilmove(film);
+            if(filtriraniFilmovi.size()==0) {
+                JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje filmove po zadatoj vrednosti!");
+            }
+            jtblFilmovi.setModel(new FilmTableModel(filtriraniFilmovi));
+        } catch (IOException ex) {
+            Logger.getLogger(FPretragaFilma.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FPretragaFilma.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        if(jtblFilmovi.getRowCount() == 0) {
+//            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje filmove po zadatoj vrednosti!");
+//        }
     }//GEN-LAST:event_jbtnPretraziActionPerformed
 
     private void jbtnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDetaljiActionPerformed

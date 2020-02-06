@@ -136,7 +136,7 @@ public class Film implements Serializable, DomenskiObjekat {
                 Zanr zanr = Zanr.valueOf(rs.getString("zanr"));
                 int godina = rs.getInt("godina");
                 String jezik = rs.getString("jezik");
-                double ocenaIMDb = rs.getInt("ocenaIMDb");
+                double ocenaIMDb = rs.getDouble("ocenaIMDb");
                 Film film = new Film(id, naziv, trajanje, zanr, godina, jezik, ocenaIMDb);
                 filmovi.add(film);
             }
@@ -199,6 +199,11 @@ public class Film implements Serializable, DomenskiObjekat {
     @Override
     public DomenskiObjekat ucitajDomenskiObjekat(ResultSet rs) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String vratiUslovZaCitanjeListe() {
+        return " zanr = '" + zanr.toString() + "' AND naziv LIKE '%" + naziv + "%'";
     }
 
     

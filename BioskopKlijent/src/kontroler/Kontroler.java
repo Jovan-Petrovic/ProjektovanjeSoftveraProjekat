@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -352,6 +353,15 @@ public class Kontroler {
         posaljiZahtev(kz);
         ServerskiOdgovor so = primiOdgovor();
         return so;
+    }
+
+    public ArrayList<Film> vratiFiltriraneFilmove(Film film) throws IOException, ClassNotFoundException {
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacije.VRATI_FILTRIRANE_FILMOVE);
+        kz.setParametar(film);
+        posaljiZahtev(kz);
+        ServerskiOdgovor so = primiOdgovor();
+        return (ArrayList<Film>) so.getOdgovor();
     }
 
     

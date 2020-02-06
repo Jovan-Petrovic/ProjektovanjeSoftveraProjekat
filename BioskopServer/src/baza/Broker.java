@@ -264,4 +264,12 @@ public class Broker {
         ResultSet rs = s.executeQuery(upit);
         return odo.ucitajDomenskiObjekat(rs);
     }
+    
+    public List<DomenskiObjekat> vratiListuSaUslovom(DomenskiObjekat odo) throws SQLException {
+        String upit = "SELECT * FROM " + odo.getImeTabele() + " WHERE " + odo.vratiUslovZaCitanjeListe();
+        System.out.println(upit);
+        Statement s = konekcija.createStatement();
+        ResultSet rs = s.executeQuery(upit);
+        return odo.ucitajListu(rs);
+    }
 }
