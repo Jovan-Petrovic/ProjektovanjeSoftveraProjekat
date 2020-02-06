@@ -527,10 +527,10 @@ public class FFilmDetalji extends javax.swing.JDialog {
     private void popuniTabeluReditelji() throws Exception {
         List<Rezira> reziranja = Kontroler.getInstanca().vratiSvaReziranja();
         List<Reditelj> reditelji = new ArrayList<>();
+        List<Reditelj> sviSvireditelji = Kontroler.getInstanca().vratiSveReditelje();
         for (Rezira rezira : reziranja) {
             if(rezira.getFilm().getId().equals(this.film.getId())) {
-                Long rediteljID = rezira.getReditelj().getId();
-                List<Reditelj> sviSvireditelji = Kontroler.getInstanca().vratiSveReditelje();
+                Long rediteljID = rezira.getReditelj().getId();                
                 for (Reditelj reditelj : sviSvireditelji) {
                     if(rediteljID.equals(reditelj.getId())) {
                         reditelji.add(reditelj);
@@ -546,10 +546,10 @@ public class FFilmDetalji extends javax.swing.JDialog {
     private void popuniTabeluGlumci() throws Exception {
         List<Glumi> uloge = Kontroler.getInstanca().vratiSveUloge();
         List<Glumac> glumci = new ArrayList<>();
+        List<Glumac> sviGlumci = Kontroler.getInstanca().vratiSveGlumce();
         for (Glumi glumi : uloge) {
             if(glumi.getFilm().getId().equals(this.film.getId())) {
-                Long glumacID = glumi.getGlumac().getId();
-                List<Glumac> sviGlumci = Kontroler.getInstanca().vratiSveGlumce();
+                Long glumacID = glumi.getGlumac().getId(); 
                 for (Glumac glumac : sviGlumci) {
                     if(glumacID.equals(glumac.getId())) {
                         glumci.add(glumac);

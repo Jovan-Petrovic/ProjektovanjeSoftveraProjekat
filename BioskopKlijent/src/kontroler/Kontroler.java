@@ -242,13 +242,13 @@ public class Kontroler {
         return (List<Projekcija>) so.getOdgovor();
     }
 
-    public boolean sacuvajRezervisanje(Rezervisanje rezervisanje) throws IOException, ClassNotFoundException {
+    public ServerskiOdgovor sacuvajRezervisanje(Rezervisanje rezervisanje) throws IOException, ClassNotFoundException {
         KlijentskiZahtev kz = new KlijentskiZahtev();
         kz.setOperacija(Operacije.SACUVAJ_REZERVACIJU);
         kz.setParametar(rezervisanje);
         posaljiZahtev(kz);
         ServerskiOdgovor so = primiOdgovor();
-        return (boolean) so.getOdgovor();
+        return so;
     }
 
     public List<Rezervisanje> vratiSvaRezervisanja() throws IOException, ClassNotFoundException, Exception {
@@ -334,16 +334,13 @@ public class Kontroler {
         return true;
     }
 
-    public boolean obrisiRezervaciju(Rezervisanje r) throws IOException, ClassNotFoundException {
+    public ServerskiOdgovor obrisiRezervaciju(Rezervisanje r) throws IOException, ClassNotFoundException {
         KlijentskiZahtev kz = new KlijentskiZahtev();
         kz.setOperacija(Operacije.OTAKZI_REZERVACIJU);
         kz.setParametar(r);
         posaljiZahtev(kz);
         ServerskiOdgovor so = primiOdgovor();
-        if(so.getStatus().equals(Status.GRESKA)) {
-            return false;
-        }
-        return true;
+        return so;
     }
 
     public ServerskiOdgovor prijava(Korisnik k) throws IOException, ClassNotFoundException {

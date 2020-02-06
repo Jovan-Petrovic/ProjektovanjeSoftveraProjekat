@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,6 +67,35 @@ public class Projekcija implements Serializable, DomenskiObjekat {
     public void setDatumVreme(Timestamp datumVreme) {
         this.datumVreme = datumVreme;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Projekcija other = (Projekcija) obj;
+        if (!Objects.equals(this.sala, other.sala)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.datumVreme, other.datumVreme)) {
+            return false;
+        }
+        if (!Objects.equals(this.film, other.film)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
     @Override
     public String getImeTabele() {
@@ -126,7 +156,7 @@ public class Projekcija implements Serializable, DomenskiObjekat {
 
     @Override
     public String vratiUslovZaJoin() {
-        return "projekcija.filmID = film.id";
+        return "projekcija.filmID = film.id ORDER BY datum ASC";
     }
 
     @Override

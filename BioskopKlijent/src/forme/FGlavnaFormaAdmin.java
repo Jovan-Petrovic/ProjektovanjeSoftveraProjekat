@@ -44,6 +44,7 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
         jMenuItemOdjava = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Administrator");
 
         jMenuFilm.setText("Film");
 

@@ -98,9 +98,13 @@ public class ProjekcijaTableModel extends AbstractTableModel {
         return null;
     }
 
-    public void dodajProjekciju(Projekcija p) {
-        projekcije.add(p);
-        fireTableDataChanged();
+    public boolean dodajProjekciju(Projekcija p) {
+        if(!projekcije.contains(p)) {
+            projekcije.add(p);
+            fireTableDataChanged();
+            return true;
+        }
+        return false;
     }
 
     public void obrisiProjekciju(int selektovanRed) {

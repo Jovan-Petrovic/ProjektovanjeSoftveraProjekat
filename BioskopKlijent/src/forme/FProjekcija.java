@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -73,13 +74,13 @@ public class FProjekcija extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nova projekcija"));
 
-        jlabDatum.setText("Datum:");
+        jlabDatum.setText("Vreme: (dd.MM.yyyy HH:mm)");
 
         jlabSala.setText("Sala:");
 
         jlabFilm.setText("Film:");
 
-        jbtnPretraziFilm.setText("Pretrazi film");
+        jbtnPretraziFilm.setText("Dodaj film");
         jbtnPretraziFilm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnPretraziFilmActionPerformed(evt);
@@ -136,31 +137,33 @@ public class FProjekcija extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jlabFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jbtnPretraziFilm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jbtnDodajProjekciju, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(226, 226, 226)
-                                    .addComponent(jbtnObrisiProjekciju))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jlabSala, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jtxtSala, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jlabDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtxtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jbtnIzadji, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbtnSacuvaj, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jlabFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                                .addComponent(jtxtFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jbtnDodajProjekciju, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbtnObrisiProjekciju))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jlabDatum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jlabSala, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)))
+                                .addGap(50, 50, 50)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jtxtDatum, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                                    .addComponent(jtxtSala))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbtnPretraziFilm, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -227,15 +230,11 @@ public class FProjekcija extends javax.swing.JDialog {
 
     private void jbtnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSacuvajActionPerformed
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) jtblProjekcije.getModel();
-        List<Projekcija> projekcije = ptm.vratiProjekcije();        
-            //        try {
-//            for (Projekcija projekcija : projekcije) {
-//                projekcija = Kontroler.getInstanca().sacuvajProjekciju(projekcija);                
-//            }
-//            
-//        } catch (Exception ex) {
-//            Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        List<Projekcija> projekcije = ptm.vratiProjekcije();
+        if(projekcije.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Morate dodati bar jednu projekciju!");
+            return;
+        }        
         try {
             boolean odgovor = Kontroler.getInstanca().sacuvajSveprojekcije(projekcije);
             if(odgovor) {
@@ -251,6 +250,10 @@ public class FProjekcija extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnSacuvajActionPerformed
 
     private void jbtnDodajProjekcijuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDodajProjekcijuActionPerformed
+        if(jtxtFilm.getText().isEmpty() || jtxtDatum.getText().isEmpty() || jtxtSala.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Sva polja moraju biti popunjena!");
+            return;
+        }
         Film f = this.film;
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
         Date datum = null;
@@ -259,13 +262,26 @@ public class FProjekcija extends javax.swing.JDialog {
             //datumVreme = sdf.parse(jtxtDatum.getText().trim());
             datum = sdf.parse(jtxtDatum.getText().trim());
             datumVreme = new Timestamp(datum.getTime());
+            if(datumVreme.before(Timestamp.valueOf(LocalDateTime.now()))) {
+                JOptionPane.showMessageDialog(this, "Datum projekcije ne moze biti u proslosti!");
+                return;
+            }
         } catch (ParseException ex) {
-            Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Vreme projekcije mora biti u formatu dd.MM.yyyy HH:mm");
+            return;
         }
         String sala = jtxtSala.getText().trim();
+        if(!sala.equalsIgnoreCase("sala 1") && !sala.equalsIgnoreCase("sala 2") && !sala.equalsIgnoreCase("sala 3")) {
+            JOptionPane.showMessageDialog(this, "Naziv sale mora biti jedan od sledecih naziva: sala 1, sala 2 ili sala 3");
+            return;
+        }
         Projekcija p = new Projekcija(-1l, datumVreme, sala, film);
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) jtblProjekcije.getModel();
-        ptm.dodajProjekciju(p);
+        boolean status = ptm.dodajProjekciju(p);
+        if(!status) {
+            JOptionPane.showMessageDialog(this, "Ne mogu se uneti dve iste projekcije!");
+            return;
+        }
     }//GEN-LAST:event_jbtnDodajProjekcijuActionPerformed
 
     private void jbtnObrisiProjekcijuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnObrisiProjekcijuActionPerformed

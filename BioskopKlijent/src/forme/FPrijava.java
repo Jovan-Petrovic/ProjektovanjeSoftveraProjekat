@@ -49,6 +49,7 @@ public class FPrijava extends javax.swing.JFrame {
         jtxtLozinka = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Prijava");
 
         jlabKorisnickoIme.setText("Korisnicko ime:");
 
@@ -116,7 +117,7 @@ public class FPrijava extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnIzlaz)
                     .addComponent(jbtnPrijava))
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addGap(0, 33, Short.MAX_VALUE))
         );
 
         pack();

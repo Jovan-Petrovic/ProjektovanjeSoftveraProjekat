@@ -114,6 +114,10 @@ public class FilmTableModel extends AbstractTableModel {
     public void setFilmovi(List<Film> filmovi) {
         this.filmovi = filmovi;
     }
+
+    public Film nadjiFilm(int selektovanRed) {
+        return filmovi.get(selektovanRed);
+    }
     
     
    

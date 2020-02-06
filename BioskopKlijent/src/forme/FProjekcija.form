@@ -58,38 +58,39 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jlabFilm" min="-2" pref="104" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jtxtFilm" min="-2" pref="354" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="jbtnPretraziFilm" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jbtnDodajProjekciju" min="-2" pref="127" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="226" max="-2" attributes="0"/>
-                                      <Component id="jbtnObrisiProjekciju" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="jlabSala" min="-2" pref="104" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jtxtSala" min="-2" pref="354" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jlabDatum" min="-2" pref="104" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jtxtDatum" min="-2" pref="354" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <Component id="jbtnIzadji" min="-2" pref="106" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jbtnSacuvaj" min="-2" pref="109" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jlabFilm" min="-2" pref="72" max="-2" attributes="0"/>
+                                  <EmptySpace pref="170" max="32767" attributes="0"/>
+                                  <Component id="jtxtFilm" min="-2" pref="322" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jbtnDodajProjekciju" min="-2" pref="127" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jbtnObrisiProjekciju" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jlabDatum" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Component id="jlabSala" min="-2" pref="72" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jtxtDatum" pref="322" max="32767" attributes="0"/>
+                                      <Component id="jtxtSala" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jbtnPretraziFilm" min="-2" pref="138" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -135,7 +136,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jlabDatum">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Datum:"/>
+            <Property name="text" type="java.lang.String" value="Vreme: (dd.MM.yyyy HH:mm)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtxtDatum">
@@ -154,7 +155,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jbtnPretraziFilm">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pretrazi film"/>
+            <Property name="text" type="java.lang.String" value="Dodaj film"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnPretraziFilmActionPerformed"/>

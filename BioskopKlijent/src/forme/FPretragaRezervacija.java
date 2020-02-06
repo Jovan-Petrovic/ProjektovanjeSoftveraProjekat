@@ -9,6 +9,7 @@ import domen.Film;
 import domen.Korisnik;
 import domen.Projekcija;
 import domen.Rezervisanje;
+import domen.Status;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +23,7 @@ import javax.swing.table.TableModel;
 import kontroler.Kontroler;
 import model.ProjekcijaTableModel;
 import model.RezervisanjeTableModel;
+import transfer.ServerskiOdgovor;
 
 /**
  *
@@ -140,9 +142,13 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
 
     private void jbtnFilmDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnFilmDetaljiActionPerformed
         int selektovanRed = jtblRezervacije.getSelectedRow();
+        if(selektovanRed == -1) {
+            JOptionPane.showMessageDialog(this, "Morate selektovati red!");
+            return;
+        }
         RezervisanjeTableModel rtm = (RezervisanjeTableModel) jtblRezervacije.getModel();
         Rezervisanje rezervisanje = rtm.vratiRezervisanje(selektovanRed);
-        Long filmID = rezervisanje.getProjekcija().getFilm().getId();
+//        Long filmID = rezervisanje.getProjekcija().getFilm().getId();
         List<Film> filmovi = null;
         try {
            filmovi = Kontroler.getInstanca().vratiSveFilmove();
@@ -151,7 +157,7 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
         }
         Film f = null;
         for (Film film : filmovi) {
-            if(film.getId().equals(filmID)) {
+            if(film.equals(rezervisanje.getProjekcija().getFilm())) {
                 f = film;
                 break;
             }
@@ -168,7 +174,25 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
     private void jbtnOtkazivanjeRezervacijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnOtkazivanjeRezervacijeActionPerformed
         int rezultat = JOptionPane.showConfirmDialog(this, "Da li zaista zelite da otkazete rezervaciju?", "Potvrda", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(rezultat == JOptionPane.YES_OPTION) {
-            otkaziRezervaciju();
+            try {
+                int selektovanRed = jtblRezervacije.getSelectedRow();
+                if(selektovanRed == -1) {
+                    JOptionPane.showMessageDialog(this, "Morate odabrati rezervaciju!");
+                    return;
+                }
+                RezervisanjeTableModel rtm = (RezervisanjeTableModel) jtblRezervacije.getModel();
+                Rezervisanje r = rtm.vratiRezervisanje(selektovanRed);
+                ServerskiOdgovor so = Kontroler.getInstanca().obrisiRezervaciju(r);
+                if(so.getStatus().equals(Status.GRESKA)) {
+                    JOptionPane.showMessageDialog(this, "Doslo je do greske. Rezervacija filma "+r.getProjekcija().getFilm().getNaziv()+" nije uspesno obrisana");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Rezervacija filma "+r.getProjekcija().getFilm().getNaziv()+" je uspesno obrisana");
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jbtnOtkazivanjeRezervacijeActionPerformed
 
@@ -192,49 +216,4 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
         jtblRezervacije.setModel(new RezervisanjeTableModel(korisnikovaRezervisanja));
     }
 
-    private void otkaziRezervaciju() {
-//        int selektovanRed = jtblRezervacije.getSelectedRow();
-//        Long projekcijaID = (Long) jtblRezervacije.getValueAt(selektovanRed, 0);
-//        List<Projekcija> projekcije = null;
-//        try {
-//            projekcije = Kontroler.getInstanca().vratiSveProjekcije();
-//        } catch (Exception ex) {
-//            Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        Projekcija p = null;
-//        for (Projekcija projekcija : projekcije) {
-//            if(projekcija.getId().equals(projekcijaID)) {
-//                p = projekcija;
-//            }
-//        }
-//        boolean signal = false;
-//        Map<String,Long> podaci = new HashMap<>();
-//        podaci.put("projekcijaID", projekcijaID);
-//        podaci.put("korisnikID", k.getId());
-//        try {
-//            //signal = Kontroler.getInstanca().obrisiRezervaciju(projekcijaID, k.getId());
-//            signal = Kontroler.getInstanca().obrisiRezervaciju(podaci);
-//        } catch (Exception ex) {
-//            Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        if(signal) {
-//            JOptionPane.showMessageDialog(this, "Rezervacija filma " + p.getFilm().getNaziv() + " datuma " + p.getDatumVreme()+ " je uspesno obrisana");
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Doslo je do greske. Rezervacija filma " + p.getFilm().getNaziv() + " datuma " + p.getDatumVreme()+ " nije uspesno obrisana");
-//        }
-        try {
-            int selektovanRed = jtblRezervacije.getSelectedRow();
-            RezervisanjeTableModel rtm = (RezervisanjeTableModel) jtblRezervacije.getModel();
-            Rezervisanje r = rtm.vratiRezervisanje(selektovanRed);
-            if(Kontroler.getInstanca().obrisiRezervaciju(r)) {
-                JOptionPane.showMessageDialog(this, "Rezervacija filma "+r.getProjekcija().getFilm().getNaziv()+" je uspesno obrisana");
-            } else {
-                JOptionPane.showMessageDialog(this, "Doslo je do greske. Rezervacija filma "+r.getProjekcija().getFilm().getNaziv()+" nije uspesno obrisana");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }

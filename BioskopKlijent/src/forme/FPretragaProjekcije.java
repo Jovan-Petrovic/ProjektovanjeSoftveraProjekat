@@ -8,6 +8,9 @@ package forme;
 import domen.Korisnik;
 import domen.Projekcija;
 import domen.Rezervisanje;
+import domen.Status;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import kontroler.Kontroler;
 import model.ProjekcijaTableModel;
+import transfer.ServerskiOdgovor;
 
 /**
  *
@@ -180,9 +184,12 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
 
     private void jbtnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDetaljiActionPerformed
         int selektovanRed = jtblProjekcije.getSelectedRow();
+        if(selektovanRed == -1) {
+            JOptionPane.showMessageDialog(this, "Morate odabrati projekciju!");
+            return;
+        }
         TableModel tm = jtblProjekcije.getModel();
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) tm;
-        //Long id = (Long) ptm.getValueAt(selektovanRed, 0);
         Projekcija projekcija = ptm.nadjiProjekciju(selektovanRed);
         JDialog forma = new FProjekcijaDetalji(this, true, projekcija);
         forma.setVisible(true);
@@ -191,9 +198,12 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
 
     private void jbtnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnObrisiActionPerformed
         int selektovanRed = jtblProjekcije.getSelectedRow();
+        if(selektovanRed == -1) {
+            JOptionPane.showMessageDialog(this, "Morate odabrati projekciju!");
+            return;
+        }
         TableModel tm = jtblProjekcije.getModel();
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) tm;
-        //Long id = (Long) ptm.getValueAt(selektovanRed, 0);
         Projekcija p = ptm.vratiProjekciju(selektovanRed);
         try {
             if(Kontroler.getInstanca().obrisiProjekciju(p)) {
@@ -209,33 +219,28 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
 
     private void jbtnRezervisiMestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRezervisiMestoActionPerformed
         int selektovanRed = jtblProjekcije.getSelectedRow();
-        Long projekcijaID = (Long) jtblProjekcije.getValueAt(selektovanRed, 0);
-        List<Projekcija> projekcije = null;
-        Projekcija p = null;
-        try {
-            projekcije = Kontroler.getInstanca().vratiSveProjekcije();
-        } catch (Exception ex) {
-            Logger.getLogger(FPretragaProjekcije.class.getName()).log(Level.SEVERE, null, ex);
+        if(selektovanRed == -1) {
+            JOptionPane.showMessageDialog(this, "Morate prvo odabradi projekciju!");
+            return;
         }
-        for (Projekcija projekcija : projekcije) {
-            if(projekcija.getId().equals(projekcijaID)) {
-                p = projekcija;
-                break;
-            }
+        ProjekcijaTableModel ptm = (ProjekcijaTableModel) jtblProjekcije.getModel();
+        Projekcija p = ptm.vratiProjekciju(selektovanRed);
+        if(p.getDatumVreme().before(Timestamp.valueOf(LocalDateTime.now()))) {
+            JOptionPane.showMessageDialog(this, "Data projekcija se vec zavrsila!");
+            return;
         }
-        //Date datum = (Date) jtblProjekcije.getValueAt(selektovanRed, 1);
         Date datum = new Date();
         Rezervisanje rezervisanje = new Rezervisanje(datum, k, p);
-        boolean signal = false;
+        ServerskiOdgovor so = new ServerskiOdgovor();
         try {
-            signal = Kontroler.getInstanca().sacuvajRezervisanje(rezervisanje);
+            so = Kontroler.getInstanca().sacuvajRezervisanje(rezervisanje);
         } catch (Exception ex) {
             Logger.getLogger(FPretragaProjekcije.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(signal) {
+        if(so.getStatus().equals(Status.U_REDU)) {
             JOptionPane.showMessageDialog(this, "Rezeracija za film " + rezervisanje.getProjekcija().getFilm().getNaziv() + " datuma " + rezervisanje.getProjekcija().getDatumVreme()+ " je uspesno sacuvana");
         } else {
-            JOptionPane.showMessageDialog(this, "Doslo je do greske. Rezeracija za film " + rezervisanje.getProjekcija().getFilm().getNaziv() + " datuma " + rezervisanje.getProjekcija().getDatumVreme()+ " nije uspesno sacuvana");
+            JOptionPane.showMessageDialog(this, so.getPoruka());
         }
     }//GEN-LAST:event_jbtnRezervisiMestoActionPerformed
 

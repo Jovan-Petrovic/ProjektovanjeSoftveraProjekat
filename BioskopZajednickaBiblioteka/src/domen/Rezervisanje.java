@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -55,6 +56,29 @@ public class Rezervisanje implements Serializable, DomenskiObjekat {
     public void setKorisnik(Korisnik korisnik) {
         this.korisnik = korisnik;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Rezervisanje other = (Rezervisanje) obj;
+        if (!Objects.equals(this.korisnik, other.korisnik)) {
+            return false;
+        }
+        if (!Objects.equals(this.projekcija.getId(), other.projekcija.getId())) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 
     @Override
     public String getImeTabele() {

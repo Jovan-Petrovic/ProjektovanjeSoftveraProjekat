@@ -154,15 +154,7 @@ public class FProjekcijaDetalji extends javax.swing.JDialog {
 
     private void jbtnFilmDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnFilmDetaljiActionPerformed
         try {
-            //String naziv = jtxtFilm.getText();
             Film f = this.projekcija.getFilm();
-//            List<Film> filmovi = Kontroler.getInstanca().vratiSveFilmove();
-//            Film f = null;
-//            for (Film film : filmovi) {
-//                if(film.getNaziv().equals(naziv)) {
-//                    f = film;
-//                }
-//            }
             JDialog forma = new FFilmDetalji(this, true, f);
             forma.setVisible(true);
         } catch (Exception ex) {

@@ -391,13 +391,21 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
     private ServerskiOdgovor sacuvajRezervisanje(Rezervisanje rezervisanje) throws Exception {
         ServerskiOdgovor so = new ServerskiOdgovor();
         try {
-            Kontroler.getInstanca().sacuvajRezervisanje(rezervisanje);
-            so.setStatus(Status.U_REDU);
-            so.setOdgovor(true);
+            ArrayList<DomenskiObjekat> rezervacije = (ArrayList<DomenskiObjekat>) Kontroler.getInstanca().vratiSvaRezervisanja();
+            if(rezervacije.contains(rezervisanje)) {
+                so.setOdgovor(false);
+                so.setStatus(Status.GRESKA);
+                so.setPoruka("Vec ste rezervisali mesto na datoj projekciji.");
+            } else {
+                Kontroler.getInstanca().sacuvajRezervisanje(rezervisanje);
+                so.setStatus(Status.U_REDU);
+                so.setOdgovor(true);
+            }
         } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
             so.setOdgovor(false);
             so.setStatus(Status.GRESKA);
+            so.setPoruka("Doslo je do greske prilikom rezervacije mesta!");
         }
         return so;
     }

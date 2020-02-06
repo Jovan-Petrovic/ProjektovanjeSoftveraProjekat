@@ -200,25 +200,18 @@ public class FPretragaFilma extends javax.swing.JDialog {
     private void jbtnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPretraziActionPerformed
         Zanr zanr = (Zanr) jcomboPretraziPoZanru.getSelectedItem();
         String naziv = jtxtPretraziPoImenu.getText().trim();
-        
-//        TableModel tm = jtblFilmovi.getModel();
-//        FilmTableModel ftm = (FilmTableModel) tm;
-//        ftm.pretraziFilmove(zanr, naziv);
         try {
             Film film = new Film(-1l, naziv, -1, zanr, -1, "", -1d);
             ArrayList<Film> filtriraniFilmovi = Kontroler.getInstanca().vratiFiltriraneFilmove(film);
+            jtblFilmovi.setModel(new FilmTableModel(filtriraniFilmovi));
             if(filtriraniFilmovi.size()==0) {
                 JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje filmove po zadatoj vrednosti!");
             }
-            jtblFilmovi.setModel(new FilmTableModel(filtriraniFilmovi));
         } catch (IOException ex) {
             Logger.getLogger(FPretragaFilma.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(FPretragaFilma.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        if(jtblFilmovi.getRowCount() == 0) {
-//            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje filmove po zadatoj vrednosti!");
-//        }
     }//GEN-LAST:event_jbtnPretraziActionPerformed
 
     private void jbtnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDetaljiActionPerformed
@@ -229,8 +222,7 @@ public class FPretragaFilma extends javax.swing.JDialog {
         }
         TableModel tm = jtblFilmovi.getModel();
         FilmTableModel ftm = (FilmTableModel) tm;
-        Long id = (Long) ftm.getValueAt(selektovanRed, 0);
-        Film film = ftm.nadjiFilm(id);
+        Film film = ftm.nadjiFilm(selektovanRed);
         JDialog forma;
         try {
             forma = new FFilmDetalji(this, true, film, FormaMod.FORMA_PRETRAGA);
@@ -242,15 +234,15 @@ public class FPretragaFilma extends javax.swing.JDialog {
 
     private void jbtnDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDodajActionPerformed
         int selektovanRed = jtblFilmovi.getSelectedRow();
+        if(selektovanRed == -1) {
+            JOptionPane.showMessageDialog(this, "Morate odabrati film");
+            return;
+        }
         TableModel tm = jtblFilmovi.getModel();
         FilmTableModel ftm = (FilmTableModel) tm;
         Film film = ftm.vratiFilm(selektovanRed);
-//        String naziv = (String) ftm.getValueAt(selektovanRed, 1);
-//        fp.getJtxtFilm().setText(naziv);
-//        fp.setFilm(ftm.nadjiFilm(Long.valueOf((Long) ftm.getValueAt(selektovanRed, 0))));
         fp.getJtxtFilm().setText(film.getNaziv());
         fp.setFilm(film);
-//        JOptionPane.showMessageDialog(this, "Uspesno dodat film: " + naziv);
         this.setVisible(false);
     }//GEN-LAST:event_jbtnDodajActionPerformed
 
@@ -262,9 +254,7 @@ public class FPretragaFilma extends javax.swing.JDialog {
         }
         TableModel tm = jtblFilmovi.getModel();
         FilmTableModel ftm = (FilmTableModel) tm;
-//        Long id = (Long) ftm.getValueAt(selektovanRed, 0);
-//        Film film = ftm.nadjiFilm(id);
-          Film film = ftm.vratiFilm(selektovanRed);
+        Film film = ftm.vratiFilm(selektovanRed);
         JDialog forma;
         try {
             forma = new FFilmDetalji(this, true, film, FormaMod.FORMA_IZMENA);
