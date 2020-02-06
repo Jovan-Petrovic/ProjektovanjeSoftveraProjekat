@@ -7,7 +7,11 @@ package domen;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,6 +24,9 @@ public class Korisnik implements Serializable, DomenskiObjekat {
     private String ime;
     private String prezime;
     private String email;
+
+    public Korisnik() {
+    }
 
     public Korisnik(Long id, String korisnickoIme, String sifra, String ime, String prezime, String email) {
         this.id = id;
@@ -84,8 +91,26 @@ public class Korisnik implements Serializable, DomenskiObjekat {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Korisnik other = (Korisnik) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
     public String getImeTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "korisnik";
     }
 
     @Override
@@ -156,6 +181,30 @@ public class Korisnik implements Serializable, DomenskiObjekat {
     @Override
     public String vratiUslovZaOperacijuUpdate() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String vratiUslovZaCitanje() {
+        return "korisnickoIme = " + "'" + korisnickoIme + "'" + " AND sifra = '" + sifra + "'";
+    }
+
+    @Override
+    public DomenskiObjekat ucitajDomenskiObjekat(ResultSet rs) {
+        Korisnik k = null;
+        try {
+            while(rs.next()) {
+                Long id = rs.getLong("id");
+                String korisnickoIme = rs.getString("korisnickoIme");
+                String sifra = rs.getString("sifra");
+                String ime = rs.getString("ime");
+                String prezime = rs.getString("prezime");
+                String email = rs.getString("email");
+                k = new Korisnik(id, korisnickoIme, sifra, ime, prezime, email);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Korisnik.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return k;
     }
       
 }

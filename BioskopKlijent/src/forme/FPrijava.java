@@ -6,12 +6,15 @@
 package forme;
 
 import domen.Korisnik;
+import domen.Status;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import kontroler.Kontroler;
+import transfer.ServerskiOdgovor;
 
 /**
  *
@@ -127,7 +130,7 @@ public class FPrijava extends javax.swing.JFrame {
             if(jtxtKorisnickoIme.getText().equals("a") && jtxtLozinka.getText().equals("a")) {
                 new FGlavnaFormaAdmin().setVisible(true);
                 dispose();
-            } else {
+            }/* else {
                 List<Korisnik> korisnici = new ArrayList<>();
                 korisnici = Kontroler.getInstanca().vratiSveKorisnike();
                 for (Korisnik korisnik : korisnici) {
@@ -136,6 +139,16 @@ public class FPrijava extends javax.swing.JFrame {
                         dispose();
                         break;
                     }
+                }
+            }*/
+            else {
+                Korisnik k = new Korisnik(-1l, jtxtKorisnickoIme.getText().trim(), jtxtKorisnickoIme.getText().trim(), "", "", "");
+                ServerskiOdgovor so = Kontroler.getInstanca().prijava(k);
+                if(so.getStatus().equals(Status.U_REDU)) {
+                    new FGlavnaFormaKorisnik((Korisnik)so.getOdgovor()).setVisible(true);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, so.getPoruka());
                 }
             }
         } catch (Exception ex) {

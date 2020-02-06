@@ -106,6 +106,9 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
                         Map<String,Object> mapa1 = (Map<String,Object>) kz.getParametar();
                         so = izmeniFilmReziraGlumi(mapa1);
                         break;
+                    case Operacije.PRIJAVA:
+                        Korisnik k = (Korisnik) kz.getParametar();
+                        so = prijava(k);
                 }
                 posaljiOdgovor(so);
             } catch (IOException ex) {
@@ -496,6 +499,16 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         } catch (Exception ex) {
             so.setOdgovor(false);
             so.setStatus(Status.GRESKA);
+            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return so;
+    }
+
+    private ServerskiOdgovor prijava(Korisnik k) {
+        ServerskiOdgovor so = new ServerskiOdgovor();
+        try {
+            so = Kontroler.getInstanca().prijava(k);
+        } catch (Exception ex) {
             Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
         }
         return so;

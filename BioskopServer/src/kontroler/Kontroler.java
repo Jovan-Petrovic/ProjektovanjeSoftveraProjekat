@@ -14,6 +14,7 @@ import domen.Projekcija;
 import domen.Reditelj;
 import domen.Rezervisanje;
 import domen.Rezira;
+import domen.Status;
 import domen.Zanr;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.logging.Logger;
 import logika.SOIzmeniFilm;
 import logika.SOObrisiProjekciju;
 import logika.SOObrisiRezervaciju;
+import logika.SOPrijavaKorisnika;
 import logika.SOUbaciFilm;
 import logika.SOUbaciGlumi;
 import logika.SOUbaciProjekciju;
@@ -52,6 +54,7 @@ import servis.implementacija.ServisProjekcijaImplementacija;
 import servis.implementacija.ServisRediteljImplementacija;
 import servis.implementacija.ServisRezervisanjeImplementacija;
 import servis.implementacija.ServisReziraImplementacija;
+import transfer.ServerskiOdgovor;
 
 /**
  *
@@ -68,6 +71,7 @@ public class Kontroler {
     private final ServisGlumi servisGlumi;
     private final ServisKorisnik servisKorisnik;
     private final ServisRezervisanje servisRezervisanje;
+    private final ArrayList<Korisnik> prijavljeniKorisnici;
     
     public Kontroler() {
         servisFilm = new ServisFilmImplementacija();
@@ -78,6 +82,7 @@ public class Kontroler {
         servisGlumi = new ServisGlumiImplementacija();
         servisKorisnik = new ServisKorisnikImplementacija();
         servisRezervisanje = new ServisRezervisanjeImplementacija();
+        prijavljeniKorisnici = new ArrayList<>();
     }
 
     public static Kontroler getInstanca() {
@@ -259,6 +264,29 @@ public class Kontroler {
             Logger.getLogger(Kontroler.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }
+
+    public ServerskiOdgovor prijava(Korisnik k) throws Exception {
+        SistemskaOperacija so = new SOPrijavaKorisnika(k);
+        so.execute();
+        Korisnik korisnik = ((SOPrijavaKorisnika)so).getKorisnik();
+        ServerskiOdgovor odgovor = new ServerskiOdgovor();
+        if(korisnik == null) {
+            odgovor.setPoruka("Niste uneli validne parametre.");
+            odgovor.setOdgovor(null);
+            odgovor.setStatus(Status.GRESKA);
+            return odgovor;
+        }
+        if(!prijavljeniKorisnici.contains(korisnik)) {
+            prijavljeniKorisnici.add(korisnik);
+            odgovor.setOdgovor(korisnik);
+            odgovor.setStatus(Status.U_REDU);
+        } else {
+            odgovor.setPoruka("Vec ste ulogovani");
+            odgovor.setOdgovor(null);
+            odgovor.setStatus(Status.GRESKA);
+        }
+        return odgovor;
     }
 
 }

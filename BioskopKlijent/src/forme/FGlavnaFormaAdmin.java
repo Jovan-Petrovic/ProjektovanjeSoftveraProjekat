@@ -40,6 +40,8 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
         jMenuProjekcija = new javax.swing.JMenu();
         jMenuItemPretragaProjekcija = new javax.swing.JMenuItem();
         jMenuItemNovaProjekcija = new javax.swing.JMenuItem();
+        jMenuKrajRada = new javax.swing.JMenu();
+        jMenuItemOdjava = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +84,18 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
         jMenuProjekcija.add(jMenuItemNovaProjekcija);
 
         jMenuBar1.add(jMenuProjekcija);
+
+        jMenuKrajRada.setText("Kraj rada");
+
+        jMenuItemOdjava.setText("Odjavi se");
+        jMenuItemOdjava.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemOdjavaActionPerformed(evt);
+            }
+        });
+        jMenuKrajRada.add(jMenuItemOdjava);
+
+        jMenuBar1.add(jMenuKrajRada);
 
         setJMenuBar(jMenuBar1);
 
@@ -135,14 +149,21 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemPretragaProjekcijaActionPerformed
 
+    private void jMenuItemOdjavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOdjavaActionPerformed
+        this.setVisible(false);
+        new FPrijava().setVisible(true);
+    }//GEN-LAST:event_jMenuItemOdjavaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFilm;
     private javax.swing.JMenuItem jMenuItemNovaProjekcija;
     private javax.swing.JMenuItem jMenuItemNoviFilm;
+    private javax.swing.JMenuItem jMenuItemOdjava;
     private javax.swing.JMenuItem jMenuItemPretragaFilmova;
     private javax.swing.JMenuItem jMenuItemPretragaProjekcija;
+    private javax.swing.JMenu jMenuKrajRada;
     private javax.swing.JMenu jMenuProjekcija;
     // End of variables declaration//GEN-END:variables
 }

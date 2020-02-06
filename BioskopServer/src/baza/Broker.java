@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -255,5 +255,13 @@ public class Broker {
             ex.printStackTrace();
             throw new Exception(ex.getLocalizedMessage()+"Greska prilikom izmene "+odo.getImeTabele()+" u bazi!\n");
         }
+    }
+
+    public DomenskiObjekat vratiSaUslovom(DomenskiObjekat odo) throws SQLException {
+        String upit = "SELECT * FROM " + odo.getImeTabele() + " WHERE " + odo.vratiUslovZaCitanje() + " LIMIT 1";
+        System.out.println(upit);
+        Statement s = konekcija.createStatement();
+        ResultSet rs = s.executeQuery(upit);
+        return odo.ucitajDomenskiObjekat(rs);
     }
 }

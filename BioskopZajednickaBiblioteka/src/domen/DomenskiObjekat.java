@@ -28,5 +28,7 @@ public interface DomenskiObjekat {
     public String vratiUslovZaBrisanje();
     public String vratiVrednostiZaOperacijuUpdate();
     public String vratiUslovZaOperacijuUpdate();
+    public String vratiUslovZaCitanje();
+    public DomenskiObjekat ucitajDomenskiObjekat(ResultSet rs);
 
 }

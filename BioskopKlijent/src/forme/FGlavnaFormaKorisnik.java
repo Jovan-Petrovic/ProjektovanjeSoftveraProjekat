@@ -44,8 +44,10 @@ public class FGlavnaFormaKorisnik extends javax.swing.JFrame {
         jMenuItemFilmovi = new javax.swing.JMenuItem();
         jMenuProjekcija = new javax.swing.JMenu();
         jMenuItemProjekcije = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuRezervacija = new javax.swing.JMenu();
+        jMenuItemRezervacije = new javax.swing.JMenuItem();
+        jMenuKrajRada = new javax.swing.JMenu();
+        jMenuItemOdjava = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,17 +75,29 @@ public class FGlavnaFormaKorisnik extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuProjekcija);
 
-        jMenu1.setText("Rezervacija");
+        jMenuRezervacija.setText("Rezervacija");
 
-        jMenuItem1.setText("Pretraga rezervacija");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemRezervacije.setText("Pretraga rezervacija");
+        jMenuItemRezervacije.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemRezervacijeActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenuRezervacija.add(jMenuItemRezervacije);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuRezervacija);
+
+        jMenuKrajRada.setText("Kraj rada");
+
+        jMenuItemOdjava.setText("Odjavi se");
+        jMenuItemOdjava.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemOdjavaActionPerformed(evt);
+            }
+        });
+        jMenuKrajRada.add(jMenuItemOdjava);
+
+        jMenuBar1.add(jMenuKrajRada);
 
         setJMenuBar(jMenuBar1);
 
@@ -120,22 +134,29 @@ public class FGlavnaFormaKorisnik extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemProjekcijeActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemRezervacijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRezervacijeActionPerformed
         try {
             JDialog forma = new FPretragaRezervacija(this, true, k);
             forma.setVisible(true);
         } catch (Exception ex) {
             Logger.getLogger(FGlavnaFormaKorisnik.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemRezervacijeActionPerformed
+
+    private void jMenuItemOdjavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOdjavaActionPerformed
+        this.setVisible(false);
+        new FPrijava().setVisible(true);
+    }//GEN-LAST:event_jMenuItemOdjavaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFilm;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemFilmovi;
+    private javax.swing.JMenuItem jMenuItemOdjava;
     private javax.swing.JMenuItem jMenuItemProjekcije;
+    private javax.swing.JMenuItem jMenuItemRezervacije;
+    private javax.swing.JMenu jMenuKrajRada;
     private javax.swing.JMenu jMenuProjekcija;
+    private javax.swing.JMenu jMenuRezervacija;
     // End of variables declaration//GEN-END:variables
 }

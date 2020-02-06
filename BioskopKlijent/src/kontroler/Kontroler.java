@@ -345,6 +345,15 @@ public class Kontroler {
         return true;
     }
 
+    public ServerskiOdgovor prijava(Korisnik k) throws IOException, ClassNotFoundException {
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacije.PRIJAVA);
+        kz.setParametar(k);
+        posaljiZahtev(kz);
+        ServerskiOdgovor so = primiOdgovor();
+        return so;
+    }
+
     
 
 }
