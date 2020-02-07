@@ -296,4 +296,15 @@ public class Kontroler {
         return ((SOVratiFiltriraneFilmove)so).getLista();
     }
 
+    public ServerskiOdgovor odjava(Korisnik korisnik) {
+        ServerskiOdgovor so = new ServerskiOdgovor();
+        if(prijavljeniKorisnici.contains(korisnik)) {
+            prijavljeniKorisnici.remove(korisnik);
+            so.setStatus(Status.U_REDU);
+        } else {
+            so.setStatus(Status.GRESKA);
+        }
+        return so;
+    }
+
 }

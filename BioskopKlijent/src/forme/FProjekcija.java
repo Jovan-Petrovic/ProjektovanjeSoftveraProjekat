@@ -261,6 +261,7 @@ public class FProjekcija extends javax.swing.JDialog {
         try {
             //datumVreme = sdf.parse(jtxtDatum.getText().trim());
             datum = sdf.parse(jtxtDatum.getText().trim());
+            System.out.println(datum);
             datumVreme = new Timestamp(datum.getTime());
             if(datumVreme.before(Timestamp.valueOf(LocalDateTime.now()))) {
                 JOptionPane.showMessageDialog(this, "Datum projekcije ne moze biti u proslosti!");

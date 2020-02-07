@@ -6,11 +6,18 @@
 package forme;
 
 import domen.Korisnik;
+import domen.Status;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import kontroler.Kontroler;
+import transfer.KlijentskiZahtev;
+import transfer.ServerskiOdgovor;
+import util.Operacije;
 
 /**
  *
@@ -144,6 +151,21 @@ public class FGlavnaFormaKorisnik extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRezervacijeActionPerformed
 
     private void jMenuItemOdjavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOdjavaActionPerformed
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacije.ODJAVA);
+        kz.setParametar(k);
+        try {
+            Kontroler.getInstanca().posaljiZahtev(kz);
+            ServerskiOdgovor so = Kontroler.getInstanca().primiOdgovor();
+            if(so.getStatus().equals(Status.GRESKA)) {
+                JOptionPane.showMessageDialog(this, "Doslo je do greske. Sistem ne moze da vas odjavi");
+                return;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FGlavnaFormaKorisnik.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FGlavnaFormaKorisnik.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setVisible(false);
         new FPrijava().setVisible(true);
     }//GEN-LAST:event_jMenuItemOdjavaActionPerformed

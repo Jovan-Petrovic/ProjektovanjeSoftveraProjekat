@@ -10,6 +10,8 @@ import domen.Projekcija;
 import domen.Rezervisanje;
 import domen.Status;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -68,10 +70,12 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         jbtnDetalji = new javax.swing.JButton();
         jbtnObrisi = new javax.swing.JButton();
         jbtnRezervisiMesto = new javax.swing.JButton();
+        jlabDatum = new javax.swing.JLabel();
+        jtxtDatum = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jlblPretraziPoImenu.setText("Pretrazi po imenu filma:");
+        jlblPretraziPoImenu.setText("Naziv filma:");
 
         jbtnPretraziPoImenuFilma.setText("Pretrazi");
         jbtnPretraziPoImenuFilma.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +125,8 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
             }
         });
 
+        jlabDatum.setText("Datum: (dd.MM.yyyy)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,11 +142,15 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
                         .addComponent(jbtnDetalji, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(jbtnObrisi, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jlblPretraziPoImenu, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jlblPretraziPoImenu, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                            .addComponent(jlabDatum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(jtxtPretraziPoImenuFilma)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtxtPretraziPoImenuFilma)
+                            .addComponent(jtxtDatum))
                         .addGap(18, 18, 18)
                         .addComponent(jbtnPretraziPoImenuFilma, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(45, 45, 45))
@@ -148,12 +158,20 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlblPretraziPoImenu)
-                    .addComponent(jtxtPretraziPoImenuFilma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnPretraziPoImenuFilma))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlblPretraziPoImenu)
+                            .addComponent(jtxtPretraziPoImenuFilma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlabDatum)
+                            .addComponent(jtxtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jbtnPretraziPoImenuFilma)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,7 +180,7 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
                         .addComponent(jbtnObrisi)
                         .addComponent(jbtnDetalji)
                         .addComponent(jbtnRezervisiMesto)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -173,10 +191,25 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnIzadjiActionPerformed
 
     private void jbtnPretraziPoImenuFilmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPretraziPoImenuFilmaActionPerformed
+        try {
+            pripremiFormu();
+        } catch (Exception ex) {
+            Logger.getLogger(FPretragaProjekcije.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String naziv = jtxtPretraziPoImenuFilma.getText().trim();
+        Date datum = null;
+        if(!jtxtDatum.getText().isEmpty()) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                datum = sdf.parse(jtxtDatum.getText().trim());
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, "Datum projekcije mora biti u formatu dd.MM.yyyy");
+                return;
+            }
+        }
         TableModel tm = jtblProjekcije.getModel();
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) tm;
-        ptm.pretraziProjekcijePoNazivuFilma(naziv);
+        ptm.pretraziProjekcijePoNazivuFilmaIDatumuProjekcije(naziv,datum);
         if(jtblProjekcije.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje projekcije po zadatoj vrednosti!");
         }
@@ -251,8 +284,10 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
     private javax.swing.JButton jbtnObrisi;
     private javax.swing.JButton jbtnPretraziPoImenuFilma;
     private javax.swing.JButton jbtnRezervisiMesto;
+    private javax.swing.JLabel jlabDatum;
     private javax.swing.JLabel jlblPretraziPoImenu;
     private javax.swing.JTable jtblProjekcije;
+    private javax.swing.JTextField jtxtDatum;
     private javax.swing.JTextField jtxtPretraziPoImenuFilma;
     // End of variables declaration//GEN-END:variables
 

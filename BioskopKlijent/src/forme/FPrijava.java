@@ -143,13 +143,14 @@ public class FPrijava extends javax.swing.JFrame {
                 }
             }*/
             else {
-                Korisnik k = new Korisnik(-1l, jtxtKorisnickoIme.getText().trim(), jtxtKorisnickoIme.getText().trim(), "", "", "");
+                Korisnik k = new Korisnik(-1l, jtxtKorisnickoIme.getText().trim(), jtxtLozinka.getText().trim(), "", "", "");
                 ServerskiOdgovor so = Kontroler.getInstanca().prijava(k);
                 if(so.getStatus().equals(Status.U_REDU)) {
                     new FGlavnaFormaKorisnik((Korisnik)so.getOdgovor()).setVisible(true);
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, so.getPoruka());
+                    return;
                 }
             }
         } catch (Exception ex) {

@@ -78,11 +78,22 @@ public class ProjekcijaTableModel extends AbstractTableModel {
         return klaseKolona[kolona];
     }
 
-    public void pretraziProjekcijePoNazivuFilma(String naziv) {
+    public void pretraziProjekcijePoNazivuFilmaIDatumuProjekcije(String naziv, Date datum) {
         List<Projekcija> zaUklanjanje = new ArrayList<>();
-        for (Projekcija projekcija : projekcije) {
-            if(!projekcija.getFilm().getNaziv().toLowerCase().contains(naziv.toLowerCase())) {
-                zaUklanjanje.add(projekcija);
+        if(datum == null) {
+            for (Projekcija projekcija : projekcije) {
+                if(!projekcija.getFilm().getNaziv().toLowerCase().contains(naziv.toLowerCase())) {
+                    zaUklanjanje.add(projekcija);
+                }
+            }
+        } else {
+            for (Projekcija projekcija : projekcije) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                String d1 = sdf.format(datum);
+                String d2 = sdf.format(projekcija.getDatumVreme());
+                if(!projekcija.getFilm().getNaziv().toLowerCase().contains(naziv.toLowerCase()) || !d1.equals(d2)) {
+                    zaUklanjanje.add(projekcija);
+                }
             }
         }
         projekcije.removeAll(zaUklanjanje);

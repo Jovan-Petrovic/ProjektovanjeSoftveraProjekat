@@ -114,6 +114,10 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
                         Film f = (Film) kz.getParametar();
                         so = vratiFiltriraneFilmove(f);
                         break;
+                    case Operacije.ODJAVA:
+                        Korisnik korisnik = (Korisnik) kz.getParametar();
+                        so = odjava(korisnik);
+                        break;
                 }
                 posaljiOdgovor(so);
             } catch (IOException ex) {
@@ -538,6 +542,12 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
             so.setPoruka("Doslo je do greske prilikom citanja filmova iz baze");
             Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return so;
+    }
+
+    private ServerskiOdgovor odjava(Korisnik korisnik) {
+        ServerskiOdgovor so = new ServerskiOdgovor();
+        so = Kontroler.getInstanca().odjava(korisnik);
         return so;
     }
 
