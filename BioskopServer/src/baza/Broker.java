@@ -272,4 +272,6 @@ public class Broker {
         ResultSet rs = s.executeQuery(upit);
         return odo.ucitajListu(rs);
     }
+    
+    
 }

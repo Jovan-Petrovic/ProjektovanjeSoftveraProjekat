@@ -10,6 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,7 +37,8 @@ public class ServerNit extends Thread {
                 klijent.start();
                 klijenti.add(klijent);
             } catch (IOException ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Server je zaustavljen");
             }
         }
         zaustaviObraduKlijentskogZahteva();

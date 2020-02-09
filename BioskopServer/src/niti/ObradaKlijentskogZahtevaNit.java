@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import kontroler.Kontroler;
 import transfer.KlijentskiZahtev;
 import transfer.ServerskiOdgovor;
@@ -121,7 +122,9 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
                 }
                 posaljiOdgovor(so);
             } catch (IOException ex) {
-                Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
+                Kontroler.getInstanca().getPrijavljeniKorisnici().removeAll(Kontroler.getInstanca().getPrijavljeniKorisnici());
+                JOptionPane.showMessageDialog(null, "Server je zaustavljen");
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {

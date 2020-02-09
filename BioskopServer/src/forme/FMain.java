@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import niti.ServerNit;
 
 /**
@@ -119,6 +120,7 @@ public class FMain extends javax.swing.JFrame {
             try {
                 serverNit.zaustaviServerskuNit();
             } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Server je zaustavljen");
                 ex.printStackTrace();
             }
         }

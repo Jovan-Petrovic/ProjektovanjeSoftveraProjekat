@@ -93,6 +93,10 @@ public class Kontroler {
         return instanca;
     }
     
+    public ArrayList<Korisnik> getPrijavljeniKorisnici() {
+        return prijavljeniKorisnici;
+    }
+    
     public Film sacuvajFilm(Film film) throws Exception {
         return servisFilm.sacuvaj(film);
     }
@@ -307,4 +311,5 @@ public class Kontroler {
         return so;
     }
 
+    
 }
