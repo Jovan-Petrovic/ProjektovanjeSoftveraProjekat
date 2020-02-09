@@ -5,11 +5,13 @@
  */
 package niti;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +24,12 @@ public class ServerNit extends Thread {
     List<ObradaKlijentskogZahtevaNit> klijenti;
 
     public ServerNit() throws IOException {
-        serverSocket=new ServerSocket(9000);
+        FileInputStream in=new FileInputStream("db.properties");
+        Properties props=new Properties();
+        props.load(in);
+        String serverSoc = props.getProperty("serverSocket");
+        int ss = Integer.parseInt(serverSoc);
+        serverSocket = new ServerSocket(ss);
         klijenti = new ArrayList<>();
     }
 

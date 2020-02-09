@@ -90,9 +90,7 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
                         so = vratiSvaRezervisanja();
                         break;
                     case Operacije.OTAKZI_REZERVACIJU:
-//                        Map<String,Long> mapa = (Map<String,Long>) kz.getParametar();
                         Rezervisanje r = (Rezervisanje) kz.getParametar();
-//                        so = otkaziRezervaciju(mapa);
                         so = otkaziRezervaciju(r);
                         break;
                     case Operacije.IZMENI_FILM:
@@ -190,20 +188,6 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         }
         return so;
     }
-
-//    private ServerskiOdgovor vratiSveReditelje() {
-//        ServerskiOdgovor so = new ServerskiOdgovor();
-//        try {
-//            ArrayList<Reditelj> reditelji = (ArrayList<Reditelj>) Kontroler.getInstanca().vratiSveReditelje();
-//            so.setOdgovor(reditelji);
-//            so.setStatus(Status.U_REDU);
-//        } catch (Exception ex) {
-//             so.setStatus(Status.GRESKA);
-//            so.setPoruka("Doslo je do greske prilikom citanja reditelja iz baze");
-//            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return so;
-//    }
     
     private ServerskiOdgovor vratiSveReditelje() {
         ServerskiOdgovor so = new ServerskiOdgovor();
@@ -218,20 +202,6 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         }
         return so;
     }
-
-//    private ServerskiOdgovor vratiSveUloge() {
-//        ServerskiOdgovor so = new ServerskiOdgovor();
-//        try {
-//            ArrayList<Glumi> uloge = (ArrayList<Glumi>) Kontroler.getInstanca().vratiSveUloge();
-//            so.setOdgovor(uloge);
-//            so.setStatus(Status.U_REDU);
-//        } catch (Exception ex) {
-//            so.setStatus(Status.GRESKA);
-//            so.setPoruka("Doslo je do greske prilikom citanja uloga iz baze");
-//            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return so;
-//    }
     
     private ServerskiOdgovor vratiSveUloge() {
         ServerskiOdgovor so = new ServerskiOdgovor();
@@ -246,20 +216,6 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         }
         return so;
     }
-
-//    private ServerskiOdgovor vratiSveGlumce() {
-//        ServerskiOdgovor so = new ServerskiOdgovor();
-//        try {
-//            ArrayList<Glumac> glumci = (ArrayList<Glumac>) Kontroler.getInstanca().vratiSveGlumce();
-//            so.setOdgovor(glumci);
-//            so.setStatus(Status.U_REDU);
-//        } catch (Exception ex) {
-//             so.setStatus(Status.GRESKA);
-//            so.setPoruka("Doslo je do greske prilikom citanja glumaca iz baze");
-//            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return so;
-//    }
     
     private ServerskiOdgovor vratiSveGlumce() {
         ServerskiOdgovor so = new ServerskiOdgovor();
@@ -274,19 +230,6 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         }
         return so;
     }
-
-//    private ServerskiOdgovor sacuvajFilmReziraGlumi(Map<String, Object> podaci) {
-//        ServerskiOdgovor so = new ServerskiOdgovor();
-//        Film film = Kontroler.getInstanca().sacuvajFilmReziraGlumi(podaci);
-//        if(film != null) {
-//            so.setOdgovor(film);
-//            so.setStatus(Status.U_REDU);
-//        } else {
-//            so.setOdgovor(film);
-//            so.setStatus(Status.GRESKA);
-//        }
-//        return so;
-//    }
     
     private ServerskiOdgovor sacuvajFilmReziraGlumi(Map<String, Object> podaci) {
         ServerskiOdgovor so = new ServerskiOdgovor();
@@ -314,21 +257,6 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         }
         return so;
     }
-
-//    private ServerskiOdgovor obrisiProjekciju(Projekcija p) throws Exception {
-//        ServerskiOdgovor so = new ServerskiOdgovor();
-//        boolean odgovor = Kontroler.getInstanca().obrisiProjekciju(p.getId());
-//        if(odgovor) {
-//            so.setOdgovor(true);
-//            so.setPoruka("Uspesno obrisana projekcija");
-//            so.setStatus(Status.U_REDU);
-//        } else {
-//            so.setOdgovor(false);
-//            so.setPoruka("projekcija nije uspesno obrisana");
-//            so.setStatus(Status.GRESKA);
-//        }
-//        return so;
-//    }
     
     private ServerskiOdgovor obrisiProjekciju(Projekcija p) {
         ServerskiOdgovor so = new ServerskiOdgovor();
@@ -343,29 +271,8 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
             so.setStatus(Status.GRESKA);
             Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        if(odgovor) {
-//            so.setOdgovor(true);
-//            so.setPoruka("Uspesno obrisana projekcija");
-//            so.setStatus(Status.U_REDU);
-//        } else {
-//            so.setOdgovor(false);
-//            so.setPoruka("projekcija nije uspesno obrisana");
-//            so.setStatus(Status.GRESKA);
-//        }
         return so;
     }
-
-//    private ServerskiOdgovor sacuvajProjekciju(Projekcija projekcija) throws Exception {
-//        ServerskiOdgovor so = new ServerskiOdgovor();
-//        Projekcija p = Kontroler.getInstanca().sacuvajProjekciju(projekcija);
-//        so.setOdgovor(p);
-//        if(p != null) {
-//            so.setStatus(Status.U_REDU);
-//        } else {
-//            so.setStatus(Status.GRESKA);
-//        }
-//        return so;
-//    }
     
     private ServerskiOdgovor sacuvajProjekciju(Projekcija projekcija){
         ServerskiOdgovor so = new ServerskiOdgovor();
@@ -381,19 +288,6 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         }
         return so;
     }
-
-//    private ServerskiOdgovor sacuvajRezervisanje(Rezervisanje rezervisanje) throws Exception {
-//        ServerskiOdgovor so = new ServerskiOdgovor();
-//        Boolean odgovor = Kontroler.getInstanca().sacuvajRezervisanje(rezervisanje);
-//        if(odgovor) {
-//            so.setOdgovor(true);
-//            so.setStatus(Status.U_REDU);
-//        } else {
-//            so.setOdgovor(false);
-//            so.setStatus(Status.GRESKA);
-//        }
-//        return so;
-//    }
     
     private ServerskiOdgovor sacuvajRezervisanje(Rezervisanje rezervisanje) throws Exception {
         ServerskiOdgovor so = new ServerskiOdgovor();
@@ -416,20 +310,6 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         }
         return so;
     }
-
-//    private ServerskiOdgovor vratiSvaRezervisanja() {
-//        ServerskiOdgovor so = new ServerskiOdgovor();
-//        try {
-//            ArrayList<Rezervisanje> rezervisanja = (ArrayList<Rezervisanje>) Kontroler.getInstanca().vratiSvaRezervisanja();
-//            so.setOdgovor(rezervisanja);
-//            so.setStatus(Status.U_REDU);
-//        } catch (Exception ex) {
-//             so.setStatus(Status.GRESKA);
-//            so.setPoruka("Doslo je do greske prilikom citanja rezervacija iz baze");
-//            Logger.getLogger(ObradaKlijentskogZahtevaNit.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return so;
-//    }
     
     private ServerskiOdgovor vratiSvaRezervisanja() {
         ServerskiOdgovor so = new ServerskiOdgovor();
@@ -483,19 +363,6 @@ public class ObradaKlijentskogZahtevaNit extends Thread {
         }
         return so;
     }
-
-//    private ServerskiOdgovor izmeniFilmReziraGlumi(Map<String, Object> mapa1) {
-//        ServerskiOdgovor so = new ServerskiOdgovor();
-//        boolean odgovor = Kontroler.getInstanca().izmeniFilmReziraGlumi(mapa1);
-//        if(odgovor) {
-//            so.setOdgovor(odgovor);
-//            so.setStatus(Status.U_REDU);
-//        } else {
-//            so.setOdgovor(odgovor);
-//            so.setStatus(Status.GRESKA);
-//        }
-//        return so;
-//    }
     
     private ServerskiOdgovor izmeniFilmReziraGlumi(Map<String, Object> mapa1) {
         ServerskiOdgovor so = new ServerskiOdgovor();

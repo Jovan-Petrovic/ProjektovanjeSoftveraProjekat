@@ -51,10 +51,11 @@ public class FKonfiguracija extends javax.swing.JDialog {
         jbtnSacuvaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Konfiguracija");
 
         jlblBrojPorta.setText("Soket broj porta:");
 
-        jlblIPAdresa.setText("Ip adresa:");
+        jlblIPAdresa.setText("Adresa servera:");
 
         jbtnIzadji.setText("Izadji");
         jbtnIzadji.addActionListener(new java.awt.event.ActionListener() {

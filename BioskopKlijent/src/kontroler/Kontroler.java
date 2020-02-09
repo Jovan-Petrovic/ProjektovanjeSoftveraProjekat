@@ -60,71 +60,6 @@ public class Kontroler {
         }
         return instanca;
     }
-    /*
-    public Film sacuvajFilm(Film film) throws Exception {
-        return servisFilm.sacuvaj(film);
-    }
-    
-    public List<Reditelj> vratiSveReditelje() throws Exception {
-        return servisReditelj.vratiSve();
-    }
-
-    public List<Glumac> vratiSveGlumce() throws Exception {
-        return servisGlumac.vratiSve();
-    }
-
-    public List<Film> vratiSveFilmove() throws Exception {
-        return servisFilm.vratiSve();
-    }
-
-    public Projekcija sacuvajProjekciju(Projekcija projekcija) throws Exception {
-        return servisProjekcija.sacuvaj(projekcija);
-    }
-
-    public List<Projekcija> vratiSveProjekcije() throws Exception {
-        return servisProjekcija.vratiSve();
-    }
-
-    public boolean obrisiProjekciju(Long id) throws Exception {
-        return servisProjekcija.obrisi(id);
-    }
-
-    public void sacuvajRezira(Rezira rezira) throws Exception {
-        servisRezira.sacuvaj(rezira);
-    }
-
-    public void sacuvajGlumi(Glumi glumi) throws Exception {
-        servisGlumi.sacuvaj(glumi);
-    }
-
-    public List<Rezira> vratiSvaReziranja() throws Exception {
-        return servisRezira.vratiSve();
-    }
-
-    public List<Glumi> vratiSveUloge() {
-        return servisGlumi.vratiSve();
-    }
-
-    public boolean izmeniFilm(Film film) {
-        return servisFilm.izmeni(film);
-    }
-
-    public List<Korisnik> vratiSveKorisnike() throws Exception {
-        return servisKorisnik.vratiSve();
-    }
-
-    public boolean sacuvajRezervisanje(Rezervisanje rezervisanje) throws Exception {
-        return servisRezervisanje.sacuvaj(rezervisanje);
-    }
-
-    public List<Rezervisanje> vratiSvaRezervisanja() throws Exception {
-        return servisRezervisanje.vratiSva();
-    }
-
-    public boolean obrisiRezervaciju(Long projekcijaID, Long korisnikID) throws Exception {
-        return servisRezervisanje.obrisi(projekcijaID, korisnikID);
-    }
-    */
 
     public void posaljiZahtev(KlijentskiZahtev kz) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
@@ -178,14 +113,6 @@ public class Kontroler {
         return glumci;
     }
 
-//    public void sacuvajRezira(Rezira rezira) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    public void sacuvajGlumi(Glumi glumi) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-
     public boolean izmeniFilm(Film film) throws IOException, ClassNotFoundException {
         KlijentskiZahtev kz = new KlijentskiZahtev();
         kz.setOperacija(Operacije.IZMENI_FILM);
@@ -237,7 +164,6 @@ public class Kontroler {
         kz.setParametar(p);
         posaljiZahtev(kz);
         ServerskiOdgovor so = primiOdgovor();
-//        JOptionPane.showMessageDialog(null, so.getPoruka());
         if(so.getStatus().equals(Status.GRESKA)) {
             return false;
         }
@@ -274,10 +200,6 @@ public class Kontroler {
         }
         return (List<Rezervisanje>) so.getOdgovor();
     }
-
-//    public boolean obrisiRezervaciju(Long projekcijaID, int korisnikID) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
 
     public Projekcija sacuvajProjekciju(Projekcija projekcija) throws IOException, ClassNotFoundException {
         KlijentskiZahtev kz = new KlijentskiZahtev();

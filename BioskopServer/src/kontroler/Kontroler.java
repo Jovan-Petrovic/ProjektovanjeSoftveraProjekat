@@ -101,58 +101,34 @@ public class Kontroler {
         return servisFilm.sacuvaj(film);
     }
     
-//    public List<Reditelj> vratiSveReditelje() throws Exception {
-//        return servisReditelj.vratiSve();
-//    }
-    
     public List<DomenskiObjekat> vratiSveReditelje() throws Exception {
         SistemskaOperacija so = new SOVratiReditelje(new Reditelj());
         so.execute();
         return ((SOVratiReditelje)so).getLista();
     }
-
-//    public List<Glumac> vratiSveGlumce() throws Exception {
-//        return servisGlumac.vratiSve();
-//    }
     
     public List<DomenskiObjekat> vratiSveGlumce() throws Exception {
         SistemskaOperacija so = new SOVratiGlumce(new Glumac());
         so.execute();
         return ((SOVratiGlumce)so).getLista();
     }
-
-//    public List<Film> vratiSveFilmove() throws Exception {
-//        return servisFilm.vratiSve();
-//    }
     
     public List<DomenskiObjekat> vratiSveFilmove() throws Exception {
         SistemskaOperacija so = new SOVratiFilmove(new Film());
         so.execute();
         return ((SOVratiFilmove)so).getLista();
     }
-
-//    public Projekcija sacuvajProjekciju(Projekcija projekcija) throws Exception {
-//        return servisProjekcija.sacuvaj(projekcija);
-//    }
     
     public void sacuvajProjekciju(Projekcija projekcija) throws Exception {
         SistemskaOperacija so = new SOUbaciProjekciju(projekcija);
         so.execute();
     }
-
-//    public List<Projekcija> vratiSveProjekcije() throws Exception {
-//        return servisProjekcija.vratiSve();
-//    }
     
     public List<DomenskiObjekat> vratiSveProjekcije() throws Exception {
         SistemskaOperacija so = new SOVratiProjekcije(new Projekcija());
         so.execute();
         return ((SOVratiProjekcije)so).getLista();
     }
-
-//    public boolean obrisiProjekciju(Long id) throws Exception {
-//        return servisProjekcija.obrisi(id);
-//    }
     
     public void obrisiProjekciju(Projekcija p) throws Exception {
         SistemskaOperacija so = new SOObrisiProjekciju(p);
@@ -166,20 +142,12 @@ public class Kontroler {
     public void sacuvajGlumi(Glumi glumi) throws Exception {
         servisGlumi.sacuvaj(glumi);
     }
-
-//    public List<Rezira> vratiSvaReziranja() throws Exception {
-//        return servisRezira.vratiSve();
-//    }
     
     public List<DomenskiObjekat> vratiSvaReziranja() throws Exception {
         SistemskaOperacija so = new SOVratiReziranja(new Rezira());
         so.execute();
         return ((SOVratiReziranja)so).getLista();
     }
-
-//    public List<Glumi> vratiSveUloge() {
-//        return servisGlumi.vratiSve();
-//    }
     
     public List<DomenskiObjekat> vratiSveUloge() throws Exception {
         SistemskaOperacija so = new SOVratiUloge(new Glumi());
@@ -194,57 +162,27 @@ public class Kontroler {
     public List<Korisnik> vratiSveKorisnike() throws Exception {
         return servisKorisnik.vratiSve();
     }
-
-//    public boolean sacuvajRezervisanje(Rezervisanje rezervisanje) throws Exception {
-//        return servisRezervisanje.sacuvaj(rezervisanje);
-//    }
     
     public void sacuvajRezervisanje(Rezervisanje rezervisanje) throws Exception {
         SistemskaOperacija so = new SOUbaciRezervisanje(rezervisanje);
         so.execute();
     }
-
-//    public List<Rezervisanje> vratiSvaRezervisanja() throws Exception {
-//        return servisRezervisanje.vratiSva();
-//    }
     
     public List<DomenskiObjekat> vratiSvaRezervisanja() throws Exception {
         SistemskaOperacija so = new SOVratiRezervacije(new Rezervisanje());
         so.execute();
         return ((SOVratiRezervacije)so).getLista();
     }
-
-//    public boolean obrisiRezervaciju(Long projekcijaID, Long korisnikID) throws Exception {
-//        return servisRezervisanje.obrisi(projekcijaID, korisnikID);
-//    }
     
     public void otkaziRezervaciju(Rezervisanje r) throws Exception {
         SistemskaOperacija so = new SOObrisiRezervaciju(r);
         so.execute();
     }
-
-//    public Film sacuvajFilmReziraGlumi(Map<String, Object> podaci) {
-//        return servisFilm.sacuvajFilmReziraglumi(podaci);
-//    }
     
     public Film sacuvajFilmReziraGlumi(Map<String, Object> podaci) throws Exception {
         Film film = (Film) podaci.get("film");
-//        ArrayList<Rezira> reziranja = (ArrayList<Rezira>) podaci.get("rezira");
-//        ArrayList<Glumi> uloge = (ArrayList<Glumi>) podaci.get("glumi");
         SistemskaOperacija so = new SOUbaciFilm(film, podaci);
         so.execute();
-        
-//        for (Rezira rezira : reziranja) {
-//            rezira.setFilm(film);
-//            SistemskaOperacija so1 = new SOUbaciRezira(rezira);
-//            so1.execute();
-//        }
-//        
-//        for (Glumi glumi : uloge) {
-//            glumi.setFilm(film);
-//            SistemskaOperacija so2 = new SOUbaciGlumi(glumi);
-//            so2.execute();
-//        }
         return film;
     }
 
@@ -255,10 +193,6 @@ public class Kontroler {
     public boolean izmeniFilmRediteljeGlumce(Map<String, Object> podaci) {
         return servisFilm.izmeniFilmRediteljeGlumce(podaci);
     }
-
-//    public boolean izmeniFilmReziraGlumi(Map<String, Object> mapa1) {
-//        return servisFilm.izmeniFilmReziraGlumi(mapa1);
-//    }
 
     public boolean izmeniFilmReziraGlumi(Map<String, Object> podaci) {
         SistemskaOperacija so = new SOIzmeniFilm(podaci);

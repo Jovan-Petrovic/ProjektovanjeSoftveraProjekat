@@ -216,7 +216,6 @@ public class FPretragaFilma extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnPretraziActionPerformed
 
     private void jbtnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDetaljiActionPerformed
-        JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti rezervaciju.", "Greska", JOptionPane.ERROR_MESSAGE);
         int selektovanRed = jtblFilmovi.getSelectedRow();
         if(selektovanRed == -1) {
             JOptionPane.showMessageDialog(this, "Morate selektovati red!", "Greska", JOptionPane.ERROR_MESSAGE);
@@ -251,7 +250,7 @@ public class FPretragaFilma extends javax.swing.JDialog {
     private void jbtnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnIzmeniActionPerformed
         int selektovanRed = jtblFilmovi.getSelectedRow();
         if(selektovanRed == -1) {
-            JOptionPane.showMessageDialog(this, "Morate selektovati red");
+            JOptionPane.showMessageDialog(this, "Morate selektovati red.", "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
         TableModel tm = jtblFilmovi.getModel();

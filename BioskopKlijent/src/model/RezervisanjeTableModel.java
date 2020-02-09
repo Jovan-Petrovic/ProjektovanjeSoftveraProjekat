@@ -7,6 +7,8 @@ package model;
 
 import domen.Projekcija;
 import domen.Rezervisanje;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -18,8 +20,8 @@ import javax.swing.table.AbstractTableModel;
 public class RezervisanjeTableModel extends AbstractTableModel {
     
     private final List<Rezervisanje> rezervisanja;
-    private final String[] imenaKolona = new String[]{"PROJEKCIJA_ID","FILM","DATUM","SALA"};
-    private final Class[] klaseKolona = new Class[]{Long.class,String.class, Date.class, Integer.class};
+    private final String[] imenaKolona = new String[]{"PROJEKCIJA_ID","FILM","DATUM I VREME","SALA"};
+    private final Class[] klaseKolona = new Class[]{Long.class,String.class, String.class, Integer.class};
 
     public RezervisanjeTableModel(List<Rezervisanje> rezervisanja) {
         this.rezervisanja = rezervisanja;
@@ -47,7 +49,9 @@ public class RezervisanjeTableModel extends AbstractTableModel {
             case 1:
                 return rezervisanje.getProjekcija().getFilm().getNaziv();
             case 2:
-                return rezervisanje.getProjekcija().getDatumVreme();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+                String datumVreme = sdf.format(rezervisanje.getProjekcija().getDatumVreme());
+                return datumVreme;
             case 3:
                 return rezervisanje.getProjekcija().getSala();
             default:

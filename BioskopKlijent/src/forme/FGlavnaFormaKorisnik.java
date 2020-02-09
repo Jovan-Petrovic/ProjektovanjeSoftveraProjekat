@@ -158,7 +158,7 @@ public class FGlavnaFormaKorisnik extends javax.swing.JFrame {
             Kontroler.getInstanca().posaljiZahtev(kz);
             ServerskiOdgovor so = Kontroler.getInstanca().primiOdgovor();
             if(so.getStatus().equals(Status.GRESKA)) {
-                JOptionPane.showMessageDialog(this, "Doslo je do greske. Sistem ne moze da vas odjavi");
+                JOptionPane.showMessageDialog(this, "Doslo je do greske. Sistem ne moze da vas odjavi","Greska",JOptionPane.ERROR_MESSAGE);
                 return;
             }
         } catch (IOException ex) {

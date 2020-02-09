@@ -114,12 +114,12 @@ public class Projekcija implements Serializable, DomenskiObjekat {
 
     @Override
     public String getImenaAtributaZaUbacivanje() {
-        return "datum, sala, filmID";
+        return "datum, sala, filmID, preostaloMesta";
     }
 
     @Override
     public String getVrednostiAtributaZaUbacivanje() {
-        return "'"+new java.sql.Timestamp(datumVreme.getTime())+"', '"+sala+"', "+film.getId();
+        return "'"+new java.sql.Timestamp(datumVreme.getTime())+"', '"+sala+"', "+film.getId()+", "+preostaloMesta;
     }
 
     @Override
