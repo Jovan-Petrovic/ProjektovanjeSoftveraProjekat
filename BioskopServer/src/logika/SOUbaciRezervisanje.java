@@ -20,7 +20,7 @@ public class SOUbaciRezervisanje extends SistemskaOperacija {
 
     @Override
     protected void operacija() throws Exception {
-        dbbr.ubaci(odo);
+        dbbr.ubaciSaIzmenom(odo);
     }
     
     

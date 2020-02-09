@@ -123,7 +123,8 @@ public class Rezervisanje implements Serializable, DomenskiObjekat {
                 Long projekcijaId = rs.getLong("projekcija.id");
                 java.sql.Timestamp datumProjekcije = rs.getTimestamp("projekcija.datum");
                 String salaProjekcije = rs.getString("projekcija.sala");
-                Projekcija projekcija = new Projekcija(projekcijaId, datumProjekcije, salaProjekcije, film);
+                int ostaloMesta = rs.getInt("preostaloMesta");
+                Projekcija projekcija = new Projekcija(projekcijaId, datumProjekcije, salaProjekcije, film, ostaloMesta);
                 
                 Long korisnikID = rs.getLong("korisnik.id");
                 String korisnickoIme = rs.getString("korisnik.korisnickoIme");
@@ -201,6 +202,22 @@ public class Rezervisanje implements Serializable, DomenskiObjekat {
     @Override
     public String vratiUslovZaCitanjeListe() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getImePovezaneTabele() {
+        return "projekcija";
+    }
+
+    @Override
+    public String vratiVrednostiZaOperacijuUpdatePovezaneTabele() {
+        int ostaloMesta = projekcija.getBrojMesta()-1;
+        return "preostaloMesta = " + ostaloMesta;
+    }
+
+    @Override
+    public String vratiUslovZaOperacijuUpdatePovezaneTabele() {
+        return "id = " + projekcija.getId();
     }
 
 }

@@ -25,17 +25,19 @@ public class Projekcija implements Serializable, DomenskiObjekat {
     private Timestamp datumVreme;
     private String sala;
     private Film film;
+    private int preostaloMesta;
 
     public Projekcija() {
     }
 
-    public Projekcija(Long id, Timestamp datumVreme, String sala, Film film) {
+    public Projekcija(Long id, Timestamp datumVreme, String sala, Film film, int preostaloMesta) {
         this.id = id;
         this.datumVreme = datumVreme;
         this.sala = sala;
         this.film = film;
-    }
-    
+        this.preostaloMesta = preostaloMesta;
+    }  
+  
     public Film getFilm() {
         return film;
     }
@@ -66,6 +68,14 @@ public class Projekcija implements Serializable, DomenskiObjekat {
 
     public void setDatumVreme(Timestamp datumVreme) {
         this.datumVreme = datumVreme;
+    }
+    
+    public int getBrojMesta() {
+        return preostaloMesta;
+    }
+
+    public void setBrojMesta(int brojMesta) {
+        this.preostaloMesta = brojMesta;
     }
 
     @Override
@@ -139,7 +149,8 @@ public class Projekcija implements Serializable, DomenskiObjekat {
                 Long idProjekcija = rs.getLong("projekcija.id");
                 Timestamp datumVreme = rs.getTimestamp("datum");
                 String sala = rs.getString("sala");
-                Projekcija projekcija = new Projekcija(idProjekcija, datumVreme, sala, film);
+                int ostaloMesta = rs.getInt("preostaloMesta");
+                Projekcija projekcija = new Projekcija(idProjekcija, datumVreme, sala, film, ostaloMesta);
                 
                 projekcije.add(projekcija);
             }
@@ -206,6 +217,21 @@ public class Projekcija implements Serializable, DomenskiObjekat {
 
     @Override
     public String vratiUslovZaCitanjeListe() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getImePovezaneTabele() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String vratiVrednostiZaOperacijuUpdatePovezaneTabele() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String vratiUslovZaOperacijuUpdatePovezaneTabele() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

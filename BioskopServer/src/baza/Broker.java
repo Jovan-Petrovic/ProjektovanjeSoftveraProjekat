@@ -273,5 +273,28 @@ public class Broker {
         return odo.ucitajListu(rs);
     }
     
-    
+    public DomenskiObjekat ubaciSaIzmenom(DomenskiObjekat odo) throws Exception {
+        try {
+            String upit = "insert into "+odo.getImeTabele()+" ("+odo.getImenaAtributaZaUbacivanje()+") values ("+odo.getVrednostiAtributaZaUbacivanje()+")";
+            System.out.println(upit);
+            Statement statement = konekcija.createStatement();
+            statement.executeUpdate(upit, Statement.RETURN_GENERATED_KEYS);
+            
+            if(odo.isAutoincrement()) {
+                ResultSet rs=statement.getGeneratedKeys();
+                if(rs.next()){
+                    odo.setObjekatID(rs.getLong(1));
+                }
+            }
+            
+            upit = "UPDATE "+odo.getImePovezaneTabele()+" SET "+odo.vratiVrednostiZaOperacijuUpdatePovezaneTabele()+" WHERE "+odo.vratiUslovZaOperacijuUpdatePovezaneTabele();
+            System.out.println(upit);
+            statement = konekcija.createStatement();
+            statement.executeUpdate(upit);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new Exception(ex.getLocalizedMessage()+"Greska prilikom kreiranja "+odo.getImeTabele()+" u bazi!\n");
+        }
+        return odo;
+    }
 }

@@ -84,7 +84,8 @@ public class BazapodatakaSkladisteRezervisanje implements SkladisteRezervisanje{
                 Long projekcijaId = rs.getLong("p.id");
                 java.sql.Timestamp datumVremeProjekcije = rs.getTimestamp("p.datum");
                 String salaProjekcije = rs.getString("p.sala");
-                Projekcija projekcija = new Projekcija(projekcijaId, datumVremeProjekcije, salaProjekcije, film);
+                int ostaloMesta = rs.getInt("preostaloMesta");
+                Projekcija projekcija = new Projekcija(projekcijaId, datumVremeProjekcije, salaProjekcije, film, ostaloMesta);
                 
                 Long korisnikID = rs.getLong("k.id");
                 String korisnickoIme = rs.getString("k.korisnickoIme");

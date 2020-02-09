@@ -77,13 +77,14 @@ public class BazapodatakaSkladisteProjekcija implements SkladisteProjekcija {
                 Timestamp datumVreme = rs.getTimestamp("datum");
                 String sala = rs.getString("sala");
                 Long filmID = rs.getLong("filmID");
+                int ostaloMesta = rs.getInt("preostaloMesta");
                 Film f = null;
                 for(Film film : filmovi) {
                     if(film.getId().equals(filmID)) {
                         f = film;
                     }
                 }
-                Projekcija projekcija = new Projekcija(id, datumVreme, sala, f);
+                Projekcija projekcija = new Projekcija(id, datumVreme, sala, f, ostaloMesta);
                 projekcije.add(projekcija);
             }
             statement.close();

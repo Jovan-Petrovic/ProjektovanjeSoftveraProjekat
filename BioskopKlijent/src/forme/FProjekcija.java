@@ -270,12 +270,24 @@ public class FProjekcija extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Vreme projekcije mora biti u formatu dd.MM.yyyy HH:mm");
             return;
         }
-        String sala = jtxtSala.getText().trim();
+        String sala = jtxtSala.getText().trim().toLowerCase();
         if(!sala.equalsIgnoreCase("sala 1") && !sala.equalsIgnoreCase("sala 2") && !sala.equalsIgnoreCase("sala 3")) {
             JOptionPane.showMessageDialog(this, "Naziv sale mora biti jedan od sledecih naziva: sala 1, sala 2 ili sala 3");
             return;
         }
-        Projekcija p = new Projekcija(-1l, datumVreme, sala, film);
+        int ostaloMesta = -1;
+        switch(sala) {
+            case "sala 1":
+                ostaloMesta = 30;
+                break;
+            case "sala 2":
+                ostaloMesta = 25;
+                break;
+            case "sala 3":
+                ostaloMesta = 20;
+                break;
+        }
+        Projekcija p = new Projekcija(-1l, datumVreme, sala, film, ostaloMesta);
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) jtblProjekcije.getModel();
         boolean status = ptm.dodajProjekciju(p);
         if(!status) {
@@ -325,26 +337,26 @@ public class FProjekcija extends javax.swing.JDialog {
         this.jtxtFilm = jtxtFilm;
     }
 
-    private void sacuvajProjekciju() throws Exception {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
-            Date datum = sdf.parse(jtxtDatum.getText().trim());
-            Timestamp datumVreme = new Timestamp(datum.getTime());
-            String sala = jtxtSala.getText().trim();
-            List<Film> filmovi = Kontroler.getInstanca().vratiSveFilmove();
-            Film f = null;
-            for (Film film : filmovi) {
-                if(jtxtFilm.getText().equals(film.getNaziv())) {
-                    f = film;
-                }
-            }
-            Projekcija projekcija = new Projekcija(null, datumVreme, sala, f);
-            projekcija = Kontroler.getInstanca().sacuvajProjekciju(projekcija);
-            JOptionPane.showMessageDialog(this, "Projekcija je sacuvana sa ID-em: " + projekcija.getId());
-        } catch (ParseException ex) {
-            Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    private void sacuvajProjekciju() throws Exception {
+//        try {
+//            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy hh:mm");
+//            Date datum = sdf.parse(jtxtDatum.getText().trim());
+//            Timestamp datumVreme = new Timestamp(datum.getTime());
+//            String sala = jtxtSala.getText().trim();
+//            List<Film> filmovi = Kontroler.getInstanca().vratiSveFilmove();
+//            Film f = null;
+//            for (Film film : filmovi) {
+//                if(jtxtFilm.getText().equals(film.getNaziv())) {
+//                    f = film;
+//                }
+//            }
+//            Projekcija projekcija = new Projekcija(null, datumVreme, sala, f, 0);
+//            projekcija = Kontroler.getInstanca().sacuvajProjekciju(projekcija);
+//            JOptionPane.showMessageDialog(this, "Projekcija je sacuvana sa ID-em: " + projekcija.getId());
+//        } catch (ParseException ex) {
+//            Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
     public Film getFilm() {
         return film;

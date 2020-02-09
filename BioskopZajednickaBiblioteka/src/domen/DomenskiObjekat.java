@@ -31,5 +31,8 @@ public interface DomenskiObjekat {
     public String vratiUslovZaCitanje();
     public DomenskiObjekat ucitajDomenskiObjekat(ResultSet rs);
     public String vratiUslovZaCitanjeListe();
+    public String getImePovezaneTabele();
+    public String vratiVrednostiZaOperacijuUpdatePovezaneTabele();
+    public String vratiUslovZaOperacijuUpdatePovezaneTabele();
 
 }

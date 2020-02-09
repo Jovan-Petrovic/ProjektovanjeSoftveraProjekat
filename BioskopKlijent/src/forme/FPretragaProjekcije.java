@@ -254,7 +254,7 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
     private void jbtnRezervisiMestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRezervisiMestoActionPerformed
         int selektovanRed = jtblProjekcije.getSelectedRow();
         if(selektovanRed == -1) {
-            JOptionPane.showMessageDialog(this, "Morate prvo odabradi projekciju!");
+            JOptionPane.showMessageDialog(this, "Morate prvo odabradi projekciju!", "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) jtblProjekcije.getModel();
@@ -272,7 +272,12 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
             Logger.getLogger(FPretragaProjekcije.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(so.getStatus().equals(Status.U_REDU)) {
-            JOptionPane.showMessageDialog(this, "Rezeracija za film " + rezervisanje.getProjekcija().getFilm().getNaziv() + " datuma " + rezervisanje.getProjekcija().getDatumVreme()+ " je uspesno sacuvana");           
+            JOptionPane.showMessageDialog(this, "Rezeracija za film " + rezervisanje.getProjekcija().getFilm().getNaziv() + " datuma " + rezervisanje.getProjekcija().getDatumVreme()+ " je uspesno sacuvana");
+            try {
+                pripremiFormu();
+            } catch (Exception ex) {
+                Logger.getLogger(FPretragaProjekcije.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             JOptionPane.showMessageDialog(this, so.getPoruka());
         }

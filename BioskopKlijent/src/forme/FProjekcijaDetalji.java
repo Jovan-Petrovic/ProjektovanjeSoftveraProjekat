@@ -60,6 +60,8 @@ public class FProjekcijaDetalji extends javax.swing.JDialog {
         jtxtSala = new javax.swing.JTextField();
         jtxtIzadji = new javax.swing.JButton();
         jbtnFilmDetalji = new javax.swing.JButton();
+        jlblPreostaloMesta = new javax.swing.JLabel();
+        jtxtPreostaloMesta = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Projekcija");
@@ -94,6 +96,10 @@ public class FProjekcijaDetalji extends javax.swing.JDialog {
             }
         });
 
+        jlblPreostaloMesta.setText("Preostalo mesta:");
+
+        jtxtPreostaloMesta.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,21 +109,26 @@ public class FProjekcijaDetalji extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jtxtIzadji)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbtnFilmDetalji))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                            .addComponent(jlabFilm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtxtSala)
+                            .addComponent(jlblPreostaloMesta)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                                .addComponent(jlabFilm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jlblID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jtxtPreostaloMesta))
+                            .addComponent(jtxtSala, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                             .addComponent(jtxtDatum)
                             .addComponent(jtxtFilm)
                             .addComponent(jtxtID))))
-                .addGap(64, 64, 64))
+                .addGap(38, 38, 38))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,11 +149,15 @@ public class FProjekcijaDetalji extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jtxtSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlblPreostaloMesta)
+                    .addComponent(jtxtPreostaloMesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtxtIzadji)
                     .addComponent(jbtnFilmDetalji))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -169,10 +184,12 @@ public class FProjekcijaDetalji extends javax.swing.JDialog {
     private javax.swing.JButton jbtnFilmDetalji;
     private javax.swing.JLabel jlabFilm;
     private javax.swing.JLabel jlblID;
+    private javax.swing.JLabel jlblPreostaloMesta;
     private javax.swing.JTextField jtxtDatum;
     private javax.swing.JTextField jtxtFilm;
     private javax.swing.JTextField jtxtID;
     private javax.swing.JButton jtxtIzadji;
+    private javax.swing.JTextField jtxtPreostaloMesta;
     private javax.swing.JTextField jtxtSala;
     // End of variables declaration//GEN-END:variables
 
@@ -181,5 +198,6 @@ public class FProjekcijaDetalji extends javax.swing.JDialog {
         jtxtFilm.setText(projekcija.getFilm().getNaziv());
         jtxtDatum.setText(projekcija.getDatumVreme().toString());
         jtxtSala.setText(projekcija.getSala()+"");
+        jtxtPreostaloMesta.setText(projekcija.getBrojMesta()+"");
     }
 }
