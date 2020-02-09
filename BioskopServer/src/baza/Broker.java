@@ -297,4 +297,21 @@ public class Broker {
         }
         return odo;
     }
+    
+    public void obrisiSaIzmenom(DomenskiObjekat odo) throws Exception {
+        try {
+            String upit = "DELETE FROM " + odo.getImeTabele() + " WHERE " + odo.vratiUslovZaBrisanje();
+            System.out.println(upit);
+            Statement s = konekcija.createStatement();
+            s.executeUpdate(upit);
+            
+            upit = "UPDATE "+odo.getImePovezaneTabele()+" SET "+odo.vratiVrednostiZaOperacijuUpdatePovezaneTabeleBrisanje()+" WHERE "+odo.vratiUslovZaOperacijuUpdatePovezaneTabele();
+            System.out.println(upit);
+            s = konekcija.createStatement();
+            s.executeUpdate(upit);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new Exception("Greska prilikom brisanja projekcije u bazi");
+        }
+    }
 }

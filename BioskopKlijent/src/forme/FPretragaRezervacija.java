@@ -187,6 +187,11 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Doslo je do greske. Rezervacija filma "+r.getProjekcija().getFilm().getNaziv()+" nije uspesno obrisana");
                 } else {
                     JOptionPane.showMessageDialog(this, "Rezervacija filma "+r.getProjekcija().getFilm().getNaziv()+" je uspesno obrisana");
+                    try {
+                        pripremiFormu();
+                    } catch (Exception ex) {
+                        Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             } catch (IOException ex) {
                 Logger.getLogger(FPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);

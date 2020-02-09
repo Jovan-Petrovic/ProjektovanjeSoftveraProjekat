@@ -220,4 +220,10 @@ public class Rezervisanje implements Serializable, DomenskiObjekat {
         return "id = " + projekcija.getId();
     }
 
+    @Override
+    public String vratiVrednostiZaOperacijuUpdatePovezaneTabeleBrisanje() {
+        int ostaloMesta = projekcija.getBrojMesta()+1;
+        return "preostaloMesta = " + ostaloMesta;
+    }
+
 }

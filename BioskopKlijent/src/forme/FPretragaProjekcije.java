@@ -260,9 +260,13 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) jtblProjekcije.getModel();
         Projekcija p = ptm.vratiProjekciju(selektovanRed);
         if(p.getDatumVreme().before(Timestamp.valueOf(LocalDateTime.now()))) {
-            JOptionPane.showMessageDialog(this, "Data projekcija se vec zavrsila!");
+            JOptionPane.showMessageDialog(this, "Data projekcija se vec zavrsila.", "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if(p.getBrojMesta() < 1) {
+            JOptionPane.showMessageDialog(this, "Sva mesta su rezervisana.", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        } 
         Date datum = new Date();
         Rezervisanje rezervisanje = new Rezervisanje(datum, k, p);
         ServerskiOdgovor so = new ServerskiOdgovor();

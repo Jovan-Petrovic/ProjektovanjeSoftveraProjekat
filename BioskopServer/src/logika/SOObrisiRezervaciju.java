@@ -20,7 +20,7 @@ public class SOObrisiRezervaciju extends SistemskaOperacija{
 
     @Override
     protected void operacija() throws Exception {
-        dbbr.obrisi(odo);
+        dbbr.obrisiSaIzmenom(odo);
     }
     
 }

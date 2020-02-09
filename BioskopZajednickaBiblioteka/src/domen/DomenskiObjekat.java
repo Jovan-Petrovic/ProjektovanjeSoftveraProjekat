@@ -34,5 +34,6 @@ public interface DomenskiObjekat {
     public String getImePovezaneTabele();
     public String vratiVrednostiZaOperacijuUpdatePovezaneTabele();
     public String vratiUslovZaOperacijuUpdatePovezaneTabele();
+    public String vratiVrednostiZaOperacijuUpdatePovezaneTabeleBrisanje();
 
 }
