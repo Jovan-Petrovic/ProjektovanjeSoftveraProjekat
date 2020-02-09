@@ -71,6 +71,7 @@ public class FProjekcija extends javax.swing.JDialog {
         jbtnSacuvaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Unos nove projekcije");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nova projekcija"));
 
@@ -152,9 +153,7 @@ public class FProjekcija extends javax.swing.JDialog {
                                 .addComponent(jbtnObrisiProjekciju))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jlabDatum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18))
+                                    .addComponent(jlabDatum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jlabSala, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)))
@@ -240,7 +239,7 @@ public class FProjekcija extends javax.swing.JDialog {
             if(odgovor) {
                 JOptionPane.showMessageDialog(this, "Sve projekcije su uspesno sacuvane.");
             } else {
-                JOptionPane.showMessageDialog(this, "Doslo je do greske. Projekcije nisu uspesno sacuvane.");
+                JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti projekcije.", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (IOException ex) {
             Logger.getLogger(FProjekcija.class.getName()).log(Level.SEVERE, null, ex);

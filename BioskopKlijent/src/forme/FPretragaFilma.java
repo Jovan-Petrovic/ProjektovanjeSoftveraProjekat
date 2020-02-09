@@ -80,6 +80,7 @@ public class FPretragaFilma extends javax.swing.JDialog {
         jbtnIzmeni = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Pretraga filmova");
 
         jtblFilmovi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -205,7 +206,7 @@ public class FPretragaFilma extends javax.swing.JDialog {
             ArrayList<Film> filtriraniFilmovi = Kontroler.getInstanca().vratiFiltriraneFilmove(film);
             jtblFilmovi.setModel(new FilmTableModel(filtriraniFilmovi));
             if(filtriraniFilmovi.size()==0) {
-                JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje filmove po zadatoj vrednosti!");
+                JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje filmove po zadatoj vrednosti.", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (IOException ex) {
             Logger.getLogger(FPretragaFilma.class.getName()).log(Level.SEVERE, null, ex);
@@ -215,9 +216,10 @@ public class FPretragaFilma extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnPretraziActionPerformed
 
     private void jbtnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDetaljiActionPerformed
+        JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti rezervaciju.", "Greska", JOptionPane.ERROR_MESSAGE);
         int selektovanRed = jtblFilmovi.getSelectedRow();
         if(selektovanRed == -1) {
-            JOptionPane.showMessageDialog(this, "Morate selektovati red!");
+            JOptionPane.showMessageDialog(this, "Morate selektovati red!", "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
         TableModel tm = jtblFilmovi.getModel();

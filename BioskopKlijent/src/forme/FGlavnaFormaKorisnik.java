@@ -34,7 +34,7 @@ public class FGlavnaFormaKorisnik extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         k = korisnik;
-        setTitle("Dobrodosli " + k.getIme() + " " + k.getPrezime());
+        setTitle("Korisnik: " + k.getIme() + " " + k.getPrezime());
     }
 
     /**

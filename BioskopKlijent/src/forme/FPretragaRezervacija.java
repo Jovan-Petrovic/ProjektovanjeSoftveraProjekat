@@ -41,7 +41,7 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
         initComponents();
         k = korisnik;
         setLocationRelativeTo(null);
-        setTitle("Korisnik: " + k.getIme() + " " + k.getPrezime());
+        setTitle("Korisnik: " + k.getIme() + " " + k.getPrezime() + " - Rezervacije");
         
         pripremiFormu();
     }
@@ -177,7 +177,7 @@ public class FPretragaRezervacija extends javax.swing.JDialog {
             try {
                 int selektovanRed = jtblRezervacije.getSelectedRow();
                 if(selektovanRed == -1) {
-                    JOptionPane.showMessageDialog(this, "Morate odabrati rezervaciju!");
+                    JOptionPane.showMessageDialog(this, "Morate odabrati rezervaciju!", "Greska", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 RezervisanjeTableModel rtm = (RezervisanjeTableModel) jtblRezervacije.getModel();

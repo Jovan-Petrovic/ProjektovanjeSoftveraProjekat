@@ -50,6 +50,21 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuKonfiguracija">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Konfiguracija"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemKonfiguracija">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Konfiguracija ip adrese i porta"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemKonfiguracijaActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuKrajRada">
           <Properties>
             <Property name="text" type="java.lang.String" value="Kraj rada"/>

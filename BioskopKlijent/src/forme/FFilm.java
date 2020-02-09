@@ -389,7 +389,7 @@ public class FFilm extends javax.swing.JDialog {
             if(film != null) {
                 JOptionPane.showMessageDialog(this, "Film je sacuvan sa id-em: " + film.getId());
             } else {
-                JOptionPane.showMessageDialog(this, "Doslo je do greske. Film nije sacuvan.");
+                JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti film.", "Greska", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             f = film;

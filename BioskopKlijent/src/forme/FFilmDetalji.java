@@ -120,6 +120,7 @@ public class FFilmDetalji extends javax.swing.JDialog {
         jbtnSacuvajPromene = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Detalji o filmu");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Film"));
 

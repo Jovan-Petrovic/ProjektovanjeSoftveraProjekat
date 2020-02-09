@@ -5,6 +5,10 @@
  */
 package forme;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -40,6 +44,8 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
         jMenuProjekcija = new javax.swing.JMenu();
         jMenuItemPretragaProjekcija = new javax.swing.JMenuItem();
         jMenuItemNovaProjekcija = new javax.swing.JMenuItem();
+        jMenuKonfiguracija = new javax.swing.JMenu();
+        jMenuItemKonfiguracija = new javax.swing.JMenuItem();
         jMenuKrajRada = new javax.swing.JMenu();
         jMenuItemOdjava = new javax.swing.JMenuItem();
 
@@ -85,6 +91,18 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
         jMenuProjekcija.add(jMenuItemNovaProjekcija);
 
         jMenuBar1.add(jMenuProjekcija);
+
+        jMenuKonfiguracija.setText("Konfiguracija");
+
+        jMenuItemKonfiguracija.setText("Konfiguracija ip adrese i porta");
+        jMenuItemKonfiguracija.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemKonfiguracijaActionPerformed(evt);
+            }
+        });
+        jMenuKonfiguracija.add(jMenuItemKonfiguracija);
+
+        jMenuBar1.add(jMenuKonfiguracija);
 
         jMenuKrajRada.setText("Kraj rada");
 
@@ -155,15 +173,22 @@ public class FGlavnaFormaAdmin extends javax.swing.JFrame {
         new FPrijava().setVisible(true);
     }//GEN-LAST:event_jMenuItemOdjavaActionPerformed
 
+    private void jMenuItemKonfiguracijaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemKonfiguracijaActionPerformed
+        JDialog forma = new FKonfiguracija(this, true);
+        forma.setVisible(true);
+    }//GEN-LAST:event_jMenuItemKonfiguracijaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuFilm;
+    private javax.swing.JMenuItem jMenuItemKonfiguracija;
     private javax.swing.JMenuItem jMenuItemNovaProjekcija;
     private javax.swing.JMenuItem jMenuItemNoviFilm;
     private javax.swing.JMenuItem jMenuItemOdjava;
     private javax.swing.JMenuItem jMenuItemPretragaFilmova;
     private javax.swing.JMenuItem jMenuItemPretragaProjekcija;
+    private javax.swing.JMenu jMenuKonfiguracija;
     private javax.swing.JMenu jMenuKrajRada;
     private javax.swing.JMenu jMenuProjekcija;
     // End of variables declaration//GEN-END:variables

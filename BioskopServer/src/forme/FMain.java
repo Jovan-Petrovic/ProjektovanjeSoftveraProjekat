@@ -8,6 +8,7 @@ package forme;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import niti.ServerNit;
 
 /**
@@ -44,6 +45,7 @@ public class FMain extends javax.swing.JFrame {
         jmiKonfiguracijaBaze = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Server");
 
         jmServer.setText("Server");
 
@@ -68,9 +70,19 @@ public class FMain extends javax.swing.JFrame {
         jmKonfiguracija.setText("Konfiguracija");
 
         jmiKonfiguracijaServera.setText("Konfiguracija servera");
+        jmiKonfiguracijaServera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiKonfiguracijaServeraActionPerformed(evt);
+            }
+        });
         jmKonfiguracija.add(jmiKonfiguracijaServera);
 
         jmiKonfiguracijaBaze.setText("Konfiguracija baze");
+        jmiKonfiguracijaBaze.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiKonfiguracijaBazeActionPerformed(evt);
+            }
+        });
         jmKonfiguracija.add(jmiKonfiguracijaBaze);
 
         jmbGlavniMeni.add(jmKonfiguracija);
@@ -112,40 +124,15 @@ public class FMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jmiStopActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jmiKonfiguracijaBazeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKonfiguracijaBazeActionPerformed
+        JDialog forma = new FKonfiguracijaBaze(this, true);
+        forma.setVisible(true);
+    }//GEN-LAST:event_jmiKonfiguracijaBazeActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FMain().setVisible(true);
-            }
-        });
-    }
+    private void jmiKonfiguracijaServeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKonfiguracijaServeraActionPerformed
+        JDialog forma = new FKonfiguracijaServera(this, true);
+        forma.setVisible(true);
+    }//GEN-LAST:event_jmiKonfiguracijaServeraActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jmKonfiguracija;

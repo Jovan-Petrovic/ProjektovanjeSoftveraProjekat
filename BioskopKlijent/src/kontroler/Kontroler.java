@@ -15,6 +15,7 @@ import domen.Reditelj;
 import domen.Rezervisanje;
 import domen.Rezira;
 import domen.Status;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
+import javax.net.ssl.SSLSocket;
 import javax.swing.JOptionPane;
 import transfer.KlijentskiZahtev;
 import transfer.ServerskiOdgovor;
@@ -38,7 +41,17 @@ public class Kontroler {
     private Socket socket;
     
     private Kontroler() throws IOException {
-        socket=new Socket("localhost", 9000);
+        try {
+            FileInputStream in=new FileInputStream("klijent.properties");
+            Properties props=new Properties();
+            props.load(in);
+            String adresa = props.getProperty("ip");
+            String soket = props.getProperty("socket");
+            int s = Integer.parseInt(soket);
+            socket=new Socket(adresa, s);
+        } catch(java.net.ConnectException ex) {
+            JOptionPane.showMessageDialog(null, "Server nije pokrenut", "Greska", JOptionPane.ERROR_MESSAGE);
+        } 
     }
 
     public static Kontroler getInstanca() throws IOException {

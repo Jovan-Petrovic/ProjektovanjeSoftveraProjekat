@@ -74,6 +74,7 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         jtxtDatum = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Pretraga projekcija");
 
         jlblPretraziPoImenu.setText("Naziv filma:");
 
@@ -211,14 +212,14 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         ProjekcijaTableModel ptm = (ProjekcijaTableModel) tm;
         ptm.pretraziProjekcijePoNazivuFilmaIDatumuProjekcije(naziv,datum);
         if(jtblProjekcije.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje projekcije po zadatoj vrednosti!");
+            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje projekcije po zadatoj vrednosti.", "Greska", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jbtnPretraziPoImenuFilmaActionPerformed
 
     private void jbtnDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDetaljiActionPerformed
         int selektovanRed = jtblProjekcije.getSelectedRow();
         if(selektovanRed == -1) {
-            JOptionPane.showMessageDialog(this, "Morate odabrati projekciju!");
+            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje projekciju po zadatoj vrednosti.", "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
         TableModel tm = jtblProjekcije.getModel();
@@ -232,7 +233,7 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
     private void jbtnObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnObrisiActionPerformed
         int selektovanRed = jtblProjekcije.getSelectedRow();
         if(selektovanRed == -1) {
-            JOptionPane.showMessageDialog(this, "Morate odabrati projekciju!");
+            JOptionPane.showMessageDialog(this, "Sistem ne moze da nadje projekciju.", "Greska", JOptionPane.ERROR_MESSAGE);
             return;
         }
         TableModel tm = jtblProjekcije.getModel();
@@ -241,9 +242,9 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
         try {
             if(Kontroler.getInstanca().obrisiProjekciju(p)) {
                 pripremiFormu();
-                JOptionPane.showMessageDialog(this, "Projekcija je uspesno obrisana");
+                JOptionPane.showMessageDialog(this, "Sistem je obrisao projekciju.");
             } else {
-                JOptionPane.showMessageDialog(this, "Doslo je do greske prilikom brisanja, projekcijan nije obrisana");
+                JOptionPane.showMessageDialog(this, "Sistem ne moze da obrise projekciju.", "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             Logger.getLogger(FPretragaProjekcije.class.getName()).log(Level.SEVERE, null, ex);
@@ -271,7 +272,7 @@ public class FPretragaProjekcije extends javax.swing.JDialog {
             Logger.getLogger(FPretragaProjekcije.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(so.getStatus().equals(Status.U_REDU)) {
-            JOptionPane.showMessageDialog(this, "Rezeracija za film " + rezervisanje.getProjekcija().getFilm().getNaziv() + " datuma " + rezervisanje.getProjekcija().getDatumVreme()+ " je uspesno sacuvana");
+            JOptionPane.showMessageDialog(this, "Rezeracija za film " + rezervisanje.getProjekcija().getFilm().getNaziv() + " datuma " + rezervisanje.getProjekcija().getDatumVreme()+ " je uspesno sacuvana");           
         } else {
             JOptionPane.showMessageDialog(this, so.getPoruka());
         }
